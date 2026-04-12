@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { FileText, File, Table, Mail, Plane, BookOpen, Shield, FolderOpen } from 'lucide-react';
-import { documents } from 'A/lib/data';
+import { documents } from '@/lib/data';
 
 const categoryIcons: Record<string, any> = {
   'Training Materials': BookOpen,
@@ -96,7 +96,7 @@ export default function DocumentsPage() {
             <div className="space-y-3">
               {docs.map((doc, index) => {
                 const FormatIcon = formatIcons[doc.format] || FileText;
-                const colorClass = formatColors[doc.format] || 'text-gray-500 bg-gray-50 dark:bg-gray-800";
+                const colorClass = formatColors[doc.format] || 'text-gray-500 bg-gray-50 dark:bg-gray-800';
 
                 return (
                   <div
