@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="98" fill="none" stroke="#1f4e79" stroke-width="2" opacity="0.2"/>
+
+  <!-- Left figure (blond/golden) -->
+  <g transform="translate(30, 40)">
+    <!-- Suit/body -->
+    <path d="M15 85 C15 65, 25 55, 35 50 L45 48 C50 60, 55 70, 55 85 Z" fill="#1a2744"/>
+    <!-- Collar -->
+    <path d="M35 50 L40 55 L45 48" fill="white" stroke="#1a2744" stroke-width="0.5"/>
+    <!-- Neck -->
+    <path d="M37 48 C37 42, 40 38, 43 35 L47 35 C44 38, 42 42, 42 48 Z" fill="#d4a06a"/>
+    <!-- Head -->
+    <ellipse cx="45" cy="28" rx="14" ry="17" fill="#e8c49a"/>
+    <!-- Hair (golden/blond) -->
+    <path d="M32 22 C32 10, 45 5, 55 10 C58 12, 59 18, 58 22 C56 16, 48 12, 40 14 C36 15, 33 18, 32 22Z" fill="#c8944a"/>
+    <!-- Beard -->
+    <path d="M38 32 C38 38, 42 42, 46 42 C48 42, 50 40, 52 36 C50 38, 46 40, 42 38 C40 37, 38 35, 38 32Z" fill="#c8944a"/>
+    <!-- Eye -->
+    <ellipse cx="42" cy="25" rx="2" ry="1.5" fill="#2c3e50"/>
+    <!-- Nose -->
+    <path d="M50 24 C52 26, 52 30, 50 32" stroke="#c9956e" stroke-width="1.2" fill="none"/>
+    <!-- Ear -->
+    <ellipse cx="33" cy="28" rx="3" ry="5" fill="#e0b68a"/>
+  </g>
+
+  <!-- Right figure (dark beard, glasses) -->
+  <g transform="translate(105, 40) scale(-1, 1) translate(-65, 0)">
+    <!-- Suit/body -->
+    <path d="M15 85 C15 65, 25 55, 35 50 L45 48 C50 60, 55 70, 55 85 Z" fill="#1a2744"/>
+    <!-- Collar -->
+    <path d="M35 50 L40 55 L45 48" fill="white" stroke="#1a2744" stroke-width="0.5"/>
+    <!-- Neck -->
+    <path d="M37 48 C37 42, 40 38, 43 35 L47 35 C44 38, 42 42, 42 48 Z" fill="#c4956a"/>
+    <!-- Head -->
+    <ellipse cx="45" cy="28" rx="14" ry="17" fill="#d4a87a"/>
+    <!-- Hair (dark) -->
+    <path d="M32 22 C32 10, 45 5, 55 10 C58 12, 59 18, 58 22 C56 16, 48 12, 40 14 C36 15, 33 18, 32 22Z" fill="#2c3e50"/>
+    <!-- Beard (dark) -->
+    <path d="M36 30 C36 40, 42 44, 48 42 C50 41, 52 38, 53 34 C51 38, 46 42, 40 40 C38 39, 36 36, 36 30Z" fill="#2c3e50"/>
+    <!-- Eye -->
+    <ellipse cx="42" cy="25" rx="2" ry="1.5" fill="#2c3e50"/>
+    <!-- Glasses -->
+    <rect x="37" y="22" width="11" height="8" rx="2" stroke="#2c3e50" stroke-width="1.2" fill="none"/>
+    <line x1="33" y1="26" x2="37" y2="26" stroke="#2c3e50" stroke-width="1"/>
+    <!-- Nose -->
+    <path d="M50 24 C52 26, 52 30, 50 32" stroke="#b8855e" stroke-width="1.2" fill="none"/>
+    <!-- Ear -->
+    <ellipse cx="33" cy="28" rx="3" ry="5" fill="#c89868"/>
+  </g>
+
+  <!-- Dove (center) -->
+  <g transform="translate(85, 50)">
+    <!-- Body -->
+    <ellipse cx="15" cy="12" rx="10" ry="6" fill="white"/>
+    <!-- Head -->
+    <circle cx="24" cy="8" r="4" fill="white"/>
+    <!-- Beak -->
+    <path d="M28 8 L32 7 L28 9Z" fill="#d4a843"/>
+    <!-- Wing -->
+    <path d="M10 10 C5 2, 0 0, -5 2 C0 4, 5 6, 10 10Z" fill="white"/>
+    <path d="M10 10 C8 4, 3 0, -2 -2 C3 2, 8 6, 10 10Z" fill="#f0f0f0"/>
+    <!-- Tail -->
+    <path d="M5 12 C0 8, -3 6, -5 8 C-2 10, 2 12, 5 12Z" fill="white"/>
+    <!-- Eye -->
+    <circle cx="25" cy="7" r="1" fill="#2c3e50"/>
+    <!-- Olive branch -->
+    <path d="M30 6 C33 4, 36 3, 38 4" stroke="#4a7c3f" stroke-width="0.8" fill="none"/>
+    <ellipse cx="34" cy="3" rx="2" ry="1" fill="#5a9c4f" transform="rotate(-20, 34, 3)"/>
+    <ellipse cx="37" cy="3" rx="2" ry="1" fill="#5a9c4f" transform="rotate(-10, 37, 3)"/>
+    <ellipse cx="36" cy="5" rx="2" ry="1" fill="#5a9c4f" transform="rotate(10, 36, 5)"/>
+  </g>
+
+  <!-- Handshake (center bottom) -->
+  <g transform="translate(75, 130)">
+    <!-- Left hand -->
+    <path d="M10 5 C15 0, 20 0, 25 5 L30 8 C28 12, 22 14, 18 12 L10 5Z" fill="#e8c49a" stroke="#c9956e" stroke-width="0.5"/>
+    <!-- Right hand -->
+    <path d="M40 5 C35 0, 30 0, 25 5 L20 8 C22 12, 28 14, 32 12 L40 5Z" fill="#d4a87a" stroke="#b8855e" stroke-width="0.5"/>
+    <!-- Fingers interlocked -->
+    <path d="M22 4 C24 2, 26 2, 28 4" stroke="#c9956e" stroke-width="0.8" fill="none"/>
+    <path d="M20 7 C22 5, 24 5, 26 7" stroke="#c9956e" stroke-width="0.6" fill="none"/>
+  </g>
+
+  <!-- Text: "good morning world" curved -->
+  <path id="textArc" d="M45 160 C45 175, 100 185, 155 160" fill="none"/>
+  <text font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#1f4e79">
+    <textPath href="#textArc" startOffset="50%" text-anchor="middle">good morning world</textPath>
+  </text>
+</svg>
