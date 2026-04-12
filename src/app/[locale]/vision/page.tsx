@@ -166,7 +166,6 @@ export default function VisionPage() {
             );
           })}
           </div>
-        </div>
       </section>
 
       {/* Call to Action */}
