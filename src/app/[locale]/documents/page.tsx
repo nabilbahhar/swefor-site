@@ -1,222 +1,153 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
-import { FileText, Archive, BookOpen, BarChart3, Image } from 'lucide-react';
+import { FileText, File, Table, Mail, Plane, BookOpen, Shield, FolderOpen } from 'lucide-react';
+import { documents } from 'A/lib/data';
+
+const categoryIcons: Record<string, any> = {
+  'Training Materials': BookOpen,
+  'Handouts': FileText,
+  'Administrative': Shield,
+  'Travel & Logistics': Plane,
+  'Key Communications': Mail,
+};
+
+const formatIcons: Record<string, any> = {
+  pdf: FileText,
+  docx: File,
+  doc: File,
+  xlsx: Table,
+  email: Mail,
+};
+
+const formatColors: Record<string, string> = {
+  pdf: 'text-red-500 bg-red-50 dark:bg-red-900/30',
+  docx: 'text-blue-500 bg-blue-50 dark:bg-blue-900/30',
+  doc: 'text-blue-500 bg-blue-50 dark:bg-blue-900/30',
+  xlsx: 'text-green-500 bg-green-50 dark:bg-green-900/30',
+  email: 'text-purple-500 bg-purple-50 dark:bg-purple-900/30',
+};
 
 export default function DocumentsPage() {
   const t = useTranslations('documents');
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  // Group documents by category
+  const categories = documents.reduce((acc, doc) => {
+    if (!acc[doc.category]) acc[doc.category] = [];
+    acc[doc.category].push(doc);
+    return acc;
+  }, {} as Record<string, typeof documents>);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
-  const categoryIcons = [FileText, Archive, BookOpen, BarChart3, Image];
+  const categoryOrder = ['Training Materials', 'Handouts', 'Administrative', 'Travel & Logistics', 'Key Communications'];
 
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
-      >
-        <motion.div variants={itemVariants} className="text-center mb-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 animate-fade-in-up">
+        <div className="text-center mb-8 animate-fade-in-up animate-fade-in-up-d1">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">{t('title')}</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
-          <p className="text-gray-700 dark:text-gray-300 mt-4">{t('description')}</p>
-        </motion.div>
-      </motion.section>
-
-      {/* Status Alert */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
-      >
-        <motion.div
-          variants={itemVariants}
-          className="bg-blue-50 dark:bg-blue-900 border-2 border-blue-200 dark:border-blue-700 rounded-lg p-8 text-center"
-        >
-          <div className="text-6xl mb-4">📄</div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Coming Soon
-          </h2>
-          <p className="text-gray-700 dark:text-gray-300 text-lg">
-            {t('status')}
+          <p className="text-gray-700 dark:text-gray-300 mt-4 max-w-3xl mx-auto">
+            Archive of {documents.length} documents collected from 7+ years of SweFOR Maghreb Network engagement,
+            including training materials, handouts, administrative documents, and key communications.
           </p>
-        </motion.div>
-      </motion.section>
+        </div>
 
-      {/* Categories Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            Document Categories
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {t.raw('categories').map((category: any, index: number) => {
-              const Icon = categoryIcons[index];
-
-              return (
-                <motion.div
-                  key={category.name}
-                  variants={itemVariants}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-sm hover:shadow-lg transition-shadow"
-                  whileHover={{ y: -5 }}
-                >
-                  <Icon className="w-12 h-12 text-blue-600 dark:text-blue-400 mx-auto mb-4" />
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {category.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+          {categoryOrder.map((cat, index) => {
+            const Icon = categoryIcons[cat] || FolderOpen;
+            const count = categories[cat]?.length || 0;
+            return (
+              <div
+                key={cat}
+                className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm animate-fade-in-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">{count}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">{cat}</div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
-      {/* Feature Highlights */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="bg-gray-50 dark:bg-gray-900 py-16"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              What You'll Find Here
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              Once available, our document library will contain comprehensive resources from our
-              work
-            </p>
-          </motion.div>
+      {/* Document Library */}
+      {categoryOrder.map((categoryName, categoryIndex) => {
+        const docs = categories[categoryName];
+        if (!docs) return null;
+        const CategoryIcon = categoryIcons[categoryName] || FolderOpen;
 
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        return (
+          <section
+            key={categoryName}
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 animate-fade-in-up"
+            style={{ animationDelay: `${categoryIndex * 100}ms` }}
           >
-            {[
-              {
-                title: 'Training Materials',
-                description:
-                  'Complete facilitator guides, workshop curricula, and participant handbooks from our Training of Trainers program',
-              },
-              {
-                title: 'Travel & Meeting Records',
-                description:
-                  'Documentation of all 15 international trips, including logistics, reports, and learnings from each journey',
-              },
-              {
-                title: 'Reports & Analysis',
-                description:
-                  'Annual reports, evaluation documents, impact assessments, and strategic planning materials covering 2018-2026',
-              },
-            ].map((item) => (
-              <motion.div
-                key={item.title}
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm"
-                whileHover={{ y: -5 }}
-              >
-                <h3 className="font-bold text-gray-900 dark:text-white mb-3">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Timeline Preview */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
-      >
-        <motion.div variants={itemVariants} className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Documents Coming Soon
-          </h2>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-sm">
-            <div className="space-y-3 text-left max-w-2xl mx-auto">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold">1</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">Workshop Materials</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Training modules and guides</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold">2</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">Travel Documents</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Trip reports and logistics</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold">3</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">Meeting Notes</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Minutes and coordination records</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold">4</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">Reports</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Annual reports and evaluations</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold">5</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-white">Photo Archives</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Visual documentation from events</p>
-                </div>
-              </div>
+            <div className="flex items-center gap-3 mb-6 animate-fade-in-up">
+              <CategoryIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{categoryName}</h2>
+              <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full">
+                {docs.length} files
+              </span>
             </div>
-          </div>
-        </motion.div>
-      </motion.section>
+
+            <div className="space-y-3">
+              {docs.map((doc, index) => {
+                const FormatIcon = formatIcons[doc.format] || FileText;
+                const colorClass = formatColors[doc.format] || 'text-gray-500 bg-gray-50 dark:bg-gray-800";
+
+                return (
+                  <div
+                    key={doc.filename}
+                    className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4 animate-fade-in-up"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${colorClass}`}>
+                      <FormatIcon className="w-5 h-5" />
+                    </div>
+                    <div className="flex-grow min-w-0">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-sm truncate">
+                        {doc.title}
+                      </h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        {doc.filename}
+                      </p>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-6 flex-shrink-0">
+                      <span className="text-xs text-gray-500 dark:text-gray-400 w-24 text-right">
+                        {new Date(doc.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                      </span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 w-16 text-right">
+                        {doc.size}
+                      </span>
+                      <span className="text-xs font-medium text-blue-600 dark:text-blue-400 uppercase w-10 text-center">
+                        {doc.format}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Source Note */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in-up">
+        <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center animate-fade-in-up">
+          <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+            Document Source
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            These documents have been cataloged from email communications between SweFOR team members
+            spanning 2018-2026. The collection includes training scripts, educational handouts in English
+            and Arabic, partnership agreements, travel logistics, and key project communications from
+            Erik Nilsson and the SweFOR team.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
