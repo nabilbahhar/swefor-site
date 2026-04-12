@@ -1,0 +1,442 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "timeline": "Chronologie",
+    "travels": "Voyages",
+    "people": "Personnes",
+    "projects": "Projets",
+    "documents": "Documents",
+    "vision": "Vision",
+    "language": "Langue",
+    "theme": "Thème"
+  },
+  "home": {
+    "title": "Réseau Maghreb SweFOR",
+    "subtitle": "Construire la Paix par le Dialogue et la Nonviolence",
+    "description": "Depuis 2018, le Réseau Maghreb SweFOR favorise le dialogue transfrontalier des jeunes et la consolidation de la paix au Maroc, en Algérie, en Tunisie et au Sahara occidental. Avec plus de 7 années d'engagement soutenu, nous avons créé des espaces de dialogue, de formation et de compréhension mutuelle parmi les jeunes défenseurs de la paix.",
+    "stats": {
+      "communications": "764",
+      "communicationsLabel": "Communications",
+      "trips": "15",
+      "tripsLabel": "Voyages Internationaux",
+      "people": "112+",
+      "peopleLabel": "Membres du Réseau",
+      "countries": "5",
+      "countriesLabel": "Pays Engagés"
+    },
+    "cta": {
+      "timeline": "Explorer la Chronologie",
+      "vision": "Voir la Vision"
+    }
+  },
+  "timeline": {
+    "title": "Chronologie du Projet",
+    "subtitle": "De 2018 à 2026 : Un Parcours de Paix et de Dialogue",
+    "events": [
+      {
+        "year": "2018",
+        "month": "Juillet",
+        "title": "Candidature et Sélection",
+        "description": "4 jeunes marocains sélectionnés pour le programme du Réseau Maghreb SweFOR"
+      },
+      {
+        "year": "2018",
+        "month": "Septembre",
+        "title": "Premier Atelier de Dialogue",
+        "description": "Atelier inaugural à Tunis, Tunisie réunissant de jeunes défenseurs de la paix"
+      },
+      {
+        "year": "2019",
+        "month": "Tout au Long",
+        "title": "Construction du Réseau",
+        "description": "Premier voyage à Stockholm, plusieurs ateliers à Tunis, élargissement du réseau au Maghreb"
+      },
+      {
+        "year": "2020",
+        "month": "Tout au Long",
+        "title": "Adaptation à la COVID-19",
+        "description": "Transition vers les plateformes numériques tout en maintenant le dialogue et l'engagement"
+      },
+      {
+        "year": "2021",
+        "month": "Tout au Long",
+        "title": "Travail Numérique Soutenu",
+        "description": "Engagement numérique continu avec planification de la reprise des voyages post-COVID"
+      },
+      {
+        "year": "2022",
+        "month": "Tout au Long",
+        "title": "Lancement du Programme de Formation de Formateurs",
+        "description": "Ateliers à Hammamet et série de webinaires sur Climat-Conflit commencent"
+      },
+      {
+        "year": "2023",
+        "month": "Tout au Long",
+        "title": "Module Istanbul et Expansion",
+        "description": "Nouveaux modules de formation à Istanbul, réunions à Stockholm, rôle de formateur élargi"
+      },
+      {
+        "year": "2024",
+        "month": "Tout au Long",
+        "title": "Activité Maximale",
+        "description": "233 communications, grands voyages à Tunis, Stockholm et Istanbul"
+      },
+      {
+        "year": "2025",
+        "month": "Tout au Long",
+        "title": "Conception de Module et Facilitation",
+        "description": "Dirigeant la conception de modules, élargissant les rôles de formateurs, réunion de planification à Rome"
+      },
+      {
+        "year": "2026",
+        "month": "Avril",
+        "title": "Évaluation et Planification Future",
+        "description": "Évaluation complète de la période 2018-2026 et planification stratégique des initiatives futures"
+      }
+    ]
+  },
+  "travels": {
+    "title": "Voyages Internationaux",
+    "subtitle": "15 Voyages à Travers 3 Continents",
+    "summary": {
+      "total": "15 Voyages Total",
+      "tunisia": "10 en Tunisie",
+      "stockholm": "3 en Suède",
+      "istanbul": "2 en Turquie"
+    },
+    "trips": [
+      {
+        "number": 1,
+        "date": "Septembre 2018",
+        "location": "Tunis, Tunisie",
+        "purpose": "Atelier de Dialogue",
+        "details": "Hôtel Golden Tulip"
+      },
+      {
+        "number": 2,
+        "date": "Juin 2019",
+        "location": "Tunis, Tunisie",
+        "purpose": "Réunion du Réseau",
+        "details": ""
+      },
+      {
+        "number": 3,
+        "date": "Septembre 2019",
+        "location": "Stockholm, Suède",
+        "purpose": "Premier Voyage en Suède",
+        "details": "Air France"
+      },
+      {
+        "number": 4,
+        "date": "Novembre 2019",
+        "location": "Tunis, Tunisie",
+        "purpose": "Atelier",
+        "details": "Réf : V2LDT6"
+      },
+      {
+        "number": 5,
+        "date": "Mars 2020",
+        "location": "Tunis, Tunisie",
+        "purpose": "Atelier Pré-COVID",
+        "details": "Dernier voyage avant la pandémie"
+      },
+      {
+        "number": 6,
+        "date": "Novembre 2021",
+        "location": "Tunis, Tunisie",
+        "purpose": "Reprise Post-COVID",
+        "details": "Retour à l'engagement en personne"
+      },
+      {
+        "number": 7,
+        "date": "Juin 2022",
+        "location": "Hammamet, Tunisie",
+        "purpose": "Réunion du Réseau Maghreb",
+        "details": ""
+      },
+      {
+        "number": 8,
+        "date": "Novembre 2022",
+        "location": "Hammamet, Tunisie",
+        "purpose": "Programme de Formation de Formateurs",
+        "details": "Hôtel Vinicci Marillia"
+      },
+      {
+        "number": 9,
+        "date": "Janvier 2023",
+        "location": "Istanbul, Turquie",
+        "purpose": "Module de Formation",
+        "details": ""
+      },
+      {
+        "number": 10,
+        "date": "Septembre 2023",
+        "location": "Stockholm, Suède",
+        "purpose": "Réunion du Réseau",
+        "details": "Hôtel Best Western"
+      },
+      {
+        "number": 11,
+        "date": "Mai 2024",
+        "location": "Tunis, Tunisie",
+        "purpose": "Engagement du Réseau",
+        "details": "Tunisair AT572/AT573"
+      },
+      {
+        "number": 12,
+        "date": "Octobre 2024",
+        "location": "Stockholm, Suède",
+        "purpose": "Réunion de Coordination",
+        "details": "Hôtel Scandic Klara"
+      },
+      {
+        "number": 13,
+        "date": "Novembre 2024",
+        "location": "Istanbul, Turquie",
+        "purpose": "Réunion du Réseau",
+        "details": ""
+      },
+      {
+        "number": 14,
+        "date": "Mars 2025",
+        "location": "Istanbul/Tunis",
+        "purpose": "Facilitation du Module 1",
+        "details": ""
+      },
+      {
+        "number": 15,
+        "date": "Octobre 2025",
+        "location": "Tunis, Tunisie",
+        "purpose": "Facilitation du Module 4",
+        "details": ""
+      }
+    ]
+  },
+  "people": {
+    "title": "Équipe du Réseau",
+    "subtitle": "Rencontrez les Personnes Derrière la Consolidation de la Paix",
+    "sweforStaff": "Personnel SweFOR",
+    "networkParticipants": "Participants du Réseau",
+    "people": [
+      {
+        "name": "Erik Nilsson",
+        "role": "Coordinateur de Projet",
+        "period": "2018-2026",
+        "communications": 677,
+        "category": "staff"
+      },
+      {
+        "name": "Love Wojnakowski",
+        "role": "Responsable de la Formation de Formateurs",
+        "period": "2022-2026",
+        "communications": 76,
+        "category": "staff"
+      },
+      {
+        "name": "Hélène Palmgren",
+        "role": "Liaison 2018",
+        "period": "2018",
+        "communications": 13,
+        "category": "staff"
+      },
+      {
+        "name": "Stella Fischer",
+        "role": "Contenu et Communications",
+        "period": "2020-2026",
+        "communications": 26,
+        "category": "staff"
+      },
+      {
+        "name": "Sandra Eriksson",
+        "role": "Support Administratif",
+        "period": "2022-2026",
+        "communications": 31,
+        "category": "staff"
+      },
+      {
+        "name": "Sabina Sevillano",
+        "role": "Membre de l'Équipe",
+        "period": "2025-2026",
+        "communications": 2,
+        "category": "staff"
+      },
+      {
+        "name": "Karin Weiström",
+        "role": "Coordination des Voyages",
+        "period": "2018-2026",
+        "communications": 15,
+        "category": "staff"
+      },
+      {
+        "name": "Hamza Nasri",
+        "role": "Participant et Personnel",
+        "period": "2018-2026",
+        "communications": 45,
+        "category": "staff"
+      },
+      {
+        "name": "Cheima El",
+        "role": "Co-Facilitatrice",
+        "period": "2021-2026",
+        "communications": 92,
+        "category": "participant"
+      },
+      {
+        "name": "Maglaha Hamma",
+        "role": "Co-Facilitatrice",
+        "period": "2021-2026",
+        "communications": 87,
+        "category": "participant"
+      },
+      {
+        "name": "Oumaima Jabnouni",
+        "role": "Participant du Réseau",
+        "period": "2019-2026",
+        "communications": 64,
+        "category": "participant"
+      },
+      {
+        "name": "Sarah Nilsson Dolah",
+        "role": "Participant du Réseau",
+        "period": "2019-2026",
+        "communications": 58,
+        "category": "participant"
+      },
+      {
+        "name": "Brahim Bendjazia",
+        "role": "Participant du Réseau",
+        "period": "2020-2026",
+        "communications": 71,
+        "category": "participant"
+      },
+      {
+        "name": "Achraf Boulamkous",
+        "role": "Participant du Réseau",
+        "period": "2020-2026",
+        "communications": 63,
+        "category": "participant"
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projets Actifs",
+    "subtitle": "Initiatives Avançant la Consolidation de la Paix au Maghreb",
+    "projects": [
+      {
+        "name": "Réseau Maghreb",
+        "description": "Dialogue transfrontalier des jeunes réunissant de jeunes défenseurs de la paix du Maroc, Algérie, Tunisie et Sahara occidental pour un engagement durable.",
+        "communications": 137,
+        "icon": "Globe"
+      },
+      {
+        "name": "Formation de Formateurs",
+        "description": "Programme de développement des formateurs équipant les jeunes de compétences en nonviolence, facilitation du dialogue et méthodologies de consolidation de la paix.",
+        "communications": 41,
+        "icon": "Users"
+      },
+      {
+        "name": "Ateliers de Dialogue",
+        "description": "Série d'ateliers centrés sur les compétences en communication, transformation des conflits et construction de la compréhension mutuelle transfrontalière.",
+        "communications": 33,
+        "icon": "MessageCircle"
+      },
+      {
+        "name": "Climat et Conflit",
+        "description": "Explorer le lien entre durabilité environnementale et consolidation de la paix, engagement des jeunes sur adaptation climatique et dialogue.",
+        "communications": 4,
+        "icon": "Leaf"
+      },
+      {
+        "name": "Réunions du Réseau",
+        "description": "Réunions mensuelles de coordination en ligne maintenant la connexion, partage des mises à jour et planification des activités collectives de consolidation de la paix.",
+        "communications": 209,
+        "icon": "Zap"
+      }
+    ]
+  },
+  "vision": {
+    "title": "Vision Stratégique",
+    "subtitle": "S'appuyant sur 7+ Années d'Excellence en Consolidation de la Paix",
+    "context": "En nous appuyant sur près d'une décennie d'expérience en dialogue transfrontalier des jeunes et en consolidation de la paix nonviolente à travers la région du Maghreb, nous proposons trois initiatives stratégiques complémentaires pour amplifier l'impact et assurer l'engagement durable pour la paix.",
+    "proposals": [
+      {
+        "number": 1,
+        "title": "Initiative Climat-Paix des Jeunes du Maghreb",
+        "duration": "Programme de 3 Ans",
+        "overview": "Connecter l'adaptation climatique avec la consolidation de la paix en engageant les jeunes du Maroc, Algérie, Tunisie et Sahara occidental autour des défis environnementaux partagés.",
+        "rationale": "44% de la population du Maghreb est constituée de jeunes. La rareté de l'eau et les changements environnementaux affectent tous les pays de la même manière, fournissant des points d'entrée naturels pour le dialogue à travers les divisions politiques.",
+        "activities": [
+          "Ateliers locaux climat-paix dans chaque pays",
+          "Échanges de jeunes transfrontaliers et visites d'étude",
+          "Programme de Formation de Formateurs pour facilitateurs climat-paix",
+          "Plateforme en ligne pour dialogue soutenu et partage de connaissances"
+        ],
+        "alignment": "Aligné avec la focus nonviolence de SweFOR et le mandat d'autonomisation des jeunes de l'IFOR"
+      },
+      {
+        "number": 2,
+        "title": "Dialogue Transfrontalier pour l'Unité du Maghreb",
+        "duration": "Programme de 3 Ans",
+        "overview": "Adresser le déficit démocratique et les tensions Maroc-Algérie par le dialogue structuré peuple-à-peuple, focalisé sur le Sahara occidental comme sujet de dialogue.",
+        "rationale": "Le dialogue dirigé par les jeunes peut construire la compréhension sans imposer de positions politiques. Réseau de 20+ formateurs entraînés prêts à amplifier l'engagement.",
+        "activities": [
+          "Cercles de dialogue dirigés par les jeunes dans chaque pays",
+          "Communautés d'apprentissage par les pairs des formateurs",
+          "Forums régionaux des jeunes sur l'unité et la coopération",
+          "Dialogue politique avec les institutions régionales"
+        ],
+        "alignment": "Aligné avec la Stratégie Maghreb du PNUD 2025-2030 et les Objectifs de Développement Durable des Nations Unies"
+      },
+      {
+        "number": 3,
+        "title": "Futurs Nonviolents : Académie de Leadership des Jeunes du Maghreb",
+        "duration": "Programme Structuré de 3 Ans",
+        "overview": "Formaliser le programme de Formation de Formateurs en une académie certifiée, créant un impact durable grâce à un cycle de leadership de 3 ans.",
+        "rationale": "Passer de la formation ad-hoc à la certification structurée. Construire un réseau d'anciens pour une influence à long terme. Intégrer profondément la méthodologie nonviolence.",
+        "activities": [
+          "Année 1 : Fondation - Principes fondamentaux de nonviolence et bases de facilitation",
+          "Année 2 : Spécialisation - Pistes climat, dialogue ou transformation des conflits",
+          "Année 3 : Mentorat - Facilitation avancée et rôles de leadership des anciens",
+          "Développement de certification et réseau d'anciens"
+        ],
+        "alignment": "Aligné avec l'éducation nonviolence de l'IFOR et l'excellence en consolidation de la paix de SweFOR"
+      }
+    ],
+    "nextSteps": "Erik Nilsson et Nabil Bahhar se rencontreront à Rome le 20-21 avril 2026 pour évaluer la période 2018-2026 et finaliser la direction stratégique."
+  },
+  "documents": {
+    "title": "Bibliothèque de Documents",
+    "subtitle": "Ressources, Rapports et Matériels",
+    "description": "Notre bibliothèque de documents contient des matériels d'ateliers, documents de voyage, notes de réunion, rapports et archives de photos du Réseau Maghreb SweFOR.",
+    "status": "Les documents sont en cours de téléchargement - consultez bientôt pour les rapports, matériels et archives.",
+    "categories": [
+      {
+        "name": "Matériels d'Atelier",
+        "description": "Modules de formation, guides de facilitation et matériels pour participants"
+      },
+      {
+        "name": "Documents de Voyage",
+        "description": "Rapports de voyage, documents de logistique et fichiers de coordination de voyage"
+      },
+      {
+        "name": "Notes de Réunion",
+        "description": "Minutes des réunions du réseau, ateliers et séances de planification"
+      },
+      {
+        "name": "Rapports",
+        "description": "Rapports annuels, documents d'évaluation et évaluations d'impact"
+      },
+      {
+        "name": "Archives Photo",
+        "description": "Documentation visuelle d'événements, ateliers et rassemblements du réseau"
+      }
+    ]
+  },
+  "footer": {
+    "description": "Réseau Maghreb SweFOR",
+    "tagline": "Construire la Paix par le Dialogue et la Nonviolence",
+    "contact": "Contact",
+    "copyright": "Construit avec amour pour la paix",
+    "year": "2026"
+  }
+}
