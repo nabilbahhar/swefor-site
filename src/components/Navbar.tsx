@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,12 +28,16 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center group-hover:shadow-lg transition-shadow">
-              <Heart className="w-5 h-5 text-white" />
-            </div>
+            <Image
+              src="/logo.svg"
+              alt="SweFOR Maghreb Network Logo"
+              width={40}
+              height={40}
+              className="rounded-lg group-hover:shadow-lg transition-shadow"
+            />
             <div className="hidden sm:block">
               <div className="text-sm font-bold text-gray-900 dark:text-white">SweFOR</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">Maghreb</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Maghreb Network</div>
             </div>
           </Link>
 
@@ -71,12 +75,7 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-gray-200 dark:border-gray-800 py-4 space-y-2"
-          >
+          <div className="lg:hidden border-t border-gray-200 dark:border-gray-800 py-4 space-y-2 animate-fade-in">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -87,7 +86,7 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </nav>
