@@ -42,3 +42,62 @@ html {
 ::selection {
   @apply bg-blue-600 text-white dark:bg-blue-500;
 }
+
+/* CSS Animations - replacing framer-motion for SSR reliability */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp-delay1 {
+  0%, 10% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp-delay2 {
+  0%, 20% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out both;
+  animation-delay: var(--animation-delay, 0s);
+}
+
+.animate-fade-in-up-d1 {
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.animate-fade-in-up-d2 {
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.animate-fade-in-up-d3 {
+  animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+.animate-fade-in-up-d4 {
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.animate-fade-in-up-d5 {
+  animation: fadeInUp 0.5s ease-out 0.5s both;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+}
