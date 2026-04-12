@@ -541,54 +541,274 @@ export const documents = [
   },
 ];
 
-export const visionProposals = [
+// ==========================================
+// VISION: SMART 3-Year Project Sheets
+// ==========================================
+
+export const globalVision = {
+  statement: 'Building sustainable peace across the Maghreb through youth-led dialogue, nonviolence education, and cross-border cooperation — ensuring every country, every community, and every young person has a role to play.',
+  approach: 'Each project follows the SMART framework: Specific objectives, Measurable indicators, Achievable activities, Realistic resources, and Time-bound milestones over 3 years.',
+  countries: ['Morocco', 'Tunisia', 'Algeria', 'Libya', 'Mauritania'],
+  principles: [
+    'Inclusive: open to all backgrounds, genders, and communities without exclusion',
+    'Country-specific: adapted to local context while maintaining regional coherence',
+    'Youth-driven: participants aged 18-35 lead design and implementation',
+    'Nonviolent: rooted in nonviolence principles and dialogue methodologies',
+    'Sustainable: building local capacity for continuation beyond funding cycles',
+  ],
+};
+
+export type ProjectPhase = {
+  quarter: string;
+  activities: string[];
+  deliverables: string[];
+};
+
+export type SmartIndicator = {
+  label: string;
+  target: string;
+  measurement: string;
+};
+
+export type VisionProject = {
+  id: string;
+  number: number;
+  title: string;
+  titleFr: string;
+  countries: string[];
+  duration: string;
+  totalBudget: string;
+  overview: string;
+  problemStatement: string;
+  targetGroup: string;
+  smartObjectives: SmartIndicator[];
+  year1: { theme: string; phases: ProjectPhase[] };
+  year2: { theme: string; phases: ProjectPhase[] };
+  year3: { theme: string; phases: ProjectPhase[] };
+  expectedOutputs: string[];
+  expectedOutcomes: string[];
+  risks: string[];
+  partners: string[];
+  sustainability: string;
+};
+
+export const visionProjects: VisionProject[] = [
   {
+    id: 'climate-peace',
     number: 1,
     title: 'Maghreb Climate-Peace Youth Initiative',
-    duration: '3-Year Program',
-    overview:
-      'Connect climate adaptation with peacebuilding by engaging youth from Morocco, Algeria, Tunisia, and Western Sahara around shared environmental challenges.',
-    rationale:
-      '44% of the Maghreb population is youth. Water scarcity and environmental change affect all countries equally, providing natural dialogue entry points across political divides.',
-    activities: [
-      'Local climate-peace workshops in each country',
-      'Cross-border youth exchanges and study tours',
-      'Training of Trainers program for climate-peace facilitators',
-      'Online platform for sustained dialogue and knowledge-sharing',
+    titleFr: 'Initiative Jeunesse Climat-Paix au Maghreb',
+    countries: ['Morocco', 'Tunisia', 'Algeria', 'Libya', 'Mauritania'],
+    duration: '2027–2029 (36 months)',
+    totalBudget: '€450,000',
+    overview: 'Connect climate adaptation with peacebuilding by engaging youth from all 5 Maghreb countries around shared environmental challenges — water scarcity, desertification, and coastal erosion — as entry points for cross-border dialogue.',
+    problemStatement: 'The Maghreb faces severe climate impacts: 60% of the region is arid, water tables are dropping, and youth unemployment exceeds 30%. These pressures fuel migration, tension, and radicalization. Yet climate affects everyone equally, making it a powerful unifying topic for dialogue across political divides.',
+    targetGroup: '150 youth (18-35) across 5 countries, with gender parity (50/50). Priority given to rural and marginalized communities. No political, ethnic, or religious exclusion criteria.',
+    smartObjectives: [
+      { label: 'Specific', target: 'Train 150 youth in climate-peace facilitation across 5 Maghreb countries', measurement: 'Participant registration and completion certificates' },
+      { label: 'Measurable', target: '30 local climate-peace initiatives launched by participants by Year 3', measurement: 'Initiative reports and impact tracking database' },
+      { label: 'Achievable', target: 'Build on existing SweFOR network of 20+ trained facilitators in 3 countries', measurement: 'Network growth tracking from baseline to target' },
+      { label: 'Realistic', target: 'Budget of €450K over 3 years with existing SIDA/FBA partnership framework', measurement: 'Annual financial reports and donor reviews' },
+      { label: 'Time-bound', target: 'Complete recruitment by Q2 2027, all training by Q4 2029', measurement: 'Quarterly milestone reports against timeline' },
     ],
-    alignment:
-      "Aligned with SweFOR's nonviolence focus and IFOR's youth empowerment mandate",
+    year1: {
+      theme: 'Foundation & Recruitment',
+      phases: [
+        { quarter: 'Q1 2027', activities: ['Launch open call for applications in all 5 countries', 'Partner outreach to universities, NGOs, and community organizations', 'Curriculum design with climate scientists and peace educators'], deliverables: ['Application platform live', 'MoUs signed with 5+ local partners', 'Curriculum framework document'] },
+        { quarter: 'Q2 2027', activities: ['Selection of 150 participants (30 per country, gender parity)', 'Onboarding sessions (online + local)', 'Baseline survey on climate-peace perceptions'], deliverables: ['150 participants selected and onboarded', 'Baseline survey report', 'Country-specific needs assessments'] },
+        { quarter: 'Q3 2027', activities: ['Module 1: Climate Literacy & Nonviolent Communication (in-country)', 'Local field visits to climate-affected communities', 'Online peer exchange sessions between countries'], deliverables: ['Module 1 completion for all cohorts', 'Field visit reports', '5 online exchange sessions'] },
+        { quarter: 'Q4 2027', activities: ['Module 2: Dialogue Facilitation & Conflict Transformation (regional)', 'First regional gathering — Tunis (all 150 participants)', 'Year 1 evaluation and reporting'], deliverables: ['Module 2 completion', 'Regional gathering report', 'Year 1 annual report'] },
+      ],
+    },
+    year2: {
+      theme: 'Deepening & Practice',
+      phases: [
+        { quarter: 'Q1 2028', activities: ['Module 3: Systems Analysis & Peace Mapping (in-country)', 'Each participant identifies a local climate-peace challenge', 'Mentor matching with senior facilitators'], deliverables: ['150 local challenge analyses', 'Mentor pairs established', 'Module 3 completion'] },
+        { quarter: 'Q2 2028', activities: ['Module 4: Project Design & SMART Planning (online + in-person)', 'Participants design their own local initiative proposals', 'Peer review workshops'], deliverables: ['150 initiative proposals drafted', 'Peer review reports', 'Module 4 completion'] },
+        { quarter: 'Q3 2028', activities: ['Seed funding disbursed for top 30 local initiatives (€3,000 each)', 'Implementation support and coaching', 'Cross-border study visit program (10 participants visit another country)'], deliverables: ['30 initiatives launched', '10 study visits completed', 'Mid-term evaluation report'] },
+        { quarter: 'Q4 2028', activities: ['Second regional gathering — Marrakech (all participants)', 'Showcase of local initiatives', 'Year 2 evaluation and donor reporting'], deliverables: ['Regional gathering report', 'Initiative showcase documentation', 'Year 2 annual report'] },
+      ],
+    },
+    year3: {
+      theme: 'Scaling & Sustainability',
+      phases: [
+        { quarter: 'Q1 2029', activities: ['Module 5: Advanced Facilitation & Training of Trainers (regional)', 'Selected participants become certified trainers', 'Alumni network formalization'], deliverables: ['50 certified trainers', 'Alumni network charter', 'Module 5 completion'] },
+        { quarter: 'Q2 2029', activities: ['New cohort recruitment by alumni trainers (ripple effect)', 'Local initiatives continue with peer coaching', 'Policy brief development on climate-peace nexus'], deliverables: ['50+ new participants recruited by alumni', 'Policy brief published', 'Coaching reports'] },
+        { quarter: 'Q3 2029', activities: ['Third regional gathering — Algiers (including new cohort)', 'Results documentation and impact assessment', 'Donor and partner presentations'], deliverables: ['Regional gathering report', 'Impact assessment report', 'Sustainability plan'] },
+        { quarter: 'Q4 2029', activities: ['Final evaluation and external audit', 'Handover to local partner organizations', 'Publication of methodology guide'], deliverables: ['Final evaluation report', 'Methodology guide (EN/FR/AR)', 'Handover agreements signed'] },
+      ],
+    },
+    expectedOutputs: [
+      '150 youth trained in climate-peace facilitation across 5 countries',
+      '50 certified trainers capable of running their own programs',
+      '30 local climate-peace initiatives with documented impact',
+      '1 methodology guide published in English, French, and Arabic',
+      '3 regional gatherings with 150+ participants each',
+      '5 policy briefs on climate-peace nexus in the Maghreb',
+    ],
+    expectedOutcomes: [
+      'Increased cross-border understanding and trust among Maghreb youth',
+      'Reduced perception of "the other" across national divides',
+      'Local communities benefit from youth-led climate adaptation projects',
+      'Self-sustaining alumni network continues beyond funding cycle',
+      'Replicable model for climate-peace education in MENA region',
+    ],
+    risks: [
+      'Visa restrictions between Algeria and Morocco → mitigation: use Tunisia/Turkey as neutral meeting points',
+      'Political tensions → mitigation: focus on climate (non-political entry point), no country excluded',
+      'Low participation in some countries → mitigation: strong local partners + competitive stipends',
+      'Security concerns in Libya → mitigation: start with online engagement, gradual in-person when safe',
+    ],
+    partners: ['SweFOR (lead)', 'IFOR', 'Local universities in each country', 'UNDP Maghreb', 'National youth councils', 'Climate research institutes'],
+    sustainability: 'The 50 certified trainers form the core of a self-sustaining network. Each trainer commits to training 10 new participants annually, creating exponential growth. Local partner organizations absorb program activities into their mandates.',
   },
   {
+    id: 'dialogue-unity',
     number: 2,
     title: 'Cross-Border Dialogue for Maghreb Unity',
-    duration: '3-Year Program',
-    overview:
-      'Address democratic deficit and Morocco-Algeria tensions through structured people-to-people dialogue, focusing on Western Sahara as a dialogue topic.',
-    rationale:
-      'Youth-led dialogue circles can build understanding without imposing political positions. Network of 20+ trained facilitators ready to scale engagement.',
-    activities: [
-      'Youth-led dialogue circles in each country',
-      'Facilitator peer-learning communities',
-      'Regional youth forums on unity and cooperation',
-      'Policy dialogue with regional institutions',
+    titleFr: 'Dialogue Transfrontalier pour l\'Unité Maghrébine',
+    countries: ['Morocco', 'Tunisia', 'Algeria', 'Libya', 'Mauritania'],
+    duration: '2027–2029 (36 months)',
+    totalBudget: '€380,000',
+    overview: 'Address the democratic deficit and inter-state tensions through structured people-to-people dialogue, creating safe spaces where youth from all Maghreb countries engage in honest, nonviolent conversation about shared challenges and a common future.',
+    problemStatement: 'The Maghreb is one of the least integrated regions in the world. The Morocco-Algeria border has been closed since 1994. Youth from different countries rarely interact, fueling stereotypes and mistrust. There is no inclusive platform for youth to discuss shared Maghreb identity across political lines.',
+    targetGroup: '120 youth (18-35) across 5 countries, 24 per country. Inclusive: all backgrounds, ethnicities, religions, and political views welcome. Active recruitment in underserved areas.',
+    smartObjectives: [
+      { label: 'Specific', target: 'Create 25 youth-led dialogue circles across 5 Maghreb countries', measurement: 'Dialogue circle registration and meeting logs' },
+      { label: 'Measurable', target: '80% of participants report increased trust toward youth from other Maghreb countries', measurement: 'Pre/post surveys using validated trust scales' },
+      { label: 'Achievable', target: 'Leverage existing facilitator network and tested dialogue methodology', measurement: 'Facilitator readiness assessments' },
+      { label: 'Realistic', target: '€380K budget with SIDA co-funding and SweFOR operational support', measurement: 'Co-funding agreements and budget tracking' },
+      { label: 'Time-bound', target: '25 dialogue circles operational by Month 18, all activities complete by Month 36', measurement: 'Monthly progress dashboards' },
     ],
-    alignment: 'Aligned with UNDP Maghreb Strategy 2025-2030 and UN Sustainable Development Goals',
+    year1: {
+      theme: 'Building Trust & Foundations',
+      phases: [
+        { quarter: 'Q1 2027', activities: ['Recruit and train 25 dialogue facilitators (5 per country)', 'Develop dialogue methodology adapted to Maghreb context', 'Secure safe venues in each country'], deliverables: ['25 trained facilitators', 'Dialogue methodology guide', 'Venue agreements in 5 countries'] },
+        { quarter: 'Q2 2027', activities: ['Open call for participants — inclusive recruitment in all 5 countries', 'Selection of 120 participants with diversity criteria', 'Onboarding and pre-dialogue preparation'], deliverables: ['120 participants onboarded', 'Pre-dialogue survey completed', 'Participant profiles database'] },
+        { quarter: 'Q3 2027', activities: ['Launch 25 dialogue circles (5 per country, monthly meetings)', 'Online cross-border dialogue sessions (paired circles)', 'Cultural exchange activities'], deliverables: ['25 circles active', '75+ dialogue sessions held', 'Cultural exchange reports'] },
+        { quarter: 'Q4 2027', activities: ['First regional gathering — Istanbul (neutral ground)', 'Dialogue circles share learnings', 'Year 1 evaluation'], deliverables: ['Regional gathering report', 'Dialogue circle impact summaries', 'Year 1 annual report'] },
+      ],
+    },
+    year2: {
+      theme: 'Deepening Dialogue & Joint Action',
+      phases: [
+        { quarter: 'Q1 2028', activities: ['Advanced dialogue training for facilitators', 'Introduce "joint challenge" methodology — circles identify shared problems', 'Expand online platform for inter-circle communication'], deliverables: ['Advanced training completion', 'Joint challenge documents per circle', 'Platform active with 120+ users'] },
+        { quarter: 'Q2 2028', activities: ['Cross-border circle visits (online and in-person where possible)', 'Joint initiative design workshops', 'Media and storytelling training for participants'], deliverables: ['20+ cross-border interactions', 'Joint initiative proposals', 'Media training completion'] },
+        { quarter: 'Q3 2028', activities: ['Launch 10 joint cross-border initiatives (pairs of circles)', 'Documentary production on Maghreb youth dialogue', 'Policy recommendations drafted'], deliverables: ['10 joint initiatives launched', 'Documentary in production', 'Draft policy brief'] },
+        { quarter: 'Q4 2028', activities: ['Second regional gathering — Tunis', 'Joint initiative showcase and evaluation', 'Donor and stakeholder presentations'], deliverables: ['Regional gathering report', 'Mid-term evaluation', 'Year 2 annual report'] },
+      ],
+    },
+    year3: {
+      theme: 'Institutionalization & Legacy',
+      phases: [
+        { quarter: 'Q1 2029', activities: ['Dialogue facilitator certification program', 'Mentoring new facilitator cohort', 'Institutional partnerships formalized'], deliverables: ['Certification standards published', '15 new facilitators in training', 'Partnership agreements'] },
+        { quarter: 'Q2 2029', activities: ['Publication of "Voices of the Maghreb" — participant stories', 'Policy dialogue with AU Youth Division and Arab League', 'Regional youth forum co-organized with local partners'], deliverables: ['Publication released', 'Policy meetings documented', 'Youth forum report'] },
+        { quarter: 'Q3 2029', activities: ['Final regional gathering — Nouakchott (Mauritania)', 'Transfer of dialogue circles to local organizations', 'Impact assessment and external evaluation'], deliverables: ['Final gathering report', 'Transfer agreements', 'External evaluation'] },
+        { quarter: 'Q4 2029', activities: ['Final reporting and knowledge management', 'Alumni network launch ceremony', 'Methodology handover to local partners'], deliverables: ['Final report', 'Alumni network operational', 'Methodology materials handed over'] },
+      ],
+    },
+    expectedOutputs: [
+      '25 dialogue circles established across 5 Maghreb countries',
+      '120 youth engaged in sustained cross-border dialogue over 3 years',
+      '10 joint cross-border initiatives designed and implemented by participants',
+      '1 documentary film on Maghreb youth dialogue',
+      '1 publication: "Voices of the Maghreb"',
+      '40 certified dialogue facilitators (25 original + 15 new cohort)',
+    ],
+    expectedOutcomes: [
+      '80%+ participants report increased trust toward other Maghreb nationalities',
+      'Breaking of stereotypes and "enemy images" through sustained personal contact',
+      'Youth-generated policy recommendations presented to regional institutions',
+      'Self-sustaining dialogue circles continue beyond project funding',
+      'Model for people-to-people diplomacy replicable in other divided regions',
+    ],
+    risks: [
+      'Border closures prevent in-person cross-border meetings → mitigation: hybrid model, neutral third countries',
+      'Government sensitivity about cross-border dialogue → mitigation: frame as cultural exchange, avoid political language',
+      'Participant dropout over 3 years → mitigation: stipends, community building, flexible scheduling',
+      'Security in Libya/border regions → mitigation: online participation option, local security assessments',
+    ],
+    partners: ['SweFOR (lead)', 'IFOR', 'Local peacebuilding NGOs per country', 'AU Youth Division', 'UNESCO Maghreb', 'European Endowment for Democracy'],
+    sustainability: 'Dialogue circles are designed to be self-running after facilitation training. Local NGO partners take ownership. Alumni network provides peer support. Methodology freely available for replication.',
   },
   {
+    id: 'leadership-academy',
     number: 3,
     title: 'Nonviolent Futures: Maghreb Youth Leadership Academy',
-    duration: '3-Year Structured Program',
-    overview:
-      'Formalize the Training of Trainers program into a certified academy, creating sustained impact through a 3-year leadership cycle.',
-    rationale:
-      'Move from ad-hoc training to structured certification. Build alumni network for long-term influence. Integrate nonviolence methodology deeply.',
-    activities: [
-      'Year 1: Foundation - Core nonviolence principles and facilitation basics',
-      'Year 2: Specialization - Climate, dialogue, or conflict transformation tracks',
-      'Year 3: Mentoring - Advanced facilitation and alumni leadership roles',
-      'Certification and alumni network development',
+    titleFr: 'Futurs Nonviolents: Académie de Leadership Jeunesse au Maghreb',
+    countries: ['Morocco', 'Tunisia', 'Algeria', 'Libya', 'Mauritania'],
+    duration: '2027–2029 (36 months)',
+    totalBudget: '€520,000',
+    overview: 'Formalize the Training of Trainers program into a certified Maghreb Youth Leadership Academy with three specialization tracks — Climate-Peace, Dialogue Facilitation, and Community Mediation — producing 100 certified nonviolent leaders across all 5 countries.',
+    problemStatement: 'After 8 years of SweFOR engagement, a generation of trained facilitators exists but without formal certification or structured advancement. The region needs institutionalized peace education that provides recognized qualifications, career pathways, and a sustainable training pipeline.',
+    targetGroup: '100 youth (18-35) across 5 countries, 20 per country. Prerequisite: community involvement or relevant experience. Open to all — no political, ethnic, or gender barriers. Scholarship available for those with financial constraints.',
+    smartObjectives: [
+      { label: 'Specific', target: 'Certify 100 nonviolent youth leaders with specialization in one of 3 tracks', measurement: 'Certification records and competency assessments' },
+      { label: 'Measurable', target: 'Each graduate implements 1 community project; 100 projects total by Year 3', measurement: 'Project documentation and community impact surveys' },
+      { label: 'Achievable', target: 'Build on proven SweFOR ToT curriculum and existing facilitator base', measurement: 'Curriculum review and facilitator capacity assessments' },
+      { label: 'Realistic', target: '€520K with SIDA funding + tuition co-pay model for sustainability', measurement: 'Financial model and co-pay collection reports' },
+      { label: 'Time-bound', target: 'Academy launches Q2 2027, first certifications awarded Q4 2028, 100 certified by Q4 2029', measurement: 'Academic calendar and certification tracking' },
     ],
-    alignment: "Aligned with IFOR's nonviolence education and SweFOR's peacebuilding excellence",
+    year1: {
+      theme: 'Academy Launch & Foundation Year',
+      phases: [
+        { quarter: 'Q1 2027', activities: ['Academy governance and curriculum finalization', 'Recruit lead trainers (8 from existing SweFOR network)', 'Accreditation process with partner university', 'Open application portal'], deliverables: ['Curriculum finalized (3 tracks)', 'Lead trainer team assembled', 'University partnership signed', 'Application system live'] },
+        { quarter: 'Q2 2027', activities: ['Selection of 100 participants (20 per country)', 'Orientation week in Tunis', 'Foundation Module: Nonviolence Principles (all participants together)'], deliverables: ['100 participants enrolled', 'Orientation completed', 'Foundation module delivered'] },
+        { quarter: 'Q3 2027', activities: ['Track selection: Climate-Peace / Dialogue / Community Mediation', 'Track-specific Module 1 (in-country, 5 days)', 'Online learning platform active with resources and peer forums'], deliverables: ['Track assignments confirmed', 'Module 1 completed per track', 'Platform live with 100+ users'] },
+        { quarter: 'Q4 2027', activities: ['Track-specific Module 2 (regional gathering, 7 days)', 'Cross-track sessions for shared learning', 'Year 1 assessment and reporting'], deliverables: ['Module 2 completed', 'Cross-track reports', 'Year 1 evaluation report'] },
+      ],
+    },
+    year2: {
+      theme: 'Specialization & Practicum',
+      phases: [
+        { quarter: 'Q1 2028', activities: ['Advanced Module 3 per track (in-country, 5 days)', 'Each participant identifies community project', 'Mentor matching with senior practitioners'], deliverables: ['Module 3 completed', '100 project proposals', 'Mentor pairs active'] },
+        { quarter: 'Q2 2028', activities: ['Community project implementation begins (supervised practicum)', 'Monthly online coaching sessions', 'Peer learning circles within tracks'], deliverables: ['100 projects in implementation', 'Coaching logs', 'Peer learning reports'] },
+        { quarter: 'Q3 2028', activities: ['Mid-program regional gathering — Marrakech', 'Project progress presentations', 'Advanced facilitation practice sessions'], deliverables: ['Regional gathering report', 'Project progress reports', 'Facilitation assessments'] },
+        { quarter: 'Q4 2028', activities: ['First cohort certification exams (practical + written)', 'Community project documentation', 'Award of certification for those who pass'], deliverables: ['Certification results (target: 80+ pass)', 'Project documentation portfolio', 'Year 2 annual report'] },
+      ],
+    },
+    year3: {
+      theme: 'Mastery & Multiplication',
+      phases: [
+        { quarter: 'Q1 2029', activities: ['Remaining certifications completed', 'Train-the-Trainer advanced module for top graduates', 'Curriculum for "Level 2" academy designed'], deliverables: ['100 certifications awarded', 'ToT advanced module completed', 'Level 2 curriculum draft'] },
+        { quarter: 'Q2 2029', activities: ['Top 20 graduates begin training new cohort (50 new participants)', 'Community project impact evaluation', 'Alumni network formalized with country chapters'], deliverables: ['50 new participants in training', 'Impact evaluation report', 'Alumni network charter'] },
+        { quarter: 'Q3 2029', activities: ['Final regional gathering — Algiers', 'Graduation ceremony for all certified leaders', 'Publication of Academy results and methodology'], deliverables: ['Final gathering and graduation', 'Published results report', 'Methodology publication'] },
+        { quarter: 'Q4 2029', activities: ['External evaluation and audit', 'Institutional handover plan to local academy board', 'Donor and partner final presentations'], deliverables: ['External evaluation report', 'Handover agreement', 'Final project report'] },
+      ],
+    },
+    expectedOutputs: [
+      '100 certified nonviolent youth leaders across 5 Maghreb countries',
+      '100 community projects implemented with documented impact',
+      '20 advanced trainers capable of running the Academy independently',
+      '50 new participants trained by alumni in Year 3',
+      '1 published Academy methodology (EN/FR/AR)',
+      'University-accredited certification recognized regionally',
+    ],
+    expectedOutcomes: [
+      'Professionalized pipeline of nonviolent leaders across the Maghreb',
+      '100 communities benefit from peace/climate/mediation projects',
+      'Self-sustaining Academy governed by alumni board after Year 3',
+      'Replicable academy model for other MENA/African regions',
+      'Strengthened civil society capacity for peacebuilding',
+    ],
+    risks: [
+      'Difficulty securing university accreditation → mitigation: start with SweFOR certification, pursue accreditation in parallel',
+      'Uneven participant quality across countries → mitigation: rigorous selection + foundation year equalizer',
+      'High cost per participant → mitigation: co-pay model + seek additional donors + in-kind university support',
+      'Certification not recognized by employers → mitigation: employer engagement strategy, internship placements',
+    ],
+    partners: ['SweFOR (lead)', 'IFOR', 'Partner universities in Tunisia and Morocco', 'SIDA/FBA', 'Local NGO partners per country', 'UNDP Peacebuilding Fund'],
+    sustainability: 'The Academy becomes self-sustaining through: (1) co-pay model generating revenue, (2) alumni board governance, (3) university partnership providing institutional home, (4) top graduates become paid trainers. Target: financial independence by Year 5.',
   },
 ];
+
+// Keep old export name for backward compatibility
+export const visionProposals = visionProjects.map(p => ({
+  number: p.number,
+  title: p.title,
+  duration: p.duration,
+  overview: p.overview,
+  rationale: p.problemStatement,
+  activities: p.expectedOutputs.slice(0, 4),
+  alignment: `Partners: ${p.partners.join(', ')}`,
+}));
