@@ -3,26 +3,9 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { ArrowRight, Globe, Users, MessageSquare, Map } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 export default function Home() {
   const t = useTranslations('home');
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
 
   const stats = [
     {
@@ -50,41 +33,27 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32"
-      >
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         <div className="text-center">
-          <motion.div variants={itemVariants} className="mb-6">
+          <div className="animate-fade-in mb-6">
             <div className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-4">
               Since 2018
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6"
-          >
+          <h1 className="animate-fade-in-up-d1 text-5xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             {t('title')}
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto"
-          >
+          <p className="animate-fade-in-up-d2 text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
             {t('subtitle')}
-          </motion.p>
+          </p>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed"
-          >
+          <p className="animate-fade-in-up-d3 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
             {t('description')}
-          </motion.p>
+          </p>
 
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="animate-fade-in-up-d4 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/timeline"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
@@ -98,36 +67,30 @@ export default function Home() {
             >
               {t('cta.vision')}
             </Link>
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Stats Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="bg-gray-50 dark:bg-gray-900 py-20"
-      >
+      <section className="bg-gray-50 dark:bg-gray-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={itemVariants} className="text-center mb-16">
+          <div className="animate-fade-in-up text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               7+ Years of Impact
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
               Measuring our commitment to peace and dialogue
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat) => {
+            {stats.map((stat, index) => {
               const Icon = stat.icon;
+              const delayClass = `animate-fade-in-up-d${Math.min(index + 1, 5)}`;
               return (
-                <motion.div
+                <div
                   key={stat.label}
-                  variants={itemVariants}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow"
+                  className={`${delayClass} bg-white dark:bg-gray-800 rounded-xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow hover-lift`}
                 >
                   <div className="flex justify-center mb-4">
                     <Icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
@@ -136,23 +99,17 @@ export default function Home() {
                     {stat.value}
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* About Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
-      >
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div variants={itemVariants}>
+          <div className="animate-fade-in-up-d1">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
               What We Do
             </h2>
@@ -170,12 +127,9 @@ export default function Home() {
                 international trips, and a network of 112+ youth leaders across 5 countries.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-2 gap-4"
-          >
+          <div className="animate-fade-in-up-d2 grid grid-cols-2 gap-4">
             {[
               { title: 'Dialogue', description: 'Cross-border conversations' },
               { title: 'Training', description: 'Facilitator development' },
@@ -190,27 +144,21 @@ export default function Home() {
                 <p className="text-sm text-gray-700 dark:text-gray-300">{item.description}</p>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* CTA Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 py-16"
-      >
+      <section className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h2 variants={itemVariants} className="text-3xl font-bold text-white mb-4">
+          <h2 className="animate-fade-in-up-d1 text-3xl font-bold text-white mb-4">
             Explore Our Work
-          </motion.h2>
-          <motion.p variants={itemVariants} className="text-blue-100 mb-8 max-w-2xl mx-auto">
+          </h2>
+          <p className="animate-fade-in-up-d2 text-blue-100 mb-8 max-w-2xl mx-auto">
             Learn about our timeline, travels, team, projects, and strategic vision for the future of
             peacebuilding in the Maghreb.
-          </motion.p>
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
+          </p>
+          <div className="animate-fade-in-up-d3 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/timeline"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors"
@@ -223,9 +171,9 @@ export default function Home() {
             >
               Meet the Team
             </Link>
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }
