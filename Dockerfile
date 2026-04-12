@@ -22,6 +22,8 @@ WORKDIR /app
 
 # Set environment to production
 ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
 
 # Copy package files
 COPY package*.json ./
@@ -36,10 +38,6 @@ COPY --from=builder /app/public ./public
 
 # Expose port
 EXPOSE 3000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Start the application
 CMD ["node", "server.js"]
