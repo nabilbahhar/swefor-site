@@ -24,35 +24,34 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16 gap-6">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0 flex items-center">
-            <Image
-              src="/logo.png"
-              alt="SweFOR Maghreb Network Logo"
-              width={50}
-              height={50}
-              className="object-contain mix-blend-lighten"
-            />
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-swefor-gold dark:hover:text-swefor-gold relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-swefor-gold after:transition-all after:duration-300 hover:after:w-full transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="flex items-center justify-between h-16">
+          {/* Left: Logo + Desktop Nav links side by side */}
+          <div className="flex items-center gap-8">
+            <Link href="/" className="flex-shrink-0">
+              <Image
+                src="/logo.png"
+                alt="SweFOR"
+                width={120}
+                height={56}
+                className="h-14 w-auto object-contain mix-blend-lighten"
+              />
+            </Link>
+            <div className="hidden lg:flex items-center gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-swefor-gold dark:hover:text-swefor-gold relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-swefor-gold after:transition-all after:duration-300 hover:after:w-full transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-4 ml-auto lg:ml-0">
+          {/* Right: Language + Mobile burger */}
+          <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -68,7 +67,7 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden border-t border-gray-200 dark:border-gray-800 py-4 space-y-1 animate-fade-in">
+          <div className="lg:hidden border-t border-gray-200 dark:border-gray-800 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
