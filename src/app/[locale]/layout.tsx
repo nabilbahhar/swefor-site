@@ -50,7 +50,7 @@ export default async function RootLayout({ children, params }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-        <ThemeProvider forcedTheme="dark">
+        <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             <GateEntry locale={locale}>
             <Navbar />
