@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Heart } from 'lucide-react';
+import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 
 export function Footer() {
@@ -16,7 +16,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-white" />
+                <Image src="/logo.png" alt="SweFOR Logo" width={48} height={48} className="rounded-lg object-contain" />
               </div>
               <div>
                 <div className="text-sm font-bold text-gray-900 dark:text-white">SweFOR</div>
