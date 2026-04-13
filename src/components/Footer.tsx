@@ -16,11 +16,11 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center">
-                <Image src="/logo.png" alt="SweFOR Logo" width={48} height={48} className="rounded-lg object-contain" />
+                <Image src="/logo.png" alt="SweFOR Logo" width={48} height={48} className="object-contain" />
               </div>
               <div>
-                <div className="text-sm font-bold text-gray-900 dark:text-white">SweFOR</div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">Maghreb Network</div>
+                
+                
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-400 text-sm">{t('tagline')}</p>
