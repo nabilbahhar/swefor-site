@@ -16,7 +16,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 flex items-center justify-center">
-                <Image src="/logo.png" alt="SweFOR Logo" width={48} height={48} className="object-contain mix-blend-lighten" />
+                <Image src="/logo.jpg" alt="SweFOR Logo" width={48} height={48} className="object-contain mix-blend-lighten" />
               </div>
               <div>
                 
