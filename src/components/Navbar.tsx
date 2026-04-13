@@ -31,14 +31,10 @@ export function Navbar() {
             <Image
               src="/logo.png"
               alt="SweFOR Maghreb Network Logo"
-              width={64}
-              height={64}
+              width={140}
+              height={60}
               className="rounded-full border-2 border-blue-100 dark:border-blue-900 group-hover:shadow-lg group-hover:border-blue-300 dark:group-hover:border-blue-700 transition-all"
             />
-            <div className="hidden sm:block">
-              <div className="text-base font-bold text-gray-900 dark:text-white">SweFOR</div>
-              <div className="text-sm text-blue-600 dark:text-blue-400 font-medium">Maghreb Network</div>
-            </div>
           </Link>
 
           {/* Desktop Menu */}
