@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import Image from 'next/image';
 
@@ -53,9 +52,7 @@ export function Navbar() {
           {/* Right Controls */}
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <ThemeToggle />
-
-            {/* Mobile Menu Button */}
+{/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
