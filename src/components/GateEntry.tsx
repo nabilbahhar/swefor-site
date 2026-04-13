@@ -38,6 +38,7 @@ export function GateEntry({ children, locale }: { children: React.ReactNode; loc
   const [failed, setFailed] = useState(false);
   const [doorsOpen, setDoorsOpen] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const lang = locale === 'fr' ? 'fr' : 'en';
 
@@ -85,6 +86,7 @@ export function GateEntry({ children, locale }: { children: React.ReactNode; loc
     setFailed(false);
     setDoorsOpen(false);
     setFadeOut(false);
+    setShowQuiz(false);
   };
 
   if (passed === null) return null;
@@ -92,40 +94,69 @@ export function GateEntry({ children, locale }: { children: React.ReactNode; loc
 
   const q = questions[currentQ];
 
+  // Get time-based greeting
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? (lang === 'fr' ? 'Bonjour' : 'Good morning') :
+                   hour < 18 ? (lang === 'fr' ? 'Bon après-midi' : 'Good afternoon') :
+                   (lang === 'fr' ? 'Bonsoir' : 'Good evening');
+
   return (
     <div className={`fixed inset-0 z-[9999] transition-opacity duration-700 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className={`absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-gray-800 to-gray-700 border-r border-blue-500/30 transition-transform duration-[1500ms] ease-in-out ${doorsOpen ? '-translate-x-full' : 'translate-x-0'}`}
+          className={`absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-gray-800 to-gray-700 border-r border-swefor-gold/30 transition-transform duration-[1500ms] ease-in-out ${doorsOpen ? '-translate-x-full' : 'translate-x-0'}`}
           style={{ boxShadow: 'inset -20px 0 60px rgba(0,0,0,0.5)' }}
         >
-          <div className="absolute right-8 top-1/2 -translate-y-1/2 w-3 h-20 rounded-full bg-blue-400/40" />
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 w-3 h-20 rounded-full bg-swefor-gold/40" />
         </div>
         <div
-          className={`absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gray-800 to-gray-700 border-l border-blue-500/30 transition-transform duration-[1500ms] ease-in-out ${doorsOpen ? 'translate-x-full' : 'translate-x-0'}`}
+          className={`absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gray-800 to-gray-700 border-l border-swefor-gold/30 transition-transform duration-[1500ms] ease-in-out ${doorsOpen ? 'translate-x-full' : 'translate-x-0'}`}
           style={{ boxShadow: 'inset 20px 0 60px rgba(0,0,0,0.5)' }}
         >
-          <div className="absolute left-8 top-1/2 -translate-y-1/2 w-3 h-20 rounded-full bg-blue-400/40" />
+          <div className="absolute left-8 top-1/2 -translate-y-1/2 w-3 h-20 rounded-full bg-swefor-gold/40" />
         </div>
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
-        <div className="mb-8 animate-pulse">
-          <Image src="/logo.png" alt="SweFOR" width={160} height={70} className="object-contain drop-shadow-2xl" priority />
+        <div className="mb-6">
+          <Image src="/logo.png" alt="SweFOR" width={180} height={80} className="object-contain mix-blend-lighten drop-shadow-2xl" priority />
         </div>
 
-        {!failed ? (
+        {!showQuiz && !failed ? (
+          /* Welcome screen for Erik */
+          <div className="w-full max-w-lg text-center animate-fade-in">
+            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-10 border border-white/20 shadow-2xl">
+              <h1 className="text-3xl font-bold text-white mb-3">
+                {greeting}, Erik!
+              </h1>
+              <p className="text-swefor-gold text-lg font-medium mb-2">
+                {lang === 'fr' ? "Le bon Erik, bien sûr..." : "The good one, of course..."}
+              </p>
+              <p className="text-gray-300 mb-8 leading-relaxed">
+                {lang === 'fr'
+                  ? "Nabil t'a préparé quelque chose de spécial. Mais d'abord, prouve que tu le connais vraiment !"
+                  : "Nabil prepared something special for you. But first, prove that you truly know him!"}
+              </p>
+              <button
+                onClick={() => setShowQuiz(true)}
+                className="bg-swefor-gold hover:bg-yellow-500 text-gray-900 font-bold py-3.5 px-10 rounded-xl transition-all duration-300 hover:scale-105 text-lg shadow-lg shadow-swefor-gold/20"
+              >
+                {lang === 'fr' ? "Commencer le quiz" : "Start the quiz"}
+              </button>
+            </div>
+          </div>
+        ) : !failed ? (
           <div className="w-full max-w-lg">
             <div className="flex gap-2 justify-center mb-6">
               {questions.map((_, i) => (
-                <div key={i} className={`h-2 w-12 rounded-full transition-colors duration-500 ${i < currentQ ? 'bg-green-500' : i === currentQ ? 'bg-blue-400' : 'bg-gray-600'}`} />
+                <div key={i} className={`h-2 w-12 rounded-full transition-colors duration-500 ${i < currentQ ? 'bg-green-500' : i === currentQ ? 'bg-swefor-gold' : 'bg-gray-600'}`} />
               ))}
             </div>
 
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-2xl">
-              <p className="text-sm text-blue-300 mb-2 font-medium">
+              <p className="text-sm text-swefor-gold mb-2 font-medium">
                 {lang === 'fr' ? `Question ${currentQ + 1} sur ${questions.length}` : `Question ${currentQ + 1} of ${questions.length}`}
               </p>
               <h2 className="text-xl font-bold text-white mb-6 leading-relaxed">{q.question[lang]}</h2>
@@ -135,7 +166,7 @@ export function GateEntry({ children, locale }: { children: React.ReactNode; loc
                   let cls = 'w-full text-left px-5 py-3.5 rounded-xl font-medium transition-all duration-300 border ';
                   if (showResult && i === q.answer) cls += 'bg-green-500/20 border-green-400 text-green-300 scale-105';
                   else if (showResult && i === selected && i !== q.answer) cls += 'bg-red-500/20 border-red-400 text-red-300';
-                  else if (selected === null) cls += 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/15 hover:border-blue-400/50 hover:scale-[1.02] cursor-pointer';
+                  else if (selected === null) cls += 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/15 hover:border-swefor-gold/50 hover:scale-[1.02] cursor-pointer';
                   else cls += 'bg-white/5 border-white/10 text-gray-400';
                   return (
                     <button key={i} onClick={() => handleAnswer(i)} disabled={showResult} className={cls}>
@@ -158,10 +189,10 @@ export function GateEntry({ children, locale }: { children: React.ReactNode; loc
               {lang === 'fr' ? "Mauvaise réponse !" : "Wrong answer!"}
             </h2>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              {lang === 'fr' ? "On dirait que vous ne connaissez pas assez bien Nabil... Contactez-le pour obtenir les bonnes réponses !" : "Looks like you don’t know Nabil well enough... Contact him to get the right answers!"}
+              {lang === 'fr' ? "On dirait que vous ne connaissez pas assez bien Nabil... Contactez-le pour obtenir les bonnes réponses !" : "Looks like you don't know Nabil well enough... Contact him to get the right answers!"}
             </p>
             <div className="space-y-3">
-              <a href="mailto:nabil.imdh@gmail.com" className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-colors">
+              <a href="mailto:nabil.imdh@gmail.com" className="block w-full bg-swefor-gold hover:bg-yellow-500 text-gray-900 font-semibold py-3 rounded-xl transition-colors">
                 {lang === 'fr' ? "Contacter Nabil" : "Contact Nabil"}
               </a>
               <button onClick={resetQuiz} className="block w-full bg-white/10 hover:bg-white/20 text-gray-200 font-medium py-3 rounded-xl transition-colors border border-white/10">
