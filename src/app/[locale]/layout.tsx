@@ -8,6 +8,7 @@ import { routing } from '@/i18n/routing';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { GateEntry } from '@/components/GateEntry';
 import '../globals.css';
 
 export const metadata: Metadata = {
@@ -51,9 +52,11 @@ export default async function RootLayout({ children, params }: Props) {
       <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
+            <GateEntry locale={locale}>
             <Navbar />
             <main className="flex-grow">{children}</main>
             <Footer />
+            </GateEntry>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
