@@ -1,0 +1,875 @@
+Delivered-To: nabil.imdh@gmail.com
+Received: by 2002:a05:6f02:c1a4:b0:117:824b:2d with SMTP id 36csp80626rcb;
+        Wed, 11 Feb 2026 04:15:11 -0800 (PST)
+X-Forwarded-Encrypted: i=3; AJvYcCUI3NyalVQgFC19akds+J7cJ2leJLovKh+p0bYKLx/IzLaiiAFOELl0yY3otTXvRdNSvZ1hfvt0Rqxi@gmail.com
+X-Received: by 2002:a17:902:dacc:b0:2ab:230f:1cde with SMTP id d9443c01a7336-2ab230f1e43mr36938445ad.17.1770812111287;
+        Wed, 11 Feb 2026 04:15:11 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1770812111; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=VuBprq2lnYk+d46KYiobWGi/gQjjaDY0FS2EhS1X7wCTFPTGAOcVXzXIep9+ytNql1
+         TroIwkTlsKItuepeg+ZimZgTXBrxekg0ja9Z3JmvjGeFddQVJ07W1QlUlCdikwJ4qiWp
+         33Wie6WKHeUzXE/7CphsJ9WNZRm03JRE4yk0ckx9jBAXJqVvQeWTKYpk6Oj4TmTwN6nH
+         sVeXJ2g1RX5aVYs4L8VhRD7Dn1YM+ZX5q35QlVRowmSk3PrR0n1VUMxSSEmvcGnlhQrN
+         hf7EOKvvsK7jZ0zHSJtNaVlgvrXsOElsVqbefY3GfFTEdqClg64HtuZitSPyBDUAYG/V
+         Eh5Q==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=mime-version:content-language:accept-language:message-id:date
+         :thread-index:thread-topic:subject:to:from:dkim-signature;
+        bh=aE7HtgDXquFqGIHgtiMBHgkW8Zu0Dp5fE1+BEiNMnIs=;
+        fh=W+uvC/tgWF5Qvfx+oC5etaxo5qHSHn6Jjkfk1IUhktQ=;
+        b=l1WTilw3tbx/d7gQJHf1CaS7Br2t+oZlzvhf3D094WpZHQohxzPVH/LwftV7944QZn
+         dqR0XAP9S4qFi62ClrGGbS0eSEtQE/vCLb2oEBLK1tB/FNtne29ep5NsGAhHe7V4HaHs
+         q+x4RYd36MN996G5IJnAfhD0N9ZFqEAm4RThxc2Krwpf9wETVwLk9q3bw0XnHE+7xL/v
+         s0OKFYVc7AELm4NdGhFlCasot/bP8djKWo6izi57AcIbB4kbLR+2Og8grSSPY/+yx+wD
+         wGW3ax8sSMn8aPi3uINBO+HvuNFyXtmfxRuEQ9JRsGO0/J2YkuxnDAMi8J5Gfbg9Abf5
+         lG7w==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@krf.se header.s=selector1 header.b=R0DFUhmD;
+       arc=pass (i=1 spf=pass spfdomain=krf.se dkim=pass dkdomain=krf.se dmarc=pass fromdomain=krf.se);
+       spf=pass (google.com: domain of erik.nilsson@krf.se designates 2a01:111:f403:c202::5 as permitted sender) smtp.mailfrom=erik.nilsson@krf.se;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=krf.se
+Return-Path: <erik.nilsson@krf.se>
+Received: from GVZP280CU018.outbound.protection.outlook.com (mail-swedencentralazlp170120005.outbound.protection.outlook.com. [2a01:111:f403:c202::5])
+        by mx.google.com with ESMTPS id d9443c01a7336-2ab29998858si40582155ad.98.2026.02.11.04.15.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Feb 2026 04:15:11 -0800 (PST)
+Received-SPF: pass (google.com: domain of erik.nilsson@krf.se designates 2a01:111:f403:c202::5 as permitted sender) client-ip=2a01:111:f403:c202::5;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@krf.se header.s=selector1 header.b=R0DFUhmD;
+       arc=pass (i=1 spf=pass spfdomain=krf.se dkim=pass dkdomain=krf.se dmarc=pass fromdomain=krf.se);
+       spf=pass (google.com: domain of erik.nilsson@krf.se designates 2a01:111:f403:c202::5 as permitted sender) smtp.mailfrom=erik.nilsson@krf.se;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=krf.se
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WzTS9jtWWL5cluDjIQ+WHl2DXr0hSzy9HT0lUl8/bvYdQJk0u2q3MMQn85lWTA+xvxR2WhfzXS1Y9SIlyypzsm0w8DZPatMkaNRil7carIcVAT3cdNOQD6X1j2i92ta8PLrUkoVp2JDyQt5+JkfhegOC4EVhIupDEXQuVaqLVzxvoQRRJcqkoqZP+gAixY4Hm2QUFqAY47FhcXnmXeanoE3uAQaz5tqP59Pp8RfRaRVTydAvi1OYTsZyLnOUqWKNSr6EwcINF3CwVhjg0Lgd/ONawXFp4gTslBdsdIz9fHg8X/1PsviddgjQok9cU0W5a7hDiIEO30BSgmcmNoYf8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aE7HtgDXquFqGIHgtiMBHgkW8Zu0Dp5fE1+BEiNMnIs=;
+ b=JiLN8anG+H+1GtnbQUkcK8Ryq0VryXS/DjUPFYxOvAMzs3J1gmv7gCmOtPSpQmbXToie67E6/jLN+yON/JIn9tDWsFHh6t8rJ5ZqLG9kGObIrixHf72TcUnW9TeK1kPSr0/ASATg8ES//eHBKcnmC6ooTjfT7WKT4P9koaDhsr2kqjmcDZDJaAKS6pyqm0IUdGnL2UubZ0wLVHghE/IQZaI9IA0n9cfglS6IVYyS9WYEoS3GAyLCxsgAJa0CItM6BJjSlL4jHZeFmilFjmJ1Ul9o17bkXTmHnE0j4JNbIQjCOAUmQe4k4DLcxi86I4FkpsY1NS8abz5Pb1BkN7wEBg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=krf.se; dmarc=pass action=none header.from=krf.se; dkim=pass
+ header.d=krf.se; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=krf.se; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aE7HtgDXquFqGIHgtiMBHgkW8Zu0Dp5fE1+BEiNMnIs=;
+ b=R0DFUhmDi+YsLl+MO08zLHkPKKCq3jW0kpoyQY7DOSZ+SfjLynf1ilZe23F2jdoVu7X4wf9CYTdLdZlDQHPo0c4k0uSDk9vTZam+ggzju2dsQUdWXxlmyjmhSbaqi3Lqqf36+SCmRryhGNm5wc2tc0Vx9h7JBgdYAyoZsrSm7eJWIt3Ejz/A+R+pJ4x5BAoNYxUmEu3i7MYUc1m5oHe5ANaNMyWzJrBBQoYXcP6gBbdpXU8uZnloKiszvn/VqFsenxDpsHYerVIVVUsAiG+lgR1KnIrm38brdZh7lsvkiUzsvpYijYVumxcQZq+Hu5o0PzGX+s7CtV6q4FQQcI/waQ==
+Received: from MM0P280MB0568.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:14::13)
+ by GV3P280MB1062.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:f0::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Wed, 11 Feb
+ 2026 12:15:06 +0000
+Received: from MM0P280MB0568.SWEP280.PROD.OUTLOOK.COM
+ ([fe80::a333:20a:5ab8:ecbd]) by MM0P280MB0568.SWEP280.PROD.OUTLOOK.COM
+ ([fe80::a333:20a:5ab8:ecbd%5]) with mapi id 15.20.9611.008; Wed, 11 Feb 2026
+ 12:15:06 +0000
+From: Erik Nilsson <erik.nilsson@krf.se>
+To: Erik Nilsson <erik.nilsson@krf.se>
+Subject: Maghreb Network - Future Direction
+Thread-Topic: Maghreb Network - Future Direction
+Thread-Index: AdybThkQIk3QrzW1RQuOtd5SY/WasQ==
+Date: Wed, 11 Feb 2026 12:15:06 +0000
+Message-ID:
+ <MM0P280MB05682294CFFF4270DCFB8CAFEC63A@MM0P280MB0568.SWEP280.PROD.OUTLOOK.COM>
+Accept-Language: sv-SE, en-US
+Content-Language: sv-SE
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=krf.se;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MM0P280MB0568:EE_|GV3P280MB1062:EE_
+x-ms-office365-filtering-correlation-id: 44046171-3ee9-4095-17b4-08de69673146
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|6049299003|7416014|19092799006|376014|366016|1800799024|13003099007|38070700021|4053099003|8096899003;
+x-microsoft-antispam-message-info:
+ =?windows-1256?Q?XuaKp1ShWBu0Xfcp7JlF7kW8JixsmOiPx47OUdMH3Hd29Nbg5XeAxhsh?=
+ =?windows-1256?Q?3d4admxZNWWcqdKTPygDeDDDfGO724zmrHaI7oQjOBzkNi2sBMhqIXhI?=
+ =?windows-1256?Q?eSZs4/DibMB0lc/qQOQwEJlYS5ktkMqYBLr2vlzb65AeDOjTX5fh43ur?=
+ =?windows-1256?Q?DpCZnViUXeiwjjqvAEtcWpiFFvRTYhktjs/4etSykZwfMyuuJFxXovak?=
+ =?windows-1256?Q?XSb55b2UAhP5ZzXrdpCFnPYy2zpiUrm6QEc9+PwmqKn7jFFZ1nrmTzTZ?=
+ =?windows-1256?Q?WtFKBVgnBbq1oObusAMSMzCpsyfV4F51P0oL2czj3gHCHgTLfSGi+pKr?=
+ =?windows-1256?Q?jnHl6EtgGaoy8N9jNipTcKuJVfx5bqzP3H41EsRUtnS7n2Tj8nWwBnaf?=
+ =?windows-1256?Q?s7LmjXQI2BsabtdpY6BUez44YBOoW7KGj9SKJHlw0Jy8U0qKu6+nuqrl?=
+ =?windows-1256?Q?0EhdXzmMaghLwiIs6Tf47jaPWcM9CQY/bw9JDfOTBc26kFqdZtDyYzxe?=
+ =?windows-1256?Q?OPvugWcGJGMVv03QTlibbr+rM6p5C24LehaUtQTKYf3zR0ACeR85u81S?=
+ =?windows-1256?Q?VmeuXONZ3ktqFOZhNK1y29PwSMXY+E5qz/iyxk32o+oifPi2zK1wp2zA?=
+ =?windows-1256?Q?Oaxh/VSURm9WMxEud1JR/1e/wD+01W44y+GWi0o6K0VZFC5XKs6z1YBS?=
+ =?windows-1256?Q?dn3q4xcaJ/77oFeQMrsI6oNEbYTIrVg2XgcEcTXoa+8BAWPW1VrQoSU+?=
+ =?windows-1256?Q?aacU8hfA/TzsH4dLnaMIENaI2fWEYTDmKq7zkfZWjDzjfRfe2w/E5I9H?=
+ =?windows-1256?Q?bLGF0+82V+EYZZTz4Ds+4EockCYDxpqjSoQg7bPkmfo8M7UHApuJ65Rq?=
+ =?windows-1256?Q?8wCKy4J5bkWEv7eztVMRD3I7XNdejgdjaAZfXVu2oZZd+8qNh95WU07A?=
+ =?windows-1256?Q?m7fjKCsDBzE3v6KAWFseQPHXJTlRnLW+NXDEO05bbR/0/V7fMIVTQZrS?=
+ =?windows-1256?Q?zySwoa18B/TOSB9f9MqdhQztHHmulTnYxugQIcrsYamy9NR95mZsX6uV?=
+ =?windows-1256?Q?+VMB9sKq8US4l1C2UvNskbZedzAxYRQAnhbCsDawuKntWpcfCsK126H+?=
+ =?windows-1256?Q?8f6wrB05D6PHvZfXbDqcE/lQzD4xSsNdNWQCCa5A2cQHEmPMOHZX6nMk?=
+ =?windows-1256?Q?Pws/+TD6Z+v627yCdBgBvuivZZp3346FIRtStMBXe4YokvrI9IDZhYqg?=
+ =?windows-1256?Q?sLKxSrJ+tG2nbpWt1HAN1L4mbXJmNBWaBfjl/hQo7NbI1UnhrMvgWT6G?=
+ =?windows-1256?Q?AuKh/q41STqBWGsU/0h4DpVm8erCsvJoofvuIQrOaxbJ93lmjglW15pA?=
+ =?windows-1256?Q?9NcAfrawZx8yW1UxfSHlLzBOe+lqn9GpRjM83GtmQ1BMJJ8N6J7dYL2F?=
+ =?windows-1256?Q?KvFoAVEyE5/CptlYFXuE+u4M+JT6W9MRIJYpMMGv4Z+xKEFx9ZMc3M55?=
+ =?windows-1256?Q?OsgwdnyKUxRHmiC/yAJWQnlDm//td14UtY5BL+4Kko0EFaAwRNhN63En?=
+ =?windows-1256?Q?pf4P8uv6Qvev2emCJd/rdf09ps2BypwKFRqGe+mKFDN66qgC/HTUcBdY?=
+ =?windows-1256?Q?O62bBB5Fxh5HdCEf4AfR5Frtx1KBhLC1+y95AxvwqtL64e7HCVBapp4p?=
+ =?windows-1256?Q?fiArxSA5H1s=3D?=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MM0P280MB0568.SWEP280.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(6049299003)(7416014)(19092799006)(376014)(366016)(1800799024)(13003099007)(38070700021)(4053099003)(8096899003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?windows-1256?Q?d/J9whf8GW0E3buifMuzccjz1ybHdOBwIG9d1AN0OtPvXPCzLhJOvfgs?=
+ =?windows-1256?Q?PzGLg1Q0cMREBCMPbfVUX5CQdSbVUimV96gV3FQzRTHhxGQNhbSi1m7l?=
+ =?windows-1256?Q?sjF8AIFbz7UwJ1KnbWAUVdjRtCj6DG/x63DJj+oqYu8fvROplshravcD?=
+ =?windows-1256?Q?V45ZA1dDm7BoQK4t8o+q45qis8rjIkAPeYXO2SqOxQnh2S54nInbrxfd?=
+ =?windows-1256?Q?XyB2wbFNnpHwUAKdQx+jCxd1fD9dqQ+Tb6eIgutCPKQoIeop/Xr/1w9Z?=
+ =?windows-1256?Q?345/kPj/hcMgRX2XCqjM4BXpZBiQVvjrKbMkn4qp0NoVIFHG6pQvprQb?=
+ =?windows-1256?Q?GKsI3o18xfvKNhUtqzQNfmNDAsqCAt3sfiECTY7/cUiaO3Th8D85EjWD?=
+ =?windows-1256?Q?cv82TXqxz0afwaC/jL3swK3VguBVcLFsDJgjx774TYglWo8YXfemg8FN?=
+ =?windows-1256?Q?DCpzD5uJBzpRcq/KG9+iFV/xePf+7enbOGS/ZlBHx532Cx4KMlqcnDIz?=
+ =?windows-1256?Q?DpV/u1uHR2C6IjsQDyHNXzzDVLLfWwc5FE6qjo8sNL2/VoUIwDA3qpA9?=
+ =?windows-1256?Q?fg714o7veEe76R8/8Tk7KiCPjde09RIvrMucTujZta5WoAC0e6XUq9r/?=
+ =?windows-1256?Q?EhxyGqC1Ij7iktmA5EIUVmeRyIEWMmZjcPxfFSHeb8Oj/wIc0FE/D208?=
+ =?windows-1256?Q?KPUVPMFebKw+/fA1aG4WYWCLraykjBQR+A3f59XmwZBUomStDQ0JMWks?=
+ =?windows-1256?Q?n+m2v3vZkOOPMtj/3KCDTOwwLuKgdvxsZog4FBDseirNqTxF1WmA5lQ9?=
+ =?windows-1256?Q?pQ73aKTU8tc+6dDdXnSyS1267oDjjGpbSpvgsddvOP8fhEi4MGwch4bW?=
+ =?windows-1256?Q?1i5zaXClio3hWO49ZM1Hp2dgi2Pj/7/cJWjjBekytkLxGIfnsFh1LyJ/?=
+ =?windows-1256?Q?C413zUfnT2XMs6RlcYxJR+j7PPAQUm84+wuhR8ALk5P9FlAjvRQgTFib?=
+ =?windows-1256?Q?5muv5WPoPJM3qRkYxBjEGXrXpaSTMl5twzjsux1WVwGbFwy/STxN7Vlm?=
+ =?windows-1256?Q?qwj60q58TiJ/3/HmDyVWT6desb8Mi3ku/QxyF7fx4jbOHvUou+mYtRzQ?=
+ =?windows-1256?Q?keg11q9LugB3yfk89ytPPVZBODL9C9qWj79YjWm1Lg2qlk/LM44H8JzG?=
+ =?windows-1256?Q?/A5fxDP09wFvP9xkohZxGzQaVJIb59kpkpkCI+dwF+sufIJg5PZw4FLn?=
+ =?windows-1256?Q?D4wO25LJYX8dMG4EA2v7Vsqoh3fh4+ZjyoI1KoxX7BQ9Nfu9bO9Y9/CK?=
+ =?windows-1256?Q?kkq9kF4ks0wTUizbIGyDPS99YunlO/YLax2NCb8DMd9TsbtCk4NNRDbr?=
+ =?windows-1256?Q?HpjDeUQBfMoNikBSKj0h1R3EMKw+CI9tIWNIyE4bnFztaBexD5Uv7pmT?=
+ =?windows-1256?Q?powv2AdoQefFmPi/I65PQb3qCX51/d7YozZUCH9+KV0r8T3SixZdssmh?=
+ =?windows-1256?Q?CD2hut+RHPkl+jsIOPqaTn8PQpClEWl4FtbaLsDDJOBKzAeC9cpuzJ0z?=
+ =?windows-1256?Q?K/3ZDP4mqZD5JjWM1mrblVdsqg4IORwf1vLE3wjeQDKagMXxJQ5GIaOD?=
+ =?windows-1256?Q?G/+HFcixfDYqkvlwHUXo+okjy0vT2B+HgwPN46o24XHKv0KY58uPw9VH?=
+ =?windows-1256?Q?BW042DUz+GrTqWTCzfmcvbYmriIA2cN21tLu+huwCcR5WiMTONVdGRvy?=
+ =?windows-1256?Q?hPcxS8rT3i1xu34UWghTuUtNLFmCXjZcRv2bk56kH8b4N/nSYB9lFbqz?=
+ =?windows-1256?Q?av8VesQ6RFaJX0awfovmOvu3i/OLLcKL4DtdF7DIXCTcpd9F?=
+Content-Type: multipart/related;
+	boundary="_004_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_";
+	type="multipart/alternative"
+MIME-Version: 1.0
+X-OriginatorOrg: krf.se
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MM0P280MB0568.SWEP280.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 44046171-3ee9-4095-17b4-08de69673146
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Feb 2026 12:15:06.1978
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d0ef1e6f-4c29-4d56-8f80-a4ba41a9fcbc
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: GuV3QuOZlKUqUNPc2G35cI/7Qe2bXJnAna82mg9Ew7uiZtK77Vjx41GFhBihLrhRhwdDJRpvg4CG/DXe8eCZNQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV3P280MB1062
+
+--_004_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_
+Content-Type: multipart/alternative;
+	boundary="_000_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_"
+
+--_000_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_
+Content-Type: text/plain; charset="windows-1256"
+Content-Transfer-Encoding: quoted-printable
+
+Dear friends,
+
+=C7=E1=CA=D1=CC=E3=C9 =C7=E1=DA=D1=C8=ED=C9 =C3=CF=E4=C7=E5
+
+Warm greetings to all of you! I hope this finds you well and that the year =
+of 2026 has begun in a good way for you all!
+
+I am writing today with an overall update on how we hope to set a direction=
+ for the future work of the Maghreb Network. It is slightly longer e-mail s=
+o I hope that you will find time to read it all.
+
+As I have mentioned many times before, we have gone through a lot of intern=
+al changes at SweFOR and we have had a long wait to understand what our ove=
+rall funding partnerships will look like going forward. We now, finally, ha=
+ve that clarity and we have a platform on which we can build our work for t=
+he next three years!
+
+It has been somewhat of a frustrating wait and for all the patience that yo=
+u have all showed in different ways =96 thank you! During this time, so muc=
+h of our shared work has also developed in lots of interesting and good way=
+s, and today we have a range of very interesting projects and collaboration=
+s that are running well thanks to the shared relationships and foundations =
+we have in our network. It is a true pleasure to be in touch with many of y=
+ou connected to these projects and collaborations, and also to be in touch =
+when there are significant updates and life events. Many things have happen=
+ed in the last years =96 people have got new jobs, started new studies, got=
+ married, celebrated successes, and dealt with challenges and losses. In th=
+is way, our network is working very well and the foundation of our relation=
+ships is strong!
+
+At the same time, what is also true is that we still need to determine the =
+best way forward for our collective work in this network and how this can s=
+erve us in the best possible way. Looking back to last year, we tried diffe=
+rent versions of online meetings as we were waiting for the overall clarity=
+ on our partnership situation. I think it is fair to say that these online =
+meetings have had their ups and downs in terms of how useful they have felt=
+. And when I last sent one of these longer updates to all of you with some =
+questions about future desires for the online meetings, there were very few=
+ responses.
+
+This leads us to where we go from here. We still have a strong foundation i=
+n our network, we have lots of interesting work taking place and we have th=
+e possibility to make clear plans for the future. What we need to figure ou=
+t and understand is how to do our shared work in a way that best serves the=
+ interests and needs of all network members going forward.
+
+Our process for figuring this out will be to contact you all individually t=
+o schedule calls which each of you. In these calls, what we hope to underst=
+and is:
+
+1) Are you still interested in being part of the Maghreb network?
+2) What work, initiatives, etc., that you are currently involved in can be =
+supported by the network?
+3) What is the best format for this support going forward?
+
+We will contact all of you =96 regardless of how much or little we have bee=
+n in touch in this last year =96 and hope to get a chance to speak to every=
+one. It will be very important in order to determine our direction going fo=
+rward.
+
+We will begin this process in the coming days and hope to have it all final=
+ized by the end of Ramadan, and then be able to return to everyone with a c=
+lear set of priorities and a clear future direction for our shared work in =
+this network.
+
+We look forward to speaking to you all in the coming weeks! Until then, wis=
+hing you all the very best.
+
+On behalf of the SweFOR team,
+Erik
+
+
+
+=C7=E1=C3=D5=CF=DE=C7=C1 =C7=E1=C3=DA=D2=C7=C1=A1
+
+=C3=CA=DE=CF=E3 =C5=E1=ED=DF=E3 =C8=C3=CD=D1=F8 =C7=E1=CA=CD=ED=C7=CA=A1 =
+=D1=C7=CC=ED=F0=C7 =C3=E4 =CA=DF=E6=E4=E6=C7 =CC=E3=ED=DA=F0=C7 =C8=CE=ED=
+=D1=A1 =E6=C3=E4 =ED=DF=E6=E4 =DA=C7=E3 2026 =DE=CF =C8=CF=C3  =E3=DA=DF=E3=
+ =DA=E1=EC =E4=CD=E6 =C5=ED=CC=C7=C8=ED =E6=E3=C8=D4=F8=D1.
+
+=C3=DF=CA=C8 =C5=E1=ED=DF=E3 =C7=E1=ED=E6=E3 =E1=C3=D4=C7=D1=DF=DF=E3 =CA=
+=CD=CF=ED=CB=F0=C7 =DA=C7=E3=F0=C7 =CD=E6=E1 =C7=E1=DF=ED=DD=ED=C9 =C7=E1=
+=CA=ED =E4=C3=E3=E1 =E3=E4 =CE=E1=C7=E1=E5=C7 =E6=D6=DA =CA=E6=CC=E5 =E6=C7=
+=D6=CD =E1=E1=DA=E3=E1 =C7=E1=E3=D3=CA=DE=C8=E1=ED =E1=E1=D4=C8=DF=C9 =C7=
+=E1=E3=DB=C7=D1=C8=ED=C9. =E5=D0=E5 =D1=D3=C7=E1=C9 =E3=D8=E6=F8=E1=C9 =E4=
+=D3=C8=ED=F0=C7=A1 =E6=C3=D1=CC=E6 =C3=E4 =ED=CA=D3=E4=EC =E1=DF=E3 =C7=E1=
+=E6=DE=CA =E1=DE=D1=C7=C1=CA=E5=C7 =DF=C7=E3=E1=C9.
+
+=DF=E3=C7 =D0=DF=D1=CA=F5 =DD=ED =E3=E4=C7=D3=C8=C7=CA =DA=CF=ED=CF=C9 =D3=
+=C7=C8=DE=C9=A1 =DD=DE=CF =E3=D1=D1=E4=C7 =C8=DD=CA=D1=C9 =E3=E4 =C7=E1=CA=
+=DB=ED=ED=D1=C7=CA =C7=E1=CF=C7=CE=E1=ED=C9 =C7=E1=DF=C8=ED=D1=C9 =DD=ED Sw=
+eFOR=A1 =DF=E3=C7 =C7=E4=CA=D9=D1=E4=C7 =E6=DE=CA=F0=C7 =D8=E6=ED=E1=F0=C7 =
+=CD=CA=EC =CA=CA=D6=CD =E3=DA=C7=E1=E3 =D4=D1=C7=DF=C7=CA=E4=C7 =C7=E1=CA=
+=E3=E6=ED=E1=ED=C9 =C7=E1=E3=D3=CA=DE=C8=E1=ED=C9. =E6=C7=E1=ED=E6=E3=A1 =
+=E6=E1=CD=D3=E4 =C7=E1=CD=D9=A1 =C3=D5=C8=CD=CA =E1=CF=ED=E4=C7 =E5=D0=E5 =
+=C7=E1=D1=C4=ED=C9 =C7=E1=E6=C7=D6=CD=C9=A1 =E6=C3=D5=C8=CD =E1=CF=ED=E4=C7=
+ =C3=D3=C7=D3 =E3=CA=ED=E4 =ED=E3=DF=E4=E4=C7 =C7=E1=C8=E4=C7=C1 =DA=E1=ED=
+=E5 =DD=ED =DA=E3=E1=E4=C7 =CE=E1=C7=E1 =C7=E1=D3=E4=E6=C7=CA =C7=E1=CB=E1=
+=C7=CB =C7=E1=DE=C7=CF=E3=C9.
+
+=E1=DE=CF =DF=C7=E4=CA =DD=CA=D1=C9 =C7=E1=C7=E4=CA=D9=C7=D1 =E5=D0=E5 =E3=
+=CD=C8=F6=D8=C9 =C5=E1=EC =CD=CF=F8=F2 =E3=C7=A1 =E6=E1=D0=E1=DF =C3=E6=CF =
+=C3=E4 =C3=CA=DE=CF=E3 =C8=CC=D2=ED=E1 =C7=E1=D4=DF=D1 =E1=DF=E3 =CC=E3=ED=
+=DA=F0=C7 =DA=E1=EC =E3=C7 =C3=C8=CF=ED=CA=E3=E6=E5 =E3=E4 =D5=C8=D1 =C8=D8=
+=D1=DE =E3=CE=CA=E1=DD=C9. =E6=CE=E1=C7=E1 =E5=D0=E5 =C7=E1=DD=CA=D1=C9=A1 =
+=CA=D8=E6=F8=D1 =C7=E1=DF=CB=ED=D1 =E3=E4 =DA=E3=E1=E4=C7 =C7=E1=E3=D4=CA=
+=D1=DF =C8=D8=D1=DE =C5=ED=CC=C7=C8=ED=C9 =E6=E3=CB=E3=D1=C9=A1 =E6=C3=D5=
+=C8=CD =E1=CF=ED=E4=C7 =C7=E1=ED=E6=E3 =DA=CF=CF =E3=E4 =C7=E1=E3=D4=C7=D1=
+=ED=DA =E6=C7=E1=CA=DA=C7=E6=E4=C7=CA =C7=E1=E3=E5=E3=C9 =C7=E1=CA=ED =CA=
+=D3=ED=D1 =DA=E1=EC =E4=CD=E6 =CC=ED=CF =C8=DD=D6=E1 =C7=E1=DA=E1=C7=DE=C7=
+=CA =C7=E1=E3=CA=ED=E4=C9 =E6=C7=E1=C3=D3=D3 =C7=E1=E3=D4=CA=D1=DF=C9 =CF=
+=C7=CE=E1 =D4=C8=DF=CA=E4=C7. =E6=ED=D3=DA=CF=E4=ED =CD=DE=F0=C7 =C3=E4 =C3=
+=DF=E6=E4 =DA=E1=EC =CA=E6=C7=D5=E1 =E3=DA =C7=E1=DA=CF=ED=CF =E3=E4=DF=E3 =
+=DD=ED =C5=D8=C7=D1 =E5=D0=E5 =C7=E1=E3=D4=C7=D1=ED=DA =E6=C7=E1=CA=DA=C7=
+=E6=E4=C7=CA=A1 =E6=DF=D0=E1=DF =DA=E4=CF =CD=CF=E6=CB =E3=D3=CA=CC=CF=C7=
+=CA =E3=E5=E3=C9 =C3=E6 =C3=CD=CF=C7=CB =D4=CE=D5=ED=C9 =C8=C7=D1=D2=C9. =
+=E1=DE=CF =D4=E5=CF=CA =C7=E1=D3=E4=E6=C7=CA =C7=E1=E3=C7=D6=ED=C9 =C7=E1=
+=DF=CB=ED=D1 =E3=E4 =C7=E1=CA=DB=ED=D1=C7=CA: =C7=E4=CA=DE=C7=E1=C7=CA =E3=
+=E5=E4=ED=C9=A1 =C8=CF=C7=ED=C7=CA =CF=D1=C7=D3=ED=C9 =CC=CF=ED=CF=C9=A1 =
+=D2=ED=CC=C7=CA=A1 =E4=CC=C7=CD=C7=CA=A1 =C5=E1=EC =CC=C7=E4=C8 =CA=CD=CF=
+=ED=C7=CA =E6=CE=D3=C7=D1=C7=CA. =E6=E3=E4 =E5=D0=C7 =C7=E1=E3=E4=D8=E1=DE=
+=A1 =ED=E3=DF=E4 =C7=E1=DE=E6=E1 =C5=E4 =D4=C8=DF=CA=E4=C7 =CA=DA=E3=E1 =C8=
+=D4=DF=E1 =CC=ED=CF=A1 =E6=C5=E4 =C3=D3=C7=D3 =DA=E1=C7=DE=C7=CA=E4=C7 =DE=
+=E6=ED =E6=E3=CA=ED=E4=C7.
+
+=E6=DD=ED =C7=E1=E6=DE=CA =D0=C7=CA=E5=A1 =E3=E4 =C7=E1=D5=CD=ED=CD =C3=ED=
+=D6=F0=C7 =C3=E4=E4=C7 =E3=C7 =D2=E1=E4=C7 =C8=CD=C7=CC=C9 =C5=E1=EC =CA=CD=
+=CF=ED=CF =C3=DD=D6=E1 =C7=E1=D3=C8=E1 =E1=E1=E3=D6=ED =DE=CF=E3=F0=C7 =DD=
+=ED =DA=E3=E1=E4=C7 =C7=E1=CC=E3=C7=DA=ED =D6=E3=E4 =E5=D0=E5 =C7=E1=D4=C8=
+=DF=C9=A1 =E6=DF=ED=DD =ED=E3=DF=E4 =E1=E5=D0=C7 =C7=E1=DA=E3=E1 =C3=E4 =ED=
+=CE=CF=E3=E4=C7 =C8=C3=DD=D6=E1 =D5=E6=D1=C9 =E3=E3=DF=E4=C9. =E6=C8=C7=E1=
+=DA=E6=CF=C9 =C5=E1=EC =C7=E1=DA=C7=E3 =C7=E1=E3=C7=D6=ED=A1 =DD=DE=CF =CC=
+=D1=F8=C8=E4=C7 =DA=CF=C9 =D5=ED=DB =E1=E1=C7=CC=CA=E3=C7=DA=C7=CA =DA=C8=
+=D1 =C7=E1=C5=E4=CA=D1=E4=CA =DD=ED =D9=E1 =C7=E4=CA=D9=C7=D1=E4=C7 =E1=E6=
+=D6=E6=CD =E6=D6=DA =C7=E1=D4=D1=C7=DF=C7=CA. =E6=E3=E4 =C7=E1=C5=E4=D5=C7=
+=DD =C7=E1=DE=E6=E1 =C5=E4 =E5=D0=E5 =C7=E1=C7=CC=CA=E3=C7=DA=C7=CA =D4=E5=
+=CF=CA =CA=DD=C7=E6=CA=F0=C7 =DD=ED =E3=CF=EC =DD=C7=C6=CF=CA=E5=C7. =E6=DA=
+=E4=CF=E3=C7 =C3=D1=D3=E1=CA=F5 =D3=C7=C8=DE=F0=C7 =C5=CD=CF=EC =E5=D0=E5 =
+=C7=E1=D1=D3=C7=C6=E1 =C7=E1=E3=D8=E6=F8=E1=C9 =E3=CA=D6=E3=E4=C9 =C8=DA=D6=
+ =C7=E1=C3=D3=C6=E1=C9 =CD=E6=E1 =C7=E1=D1=DB=C8=C7=CA =C7=E1=E3=D3=CA=DE=
+=C8=E1=ED=C9 =C7=E1=E3=CA=DA=E1=DE=C9 =C8=C7=E1=C7=CC=CA=E3=C7=DA=C7=CA =C7=
+=E1=C7=DD=CA=D1=C7=D6=ED=C9=A1 =CA=E1=DE=ED=E4=C7 =DA=CF=CF=F0=C7 =E3=CD=CF=
+=E6=CF=F0=C7 =CC=CF=F0=C7 =E3=E4 =C7=E1=D1=CF=E6=CF.
+
+=E6=E5=D0=C7 =ED=DE=E6=CF=E4=C7 =C5=E1=EC =C7=E1=E3=D1=CD=E1=C9 =C7=E1=E3=
+=DE=C8=E1=C9. =DD=E3=C7 =D2=C7=E1=CA =E1=CF=ED=E4=C7 =DE=C7=DA=CF=C9 =DE=E6=
+=ED=C9 =E1=D4=C8=DF=CA=E4=C7=A1 =E6=C7=E1=DA=CF=ED=CF =E3=E4 =C7=E1=C3=DA=
+=E3=C7=E1 =E6=C7=E1=C3=E4=D4=D8=C9 =C7=E1=E3=E5=E3=C9 =C7=E1=CC=C7=D1=ED=C9=
+=A1 =C5=D6=C7=DD=C9 =C5=E1=EC =C5=E3=DF=C7=E4=ED=C9 =E6=D6=DA =CE=D8=D8 =E6=
+=C7=D6=CD=C9 =E1=E1=E3=D3=CA=DE=C8=E1. =E6=E3=C7 =E4=CD=CA=C7=CC =C5=E1=ED=
+=E5 =C7=E1=C2=E4 =E5=E6 =DD=E5=E3 =C7=E1=DF=ED=DD=ED=C9 =C7=E1=CA=ED =ED=E3=
+=DF=E4=E4=C7 =E3=E4 =CE=E1=C7=E1=E5=C7 =CA=E4=D9=ED=E3 =DA=E3=E1=E4=C7 =C7=
+=E1=E3=D4=CA=D1=DF =C8=E3=C7 =ED=E1=C8=F8=ED =E3=D5=C7=E1=CD =E6=C7=CD=CA=
+=ED=C7=CC=C7=CA =CC=E3=ED=DA =C3=DA=D6=C7=C1 =C7=E1=D4=C8=DF=C9 =DA=E1=EC =
+=C3=DD=D6=E1 =E6=CC=E5 =DD=ED =C7=E1=E3=D1=CD=E1=C9 =C7=E1=DE=C7=CF=E3=C9.
+
+=E6=D3=ED=DF=E6=E4 =E4=E5=CC=E4=C7 =E1=CA=CD=DE=ED=DE =D0=E1=DF =E5=E6 =C7=
+=E1=CA=E6=C7=D5=E1 =E3=DA =DF=E1 =E6=C7=CD=CF =E3=E4=DF=E3 =DA=E1=EC =CD=CF=
+=C9 =E1=CA=CD=CF=ED=CF =E3=E6=C7=DA=ED=CF =E1=E3=DF=C7=E1=E3=C7=CA =DD=D1=
+=CF=ED=C9. =E6=CE=E1=C7=E1 =E5=D0=E5 =C7=E1=E3=DF=C7=E1=E3=C7=CA=A1 =E4=C3=
+=E3=E1 =DD=ED =C7=E1=CA=E6=D5=E1 =C5=E1=EC =DD=E5=E3 =C3=E6=D6=CD =E1=E3=C7=
+ =ED=E1=ED:
+
+1. =E5=E1 =E3=C7 =D2=E1=CA=E3 =E3=E5=CA=E3=ED=E4 =C8=C7=E1=C7=D3=CA=E3=D1=
+=C7=D1 =DF=C3=DA=D6=C7=C1 =DD=ED =C7=E1=D4=C8=DF=C9 =C7=E1=E3=DB=C7=D1=C8=
+=ED=C9=BF
+2. =E3=C7 =E5=ED =C7=E1=C3=DA=E3=C7=E1 =C3=E6 =C7=E1=E3=C8=C7=CF=D1=C7=CA =
+=C3=E6 =C7=E1=C3=E4=D4=D8=C9 =C7=E1=CA=ED =CA=D4=C7=D1=DF=E6=E4 =DD=ED=E5=
+=C7 =CD=C7=E1=ED=F0=C7=A1 =E6=C7=E1=CA=ED =ED=E3=DF=E4 =E1=E1=D4=C8=DF=C9 =
+=CF=DA=E3=E5=C7=BF
+3. =E3=C7 =E5=E6 =C7=E1=D4=DF=E1 =C3=E6 =C7=E1=C5=D8=C7=D1 =C7=E1=C3=E4=D3=
+=C8 =E1=CA=DE=CF=ED=E3 =E5=D0=C7 =C7=E1=CF=DA=E3 =DD=ED =C7=E1=E3=D1=CD=E1=
+=C9 =C7=E1=E3=DE=C8=E1=C9=BF
+
+=D3=E4=DE=E6=E3 =C8=C7=E1=CA=E6=C7=D5=E1 =E3=DA=DF=E3 =CC=E3=ED=DA=F0=C7=A1=
+ =C8=DB=D6=F8 =C7=E1=E4=D9=D1 =DA=E4 =E3=CF=EC =CA=E6=C7=D5=E1=E4=C7 =CE=E1=
+=C7=E1 =C7=E1=DA=C7=E3 =C7=E1=E3=C7=D6=ED=A1 =E6=E4=C3=E3=E1 =C3=E4 =CA=CA=
+=C7=CD =E1=E4=C7 =C7=E1=DD=D1=D5=C9 =E1=E1=CA=CD=CF=CB =E3=DA =C7=E1=CC=E3=
+=ED=DA. =E6=D3=ED=DF=E6=E4 =D0=E1=DF =C3=E3=D1=F0=C7 =C8=C7=E1=DB =C7=E1=C3=
+=E5=E3=ED=C9 =E1=CA=CD=CF=ED=CF =CA=E6=CC=E5=E4=C7 =C7=E1=E3=D3=CA=DE=C8=E1=
+=ED.
+
+=D3=E4=C8=CF=C3 =E5=D0=E5 =C7=E1=DA=E3=E1=ED=C9 =CE=E1=C7=E1 =C7=E1=C3=ED=
+=C7=E3 =C7=E1=DE=E1=ED=E1=C9 =C7=E1=E3=DE=C8=E1=C9=A1 =E6=E4=C3=E3=E1 =C3=
+=E4 =E4=CA=E3=DF=E4 =E3=E4 =C7=D3=CA=DF=E3=C7=E1=E5=C7 =C8=C7=E1=DF=C7=E3=
+=E1 =C8=CD=E1=E6=E1 =E4=E5=C7=ED=C9 =D4=E5=D1 =D1=E3=D6=C7=E4=A1 =CB=E3 =C7=
+=E1=DA=E6=CF=C9 =C5=E1=ED=DF=E3 =CC=E3=ED=DA=F0=C7 =C8=E3=CC=E3=E6=DA=C9 =
+=E6=C7=D6=CD=C9 =E3=E4 =C7=E1=C3=E6=E1=E6=ED=C7=CA =E6=CA=E6=CC=E5 =E3=D3=
+=CA=DE=C8=E1=ED =E3=CD=CF=CF =E1=DA=E3=E1=E4=C7 =C7=E1=E3=D4=CA=D1=DF =D6=
+=E3=E4 =E5=D0=E5 =C7=E1=D4=C8=DF=C9.
+
+=E4=CA=D8=E1=DA =C5=E1=EC =C7=E1=CA=CD=CF=CB =E3=DA=DF=E3 =CC=E3=ED=DA=F0=
+=C7 =CE=E1=C7=E1 =C7=E1=C3=D3=C7=C8=ED=DA =C7=E1=DE=C7=CF=E3=C9. =E6=CD=CA=
+=EC =D0=E1=DF =C7=E1=CD=ED=E4=A1 =E4=CA=E3=E4=EC =E1=DF=E3 =DF=E1 =C7=E1=CA=
+=E6=DD=ED=DE =E6=CF=E6=C7=E3 =C7=E1=CE=ED=D1.
+
+=E4=ED=C7=C8=C9=F0 =DA=E4 =DD=D1=ED=DE SweFOR=A1
+
+=C5=D1=ED=DF
+=E3=CF=ED=D1 =C7=E1=C8=D1=E4=C7=E3=CC
+Erik Nilsson
+Head of Program
+SweFOR
+
++46 765 01 17 23
+Box 14038, 167 14 Bromma, Sweden
+
+www.swefor.org<http://www.swefor.org/>
+
+[SweFor_EN_sign]
+
+
+
+--_000_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_
+Content-Type: text/html; charset="windows-1256"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dwindows-1=
+256">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"Myriad Pro";}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;
+	mso-ligatures:standardcontextual;
+	mso-fareast-language:EN-US;}
+span.E-postmall17
+	{mso-style-type:personal-compose;
+	font-family:"Aptos",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style>
+</head>
+<body lang=3D"SV" link=3D"#467886" vlink=3D"#96607D" style=3D"word-wrap:bre=
+ak-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Dear friends, <o:p></o:p></span=
+></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"AR-SA" dir=3D"RTL" style=3D"font-famil=
+y:&quot;Arial&quot;,sans-serif">=C7=E1=CA=D1=CC=E3=C9 =C7=E1=DA=D1=C8=ED=C9=
+ =C3=CF=E4=C7=E5</span><span lang=3D"EN-US"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Warm greetings to all of you! I=
+ hope this finds you well and that the year of 2026 has begun in a good way=
+ for you all!<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">I am writing today with an over=
+all update on how we hope to set a direction for the future work of the Mag=
+hreb Network. It is slightly longer e-mail so I hope that you will find tim=
+e to read it all.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">As I have mentioned many times =
+before, we have gone through a lot of internal changes at SweFOR and we hav=
+e had a long wait to understand what our overall funding partnerships will =
+look like going forward. We now, finally,
+ have that clarity and we have a platform on which we can build our work fo=
+r the next three years!
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">It has been somewhat of a frust=
+rating wait and for all the patience that you have all showed in different =
+ways =96 thank you! During this time, so much of our shared work has also d=
+eveloped in lots of interesting and good
+ ways, and today we have a range of very interesting projects and collabora=
+tions that are running well thanks to the shared relationships and foundati=
+ons we have in our network. It is a true pleasure to be in touch with many =
+of you connected to these projects
+ and collaborations, and also to be in touch when there are significant upd=
+ates and life events. Many things have happened in the last years =96 peopl=
+e have got new jobs, started new studies, got married, celebrated successes=
+, and dealt with challenges and losses.
+ In this way, our network is working very well and the foundation of our re=
+lationships is strong!
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><br>
+At the same time, what is also true is that we still need to determine the =
+best way forward for our collective work in this network and how this can s=
+erve us in the best possible way. Looking back to last year, we tried diffe=
+rent versions of online meetings
+ as we were waiting for the overall clarity on our partnership situation. I=
+ think it is fair to say that these online meetings have had their ups and =
+downs in terms of how useful they have felt. And when I last sent one of th=
+ese longer updates to all of you
+ with some questions about future desires for the online meetings, there we=
+re very few responses.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">This leads us to where we go fr=
+om here. We still have a strong foundation in our network, we have lots of =
+interesting work taking place and we have the possibility to make clear pla=
+ns for the future. What we need to figure
+ out and understand is how to do our shared work in a way that best serves =
+the interests and needs of all network members going forward.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Our process for figuring this o=
+ut will be to contact you all individually to schedule calls which each of =
+you. In these calls, what we hope to understand is:
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">1) Are you still interested in =
+being part of the Maghreb network?
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">2) What work, initiatives, etc.=
+, that you are currently involved in can be supported by the network?
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">3) What is the best format for =
+this support going forward?
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">We will contact all of you =96 =
+regardless of how much or little we have been in touch in this last year =
+=96 and hope to get a chance to speak to everyone. It will be very importan=
+t in order to determine our direction going
+ forward. <o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">We will begin this process in t=
+he coming days and hope to have it all finalized by the end of Ramadan, and=
+ then be able to return to everyone with a clear set of priorities and a cl=
+ear future direction for our shared
+ work in this network. <o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">We look forward to speaking to =
+you all in the coming weeks! Until then, wishing you all the very best.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">On behalf of the SweFOR team, <=
+o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Erik<o:p></o:p></span></p>
+<div style=3D"mso-element:para-border-div;border:none;border-bottom:solid w=
+indowtext 1.0pt;padding:0cm 0cm 1.0pt 0cm">
+<p class=3D"MsoNormal" style=3D"border:none;padding:0cm"><span lang=3D"EN-U=
+S"><o:p>&nbsp;</o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=C7=E1=C3=D5=CF=DE=C7=C1 =C7=E1=C3=DA=D2=C7=C1=A1</span><span dir=
+=3D"LTR" style=3D"color:black;mso-ligatures:none;mso-fareast-language:SV"><=
+o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"EN-US" dir=3D"LTR"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=C3=CA=DE=CF=E3 =C5=E1=ED=DF=E3 =C8=C3=CD=D1=F8 =C7=E1=CA=CD=ED=C7=
+=CA=A1 =D1=C7=CC=ED=F0=C7 =C3=E4 =CA=DF=E6=E4=E6=C7 =CC=E3=ED=DA=F0=C7 =C8=
+=CE=ED=D1=A1 =E6=C3=E4 =ED=DF=E6=E4 =DA=C7=E3 2026 =DE=CF =C8=CF=C3&nbsp; =
+=E3=DA=DF=E3 =DA=E1=EC =E4=CD=E6 =C5=ED=CC=C7=C8=ED =E6=E3=C8=D4=F8=D1.<o:p=
+></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=C3=DF=CA=C8 =C5=E1=ED=DF=E3 =C7=E1=ED=E6=E3 =E1=C3=D4=C7=D1=DF=DF=
+=E3 =CA=CD=CF=ED=CB=F0=C7 =DA=C7=E3=F0=C7 =CD=E6=E1 =C7=E1=DF=ED=DD=ED=C9 =
+=C7=E1=CA=ED =E4=C3=E3=E1 =E3=E4 =CE=E1=C7=E1=E5=C7 =E6=D6=DA =CA=E6=CC=E5 =
+=E6=C7=D6=CD =E1=E1=DA=E3=E1 =C7=E1=E3=D3=CA=DE=C8=E1=ED =E1=E1=D4=C8=DF=C9=
+ =C7=E1=E3=DB=C7=D1=C8=ED=C9. =E5=D0=E5 =D1=D3=C7=E1=C9 =E3=D8=E6=F8=E1=C9 =
+=E4=D3=C8=ED=F0=C7=A1 =E6=C3=D1=CC=E6 =C3=E4 =ED=CA=D3=E4=EC =E1=DF=E3 =C7=
+=E1=E6=DE=CA =E1=DE=D1=C7=C1=CA=E5=C7 =DF=C7=E3=E1=C9.<o:p></o:p></span></p=
+>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=DF=E3=C7 =D0=DF=D1=CA=F5 =DD=ED =E3=E4=C7=D3=C8=C7=CA =DA=CF=ED=
+=CF=C9 =D3=C7=C8=DE=C9=A1 =DD=DE=CF =E3=D1=D1=E4=C7 =C8=DD=CA=D1=C9 =E3=E4 =
+=C7=E1=CA=DB=ED=ED=D1=C7=CA =C7=E1=CF=C7=CE=E1=ED=C9 =C7=E1=DF=C8=ED=D1=C9 =
+=DD=ED
+</span><span dir=3D"LTR" style=3D"color:black">SweFOR</span><span dir=3D"RT=
+L"></span><span dir=3D"RTL"></span><span lang=3D"AR-SA" style=3D"font-famil=
+y:&quot;Arial&quot;,sans-serif;color:black"><span dir=3D"RTL"></span><span =
+dir=3D"RTL"></span>=A1 =DF=E3=C7 =C7=E4=CA=D9=D1=E4=C7 =E6=DE=CA=F0=C7 =D8=
+=E6=ED=E1=F0=C7 =CD=CA=EC =CA=CA=D6=CD =E3=DA=C7=E1=E3
+ =D4=D1=C7=DF=C7=CA=E4=C7 =C7=E1=CA=E3=E6=ED=E1=ED=C9 =C7=E1=E3=D3=CA=DE=C8=
+=E1=ED=C9. =E6=C7=E1=ED=E6=E3=A1 =E6=E1=CD=D3=E4 =C7=E1=CD=D9=A1 =C3=D5=C8=
+=CD=CA =E1=CF=ED=E4=C7 =E5=D0=E5 =C7=E1=D1=C4=ED=C9 =C7=E1=E6=C7=D6=CD=C9=
+=A1 =E6=C3=D5=C8=CD =E1=CF=ED=E4=C7 =C3=D3=C7=D3 =E3=CA=ED=E4 =ED=E3=DF=E4=
+=E4=C7 =C7=E1=C8=E4=C7=C1 =DA=E1=ED=E5 =DD=ED =DA=E3=E1=E4=C7 =CE=E1=C7=E1 =
+=C7=E1=D3=E4=E6=C7=CA =C7=E1=CB=E1=C7=CB =C7=E1=DE=C7=CF=E3=C9.<o:p></o:p><=
+/span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E1=DE=CF =DF=C7=E4=CA =DD=CA=D1=C9 =C7=E1=C7=E4=CA=D9=C7=D1 =E5=
+=D0=E5 =E3=CD=C8=F6=D8=C9 =C5=E1=EC =CD=CF=F8=F2 =E3=C7=A1 =E6=E1=D0=E1=DF =
+=C3=E6=CF =C3=E4 =C3=CA=DE=CF=E3 =C8=CC=D2=ED=E1 =C7=E1=D4=DF=D1 =E1=DF=E3 =
+=CC=E3=ED=DA=F0=C7 =DA=E1=EC =E3=C7 =C3=C8=CF=ED=CA=E3=E6=E5 =E3=E4 =D5=C8=
+=D1 =C8=D8=D1=DE =E3=CE=CA=E1=DD=C9. =E6=CE=E1=C7=E1 =E5=D0=E5 =C7=E1=DD=CA=
+=D1=C9=A1 =CA=D8=E6=F8=D1 =C7=E1=DF=CB=ED=D1 =E3=E4 =DA=E3=E1=E4=C7 =C7=E1=
+=E3=D4=CA=D1=DF =C8=D8=D1=DE =C5=ED=CC=C7=C8=ED=C9 =E6=E3=CB=E3=D1=C9=A1
+ =E6=C3=D5=C8=CD =E1=CF=ED=E4=C7 =C7=E1=ED=E6=E3 =DA=CF=CF =E3=E4 =C7=E1=E3=
+=D4=C7=D1=ED=DA =E6=C7=E1=CA=DA=C7=E6=E4=C7=CA =C7=E1=E3=E5=E3=C9 =C7=E1=CA=
+=ED =CA=D3=ED=D1 =DA=E1=EC =E4=CD=E6 =CC=ED=CF =C8=DD=D6=E1 =C7=E1=DA=E1=C7=
+=DE=C7=CA =C7=E1=E3=CA=ED=E4=C9 =E6=C7=E1=C3=D3=D3 =C7=E1=E3=D4=CA=D1=DF=C9=
+ =CF=C7=CE=E1 =D4=C8=DF=CA=E4=C7. =E6=ED=D3=DA=CF=E4=ED =CD=DE=F0=C7 =C3=E4=
+ =C3=DF=E6=E4 =DA=E1=EC =CA=E6=C7=D5=E1 =E3=DA =C7=E1=DA=CF=ED=CF =E3=E4=DF=
+=E3 =DD=ED =C5=D8=C7=D1 =E5=D0=E5 =C7=E1=E3=D4=C7=D1=ED=DA =E6=C7=E1=CA=DA=
+=C7=E6=E4=C7=CA=A1 =E6=DF=D0=E1=DF =DA=E4=CF =CD=CF=E6=CB =E3=D3=CA=CC=CF=
+=C7=CA =E3=E5=E3=C9 =C3=E6 =C3=CD=CF=C7=CB =D4=CE=D5=ED=C9 =C8=C7=D1=D2=C9.=
+ =E1=DE=CF
+ =D4=E5=CF=CA =C7=E1=D3=E4=E6=C7=CA =C7=E1=E3=C7=D6=ED=C9 =C7=E1=DF=CB=ED=
+=D1 =E3=E4 =C7=E1=CA=DB=ED=D1=C7=CA: =C7=E4=CA=DE=C7=E1=C7=CA =E3=E5=E4=ED=
+=C9=A1 =C8=CF=C7=ED=C7=CA =CF=D1=C7=D3=ED=C9 =CC=CF=ED=CF=C9=A1 =D2=ED=CC=
+=C7=CA=A1 =E4=CC=C7=CD=C7=CA=A1 =C5=E1=EC =CC=C7=E4=C8 =CA=CD=CF=ED=C7=CA =
+=E6=CE=D3=C7=D1=C7=CA. =E6=E3=E4 =E5=D0=C7 =C7=E1=E3=E4=D8=E1=DE=A1 =ED=E3=
+=DF=E4 =C7=E1=DE=E6=E1 =C5=E4 =D4=C8=DF=CA=E4=C7 =CA=DA=E3=E1 =C8=D4=DF=E1 =
+=CC=ED=CF=A1 =E6=C5=E4 =C3=D3=C7=D3 =DA=E1=C7=DE=C7=CA=E4=C7 =DE=E6=ED =E6=
+=E3=CA=ED=E4=C7.<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E6=DD=ED =C7=E1=E6=DE=CA =D0=C7=CA=E5=A1 =E3=E4 =C7=E1=D5=CD=ED=
+=CD =C3=ED=D6=F0=C7 =C3=E4=E4=C7 =E3=C7 =D2=E1=E4=C7 =C8=CD=C7=CC=C9 =C5=E1=
+=EC =CA=CD=CF=ED=CF =C3=DD=D6=E1 =C7=E1=D3=C8=E1 =E1=E1=E3=D6=ED =DE=CF=E3=
+=F0=C7 =DD=ED =DA=E3=E1=E4=C7 =C7=E1=CC=E3=C7=DA=ED =D6=E3=E4 =E5=D0=E5 =C7=
+=E1=D4=C8=DF=C9=A1 =E6=DF=ED=DD =ED=E3=DF=E4 =E1=E5=D0=C7 =C7=E1=DA=E3=E1 =
+=C3=E4 =ED=CE=CF=E3=E4=C7 =C8=C3=DD=D6=E1 =D5=E6=D1=C9 =E3=E3=DF=E4=C9. =E6=
+=C8=C7=E1=DA=E6=CF=C9 =C5=E1=EC =C7=E1=DA=C7=E3 =C7=E1=E3=C7=D6=ED=A1
+ =DD=DE=CF =CC=D1=F8=C8=E4=C7 =DA=CF=C9 =D5=ED=DB =E1=E1=C7=CC=CA=E3=C7=DA=
+=C7=CA =DA=C8=D1 =C7=E1=C5=E4=CA=D1=E4=CA =DD=ED =D9=E1 =C7=E4=CA=D9=C7=D1=
+=E4=C7 =E1=E6=D6=E6=CD =E6=D6=DA =C7=E1=D4=D1=C7=DF=C7=CA. =E6=E3=E4 =C7=E1=
+=C5=E4=D5=C7=DD =C7=E1=DE=E6=E1 =C5=E4 =E5=D0=E5 =C7=E1=C7=CC=CA=E3=C7=DA=
+=C7=CA =D4=E5=CF=CA =CA=DD=C7=E6=CA=F0=C7 =DD=ED =E3=CF=EC =DD=C7=C6=CF=CA=
+=E5=C7. =E6=DA=E4=CF=E3=C7 =C3=D1=D3=E1=CA=F5 =D3=C7=C8=DE=F0=C7 =C5=CD=CF=
+=EC =E5=D0=E5 =C7=E1=D1=D3=C7=C6=E1 =C7=E1=E3=D8=E6=F8=E1=C9 =E3=CA=D6=E3=
+=E4=C9 =C8=DA=D6 =C7=E1=C3=D3=C6=E1=C9 =CD=E6=E1 =C7=E1=D1=DB=C8=C7=CA =C7=
+=E1=E3=D3=CA=DE=C8=E1=ED=C9 =C7=E1=E3=CA=DA=E1=DE=C9 =C8=C7=E1=C7=CC=CA=E3=
+=C7=DA=C7=CA =C7=E1=C7=DD=CA=D1=C7=D6=ED=C9=A1
+ =CA=E1=DE=ED=E4=C7 =DA=CF=CF=F0=C7 =E3=CD=CF=E6=CF=F0=C7 =CC=CF=F0=C7 =E3=
+=E4 =C7=E1=D1=CF=E6=CF.<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E6=E5=D0=C7 =ED=DE=E6=CF=E4=C7 =C5=E1=EC =C7=E1=E3=D1=CD=E1=C9 =
+=C7=E1=E3=DE=C8=E1=C9. =DD=E3=C7 =D2=C7=E1=CA =E1=CF=ED=E4=C7 =DE=C7=DA=CF=
+=C9 =DE=E6=ED=C9 =E1=D4=C8=DF=CA=E4=C7=A1 =E6=C7=E1=DA=CF=ED=CF =E3=E4 =C7=
+=E1=C3=DA=E3=C7=E1 =E6=C7=E1=C3=E4=D4=D8=C9 =C7=E1=E3=E5=E3=C9 =C7=E1=CC=C7=
+=D1=ED=C9=A1 =C5=D6=C7=DD=C9 =C5=E1=EC =C5=E3=DF=C7=E4=ED=C9 =E6=D6=DA =CE=
+=D8=D8 =E6=C7=D6=CD=C9 =E1=E1=E3=D3=CA=DE=C8=E1. =E6=E3=C7 =E4=CD=CA=C7=CC =
+=C5=E1=ED=E5 =C7=E1=C2=E4 =E5=E6 =DD=E5=E3 =C7=E1=DF=ED=DD=ED=C9
+ =C7=E1=CA=ED =ED=E3=DF=E4=E4=C7 =E3=E4 =CE=E1=C7=E1=E5=C7 =CA=E4=D9=ED=E3 =
+=DA=E3=E1=E4=C7 =C7=E1=E3=D4=CA=D1=DF =C8=E3=C7 =ED=E1=C8=F8=ED =E3=D5=C7=
+=E1=CD =E6=C7=CD=CA=ED=C7=CC=C7=CA =CC=E3=ED=DA =C3=DA=D6=C7=C1 =C7=E1=D4=
+=C8=DF=C9 =DA=E1=EC =C3=DD=D6=E1 =E6=CC=E5 =DD=ED =C7=E1=E3=D1=CD=E1=C9 =C7=
+=E1=DE=C7=CF=E3=C9.<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E6=D3=ED=DF=E6=E4 =E4=E5=CC=E4=C7 =E1=CA=CD=DE=ED=DE =D0=E1=DF =
+=E5=E6 =C7=E1=CA=E6=C7=D5=E1 =E3=DA =DF=E1 =E6=C7=CD=CF =E3=E4=DF=E3 =DA=E1=
+=EC =CD=CF=C9 =E1=CA=CD=CF=ED=CF =E3=E6=C7=DA=ED=CF =E1=E3=DF=C7=E1=E3=C7=
+=CA =DD=D1=CF=ED=C9. =E6=CE=E1=C7=E1 =E5=D0=E5 =C7=E1=E3=DF=C7=E1=E3=C7=CA=
+=A1 =E4=C3=E3=E1 =DD=ED =C7=E1=CA=E6=D5=E1 =C5=E1=EC =DD=E5=E3 =C3=E6=D6=CD=
+ =E1=E3=C7 =ED=E1=ED:<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">1. =E5=E1 =E3=C7 =D2=E1=CA=E3 =E3=E5=CA=E3=ED=E4 =C8=C7=E1=C7=D3=
+=CA=E3=D1=C7=D1 =DF=C3=DA=D6=C7=C1 =DD=ED =C7=E1=D4=C8=DF=C9 =C7=E1=E3=DB=
+=C7=D1=C8=ED=C9=BF<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">2. =E3=C7 =E5=ED =C7=E1=C3=DA=E3=C7=E1 =C3=E6 =C7=E1=E3=C8=C7=CF=
+=D1=C7=CA =C3=E6 =C7=E1=C3=E4=D4=D8=C9 =C7=E1=CA=ED =CA=D4=C7=D1=DF=E6=E4 =
+=DD=ED=E5=C7 =CD=C7=E1=ED=F0=C7=A1 =E6=C7=E1=CA=ED =ED=E3=DF=E4 =E1=E1=D4=
+=C8=DF=C9 =CF=DA=E3=E5=C7=BF<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">3. =E3=C7 =E5=E6 =C7=E1=D4=DF=E1 =C3=E6 =C7=E1=C5=D8=C7=D1 =C7=E1=
+=C3=E4=D3=C8 =E1=CA=DE=CF=ED=E3 =E5=D0=C7 =C7=E1=CF=DA=E3 =DD=ED =C7=E1=E3=
+=D1=CD=E1=C9 =C7=E1=E3=DE=C8=E1=C9=BF<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=D3=E4=DE=E6=E3 =C8=C7=E1=CA=E6=C7=D5=E1 =E3=DA=DF=E3 =CC=E3=ED=DA=
+=F0=C7=A1 =C8=DB=D6=F8 =C7=E1=E4=D9=D1 =DA=E4 =E3=CF=EC =CA=E6=C7=D5=E1=E4=
+=C7 =CE=E1=C7=E1 =C7=E1=DA=C7=E3 =C7=E1=E3=C7=D6=ED=A1 =E6=E4=C3=E3=E1 =C3=
+=E4 =CA=CA=C7=CD =E1=E4=C7 =C7=E1=DD=D1=D5=C9 =E1=E1=CA=CD=CF=CB =E3=DA =C7=
+=E1=CC=E3=ED=DA. =E6=D3=ED=DF=E6=E4 =D0=E1=DF =C3=E3=D1=F0=C7 =C8=C7=E1=DB =
+=C7=E1=C3=E5=E3=ED=C9 =E1=CA=CD=CF=ED=CF =CA=E6=CC=E5=E4=C7 =C7=E1=E3=D3=CA=
+=DE=C8=E1=ED.<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=D3=E4=C8=CF=C3 =E5=D0=E5 =C7=E1=DA=E3=E1=ED=C9 =CE=E1=C7=E1 =C7=
+=E1=C3=ED=C7=E3 =C7=E1=DE=E1=ED=E1=C9 =C7=E1=E3=DE=C8=E1=C9=A1 =E6=E4=C3=E3=
+=E1 =C3=E4 =E4=CA=E3=DF=E4 =E3=E4 =C7=D3=CA=DF=E3=C7=E1=E5=C7 =C8=C7=E1=DF=
+=C7=E3=E1 =C8=CD=E1=E6=E1 =E4=E5=C7=ED=C9 =D4=E5=D1 =D1=E3=D6=C7=E4=A1 =CB=
+=E3 =C7=E1=DA=E6=CF=C9 =C5=E1=ED=DF=E3 =CC=E3=ED=DA=F0=C7 =C8=E3=CC=E3=E6=
+=DA=C9 =E6=C7=D6=CD=C9 =E3=E4 =C7=E1=C3=E6=E1=E6=ED=C7=CA =E6=CA=E6=CC=E5 =
+=E3=D3=CA=DE=C8=E1=ED =E3=CD=CF=CF =E1=DA=E3=E1=E4=C7 =C7=E1=E3=D4=CA=D1=DF
+ =D6=E3=E4 =E5=D0=E5 =C7=E1=D4=C8=DF=C9.<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E4=CA=D8=E1=DA =C5=E1=EC =C7=E1=CA=CD=CF=CB =E3=DA=DF=E3 =CC=E3=
+=ED=DA=F0=C7 =CE=E1=C7=E1 =C7=E1=C3=D3=C7=C8=ED=DA =C7=E1=DE=C7=CF=E3=C9. =
+=E6=CD=CA=EC =D0=E1=DF =C7=E1=CD=ED=E4=A1 =E4=CA=E3=E4=EC =E1=DF=E3 =DF=E1 =
+=C7=E1=CA=E6=DD=ED=DE =E6=CF=E6=C7=E3 =C7=E1=CE=ED=D1.<o:p></o:p></span></p=
+>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E4=ED=C7=C8=C9=F0 =DA=E4 =DD=D1=ED=DE
+</span><span dir=3D"LTR" style=3D"color:black">SweFOR</span><span dir=3D"RT=
+L"></span><span dir=3D"RTL"></span><span lang=3D"AR-SA" style=3D"font-famil=
+y:&quot;Arial&quot;,sans-serif;color:black"><span dir=3D"RTL"></span><span =
+dir=3D"RTL"></span>=A1<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=C5=D1=ED=DF<o:p></o:p></span></p>
+<p class=3D"MsoNormal" dir=3D"RTL" style=3D"text-align:right;direction:rtl;=
+unicode-bidi:embed">
+<span lang=3D"AR-SA" style=3D"font-family:&quot;Arial&quot;,sans-serif;colo=
+r:black">=E3=CF=ED=D1 =C7=E1=C8=D1=E4=C7=E3=CC</span><span dir=3D"LTR" styl=
+e=3D"color:black"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"font-size:10.0pt;fo=
+nt-family:&quot;Myriad Pro&quot;;mso-fareast-language:SV">Erik Nilsson<o:p>=
+</o:p></span></b></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-=
+family:&quot;Myriad Pro&quot;;mso-fareast-language:SV">Head of Program<br>
+SweFOR<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-=
+family:&quot;Myriad Pro&quot;;mso-fareast-language:SV"><br>
+</span><span style=3D"font-size:10.0pt;font-family:&quot;Myriad Pro&quot;;m=
+so-fareast-language:SV">+46&nbsp;765 01 17 23<br>
+Box 14038, 167 14 Bromma, Sweden<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;My=
+riad Pro&quot;;color:#FF7019;mso-fareast-language:SV"><br>
+<b><a href=3D"http://www.swefor.org/"><span style=3D"color:#0563C1">www.swe=
+for.org</span></a></b></span><b><span style=3D"font-size:10.0pt;font-family=
+:&quot;Myriad Pro&quot;;color:#0D0D0D;mso-fareast-language:SV">&nbsp;
+</span></b><b><span style=3D"font-size:14.0pt;font-family:&quot;Myriad Pro&=
+quot;;mso-fareast-language:SV">&nbsp;<o:p></o:p></span></b></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:SV"><br>
+</span><b><span style=3D"font-size:10.0pt;font-family:&quot;Myriad Pro&quot=
+;;mso-fareast-language:SV"><img border=3D"0" width=3D"123" height=3D"67" st=
+yle=3D"width:1.2777in;height:.7013in" id=3D"Bild_x0020_1" src=3D"cid:image0=
+01.jpg@01DC9B56.7AD71140" alt=3D"SweFor_EN_sign"></span></b><span style=3D"=
+font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;mso-fareast-lan=
+guage:SV"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_--
+
+--_004_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_
+Content-Type: image/jpeg; name="image001.jpg"
+Content-Description: image001.jpg
+Content-Disposition: inline; filename="image001.jpg"; size=3124;
+	creation-date="Wed, 11 Feb 2026 12:15:06 GMT";
+	modification-date="Wed, 11 Feb 2026 12:15:06 GMT"
+Content-ID: <image001.jpg@01DC9B56.7AD71140>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIf
+IiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7
+Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABDAHsDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2XpWX
+c6qzXDWmnQfabhfvnOEj/wB4/wBKdqt1KXisLU4nuM5bONiDq39BSaYIbKIWXleS6nof4/fPc1hK
+TlLlTsbRilHmauNXTtRn+a71SRD/AHLZQoH4nmqVlZ31zZvNFqlysokdVDEMpwSBnP0roaw9P+3t
+p0iWghXM8mJJGOV+Y9sVE6cU1v1LhUk09unRFfTtdvfszT3kHnQIxSSSIfNGR6r3HuK6CGaK4iWW
+FxIjDKsvQ1Qs7aHRLDyWcyyOSx45dj7VUiEuj3UcjII7S7fa6A8ROeh9gaUHOmkpu/fyKqRhUb5F
+bt5k+u6lJZ/Z4InETXD4MpGdi8ZP60l3Y3kMaTWd7cyOrKWR33CQZ5/SrOp6fa6pGLedtsg+ZCD8
+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
+
+--_004_MM0P280MB05682294CFFF4270DCFB8CAFEC63AMM0P280MB0568SWEP_--
