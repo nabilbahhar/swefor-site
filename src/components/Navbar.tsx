@@ -24,20 +24,18 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0 mr-8">
-            <Image
-              src="/logo.png"
-              alt="SweFOR"
-              width={120}
-              height={56}
-              className="h-14 w-auto object-contain mix-blend-lighten"
-            />
-          </Link>
-
-          {/* Desktop Nav - centered with flex-1 */}
-          <div className="hidden lg:flex items-center justify-center gap-6 flex-1">
+        <div className="flex items-center justify-center h-16">
+          {/* Logo + Nav together as one centered block */}
+          <div className="hidden lg:flex items-center gap-10">
+            <Link href="/" className="flex-shrink-0">
+              <Image
+                src="/logo.png"
+                alt="SweFOR"
+                width={120}
+                height={56}
+                className="h-14 w-auto object-contain mix-blend-lighten"
+              />
+            </Link>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -49,8 +47,19 @@ export function Navbar() {
             ))}
           </div>
 
+          {/* Mobile: logo on left */}
+          <Link href="/" className="flex-shrink-0 lg:hidden">
+            <Image
+              src="/logo.png"
+              alt="SweFOR"
+              width={120}
+              height={56}
+              className="h-14 w-auto object-contain mix-blend-lighten"
+            />
+          </Link>
+
           {/* Right: Language + Mobile burger */}
-          <div className="flex items-center gap-4 ml-auto lg:ml-0">
+          <div className="flex items-center gap-4 ml-auto">
             <LanguageSwitcher />
             <button
               onClick={() => setIsOpen(!isOpen)}
