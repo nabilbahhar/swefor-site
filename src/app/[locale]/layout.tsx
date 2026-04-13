@@ -44,13 +44,13 @@ export default async function RootLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className="dark" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-        <ThemeProvider>
+        <ThemeProvider forcedTheme="dark">
           <NextIntlClientProvider messages={messages}>
             <GateEntry locale={locale}>
             <Navbar />
