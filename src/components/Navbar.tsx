@@ -24,25 +24,25 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex items-center h-16 gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex-shrink-0 flex items-center">
             <Image
               src="/logo.png"
               alt="SweFOR Maghreb Network Logo"
-              width={110}
-              height={48}
+              width={50}
+              height={50}
               className="object-contain mix-blend-lighten"
             />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-swefor-gold dark:hover:text-swefor-gold text-lg font-semibold tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-swefor-gold after:transition-all after:duration-300 hover:after:w-full transition-colors duration-200"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-swefor-gold dark:hover:text-swefor-gold relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-swefor-gold after:transition-all after:duration-300 hover:after:w-full transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -50,7 +50,7 @@ export function Navbar() {
           </div>
 
           {/* Right Controls */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ml-auto lg:ml-0">
             <LanguageSwitcher />
             {/* Mobile Menu Button */}
             <button
@@ -74,7 +74,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-swefor-gold hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors text-lg font-semibold"
+                className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-swefor-gold hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors text-sm font-medium"
               >
                 {link.label}
               </Link>

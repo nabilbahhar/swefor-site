@@ -13,16 +13,14 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Image
-                src="/logo.png"
-                alt="SweFOR Maghreb Network"
-                width={100}
-                height={44}
-                className="object-contain mix-blend-lighten"
-              />
-            </div>
+          <div className="flex flex-col items-start">
+            <Image
+              src="/logo.png"
+              alt="SweFOR Maghreb Network"
+              width={80}
+              height={80}
+              className="object-contain mix-blend-lighten mb-3"
+            />
             <p className="text-gray-600 dark:text-gray-400 text-sm">{t('tagline')}</p>
           </div>
 
@@ -38,6 +36,11 @@ export function Footer() {
               <li>
                 <Link href="/timeline" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   Timeline
+                </Link>
+              </li>
+              <li>
+                <Link href="/people" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  People
                 </Link>
               </li>
               <li>
@@ -64,16 +67,11 @@ export function Footer() {
           <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 sm:mb-0">
             {t('copyright')} {currentYear}
           </p>
-          <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center gap-1">
-            Deployed on{' '}
-            <a
-              href="https://coolify.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Coolify
-            </a>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
+            Powered by{' '}
+            <span className="text-gray-900 dark:text-white font-medium">Erik Nilsson</span>
+            {' '}&{' '}
+            <span className="text-gray-900 dark:text-white font-medium">Nabil Bahhar</span>
           </p>
         </div>
       </div>
