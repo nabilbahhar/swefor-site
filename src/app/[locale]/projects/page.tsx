@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { projects } from '@/lib/data';
+import { Link } from '@/i18n/routing';
 import * as Icons from 'lucide-react';
 
 export default function ProjectsPage() {
@@ -54,7 +55,7 @@ export default function ProjectsPage() {
 
                   <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-700">
                     <span className="text-gray-600 dark:text-gray-400 text-sm font-medium">
-                      Communications
+                      {t('communicationsLabel')}
                     </span>
                     <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                       {project.communications}
@@ -72,10 +73,10 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in-up animate-fade-in-up-d1">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Project Impact Overview
+              {t('impactOverview')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Total Communications Across All Projects
+              {t('totalCommunications')}
             </p>
           </div>
 
@@ -102,7 +103,7 @@ export default function ProjectsPage() {
               {projects.reduce((sum, p) => sum + p.communications, 0)}
             </div>
             <p className="text-gray-600 dark:text-gray-400 font-medium">
-              Total Communications (2018-2026)
+              {t('totalCommunicationsLabel')}
             </p>
           </div>
         </div>
@@ -112,19 +113,17 @@ export default function ProjectsPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 animate-fade-in-up">
         <div className="text-center animate-fade-in-up animate-fade-in-up-d1">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Building on Success
+            {t('buildingOnSuccess')}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            These five projects form the foundation of our work. As we move forward, we're designing
-            new initiatives focused on climate-peace integration, cross-border dialogue, and
-            formalizing youth leadership development.
+            {t('buildingOnSuccessDesc')}
           </p>
-          <a
+          <Link
             href="/vision"
             className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
           >
-            Explore Strategic Vision
-          </a>
+            {t('exploreVision')}
+          </Link>
         </div>
       </section>
     </div>

@@ -33,7 +33,7 @@ export function Navbar() {
                 alt="SweFOR"
                 width={120}
                 height={56}
-                className="h-16 w-auto object-contain mix-blend-lighten"
+                className="h-[72px] w-auto object-contain mix-blend-lighten"
               />
             </Link>
             {navLinks.map((link) => (
@@ -54,7 +54,7 @@ export function Navbar() {
               alt="SweFOR"
               width={120}
               height={56}
-              className="h-16 w-auto object-contain mix-blend-lighten"
+              className="h-[72px] w-auto object-contain mix-blend-lighten"
             />
           </Link>
 

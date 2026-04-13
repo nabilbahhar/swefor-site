@@ -353,7 +353,14 @@
         "communications": 209,
         "icon": "Zap"
       }
-    ]
+    ],
+    "communicationsLabel": "Communications",
+    "impactOverview": "Project Impact Overview",
+    "totalCommunications": "Total Communications Across All Projects",
+    "totalCommunicationsLabel": "Total Communications (2018-2026)",
+    "buildingOnSuccess": "Building on Success",
+    "buildingOnSuccessDesc": "These five projects form the foundation of our work. As we move forward, we're designing new initiatives focused on climate-peace integration, cross-border dialogue, and formalizing youth leadership development.",
+    "exploreVision": "Explore Strategic Vision"
   },
   "vision": {
     "title": "Strategic Vision",
@@ -403,7 +410,40 @@
         "alignment": "Aligned with IFOR's nonviolence education and SweFOR's peacebuilding excellence"
       }
     ],
-    "nextSteps": "Erik Nilsson and Nabil Bahhar will meet in Rome on April 20-21, 2026 to evaluate the 2018-2026 period and finalize strategic direction."
+    "nextSteps": "Erik Nilsson and Nabil Bahhar will meet in Rome on April 20-21, 2026 to evaluate the 2018-2026 period and finalize strategic direction.",
+    "globalVision": "Global Vision",
+    "targetCountries": "Target Countries",
+    "guidingPrinciples": "Guiding Principles",
+    "smartFramework": "SMART Framework",
+    "smartDescription": "Every objective, every milestone, every deliverable is designed to be tracked and verified.",
+    "specific": "Specific",
+    "measurable": "Measurable",
+    "achievable": "Achievable",
+    "realistic": "Realistic",
+    "timeBound": "Time-bound",
+    "problemStatement": "Problem Statement",
+    "targetGroup": "Target Group",
+    "smartObjectives": "SMART Objectives",
+    "measurement": "Measurement",
+    "showTimeline": "Show Detailed 3-Year Timeline & Outputs",
+    "hideTimeline": "Hide Detailed 3-Year Timeline & Outputs",
+    "implementationPlan": "3-Year Implementation Plan",
+    "year": "Year",
+    "activities": "Activities",
+    "deliverables": "Deliverables",
+    "expectedOutputs": "Expected Outputs",
+    "expectedOutcomes": "Expected Outcomes",
+    "risksMitigation": "Risks & Mitigation",
+    "partners": "Partners",
+    "sustainabilityPlan": "Sustainability Plan",
+    "totalImpact": "Total Impact Across 3 Projects",
+    "youthTrained": "Youth Trained",
+    "countries": "Countries",
+    "totalBudget": "Total Budget",
+    "years": "Years",
+    "summaryText": "Building on 2018–2026 experience, these projects represent the next chapter of SweFOR Maghreb Network engagement — inclusive, measurable, and designed for lasting impact across every country in the region.",
+    "project": "Project",
+    "countriesCount": "countries"
   },
   "documents": {
     "title": "Document Library",
