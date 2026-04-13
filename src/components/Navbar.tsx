@@ -23,10 +23,10 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center h-16">
-          {/* Logo + Nav together as one centered block */}
-          <div className="hidden lg:flex items-center gap-10">
+          {/* Desktop: Logo + Menu as one truly centered block */}
+          <div className="hidden lg:flex items-center gap-8">
             <Link href="/" className="flex-shrink-0">
               <Image
                 src="/logo.png"
@@ -47,8 +47,8 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Mobile: logo on left */}
-          <Link href="/" className="flex-shrink-0 lg:hidden">
+          {/* Mobile: logo */}
+          <Link href="/" className="flex-shrink-0 lg:hidden mr-auto">
             <Image
               src="/logo.png"
               alt="SweFOR"
@@ -58,8 +58,8 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Right: Language + Mobile burger */}
-          <div className="flex items-center gap-4 ml-auto">
+          {/* EN/FR + burger: absolute right so it doesn't push the center block */}
+          <div className="absolute right-4 sm:right-6 lg:right-8 flex items-center gap-4">
             <LanguageSwitcher />
             <button
               onClick={() => setIsOpen(!isOpen)}
