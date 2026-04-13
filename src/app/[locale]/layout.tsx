@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://swefor.nbahhar.com/logo.png',
-        width: 512,
-        height: 512,
-        alt: 'SweFOR Maghreb Network Logo',
+        url: 'https://swefor.nbahhar.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'SweFOR Maghreb Network',
       },
     ],
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'SweFOR Maghreb Network',
     description: 'Building Peace Through Dialogue and Nonviolence',
-    images: ['https://swefor.nbahhar.com/logo.png'],
+    images: ['https://swefor.nbahhar.com/og-image.png'],
   },
 };
 

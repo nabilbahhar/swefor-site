@@ -24,7 +24,7 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center h-16">
+        <div className="flex items-center justify-center h-20">
           {/* Desktop: Logo + Menu as one truly centered block */}
           <div className="hidden lg:flex items-center gap-8">
             <Link href="/" className="flex-shrink-0">
@@ -33,7 +33,7 @@ export function Navbar() {
                 alt="SweFOR"
                 width={120}
                 height={56}
-                className="h-14 w-auto object-contain mix-blend-lighten"
+                className="h-16 w-auto object-contain mix-blend-lighten"
               />
             </Link>
             {navLinks.map((link) => (
@@ -54,7 +54,7 @@ export function Navbar() {
               alt="SweFOR"
               width={120}
               height={56}
-              className="h-14 w-auto object-contain mix-blend-lighten"
+              className="h-16 w-auto object-contain mix-blend-lighten"
             />
           </Link>
 
