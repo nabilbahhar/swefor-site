@@ -78,6 +78,11 @@ export default function PeoplePage() {
 
       {/* Team Members */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-8 text-center">
+          <p className="text-blue-700 dark:text-blue-300 text-sm font-medium">
+            {t('incompleteNote')}
+          </p>
+        </div>
         {renderSection('SweFOR Staff', staffMembers)}
         {renderSection('Network Participants', participants)}
       </section>
