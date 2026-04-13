@@ -42,7 +42,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium text-sm transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-swefor-gold dark:hover:text-swefor-gold relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-swefor-gold after:transition-all hover:after:w-full font-medium text-base transition-colors"
               >
                 {link.label}
               </Link>
