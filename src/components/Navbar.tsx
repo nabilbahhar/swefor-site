@@ -33,7 +33,7 @@ export function Navbar() {
               alt="SweFOR Maghreb Network Logo"
               width={140}
               height={60}
-              className="rounded-full border-2 border-blue-100 dark:border-blue-900 group-hover:shadow-lg group-hover:border-blue-300 dark:group-hover:border-blue-700 transition-all"
+              className="object-contain"
             />
           </Link>
 
