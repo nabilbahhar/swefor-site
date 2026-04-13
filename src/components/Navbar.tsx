@@ -32,7 +32,7 @@ export function Navbar() {
               alt="SweFOR Maghreb Network Logo"
               width={140}
               height={60}
-              className="object-contain"
+              className="object-contain mix-blend-lighten"
             />
           </Link>
 
