@@ -7,7 +7,7 @@ const questions = [
   {
     question: {
       en: "Which city does Nabil hate the most in Morocco?",
-      fr: "Quelle ville Nabil d\u00e9teste le plus au Maroc ?"
+      fr: "Quelle ville Nabil déteste le plus au Maroc ?"
     },
     options: ["Marrakech", "Casablanca", "Rabat", "Tangier", "Fes"],
     answer: 1
@@ -15,7 +15,7 @@ const questions = [
   {
     question: {
       en: "What is the thing that distinguishes Nabil's father, that he said one day?",
-      fr: "Quelle est la chose qui distingue le p\u00e8re de Nabil, qu'il avait dit un jour ?"
+      fr: "Quelle est la chose qui distingue le père de Nabil, qu'il avait dit un jour ?"
     },
     options: ["Driiiiiiiink!", "Eaaaaaat!", "WakeUuuuuuup!", "Ruuuuuuun!", "Sleeeeeep!"],
     answer: 1
@@ -153,19 +153,19 @@ export function GateEntry({ children, locale }: { children: React.ReactNode; loc
           </div>
         ) : (
           <div className="w-full max-w-lg bg-red-500/10 backdrop-blur-xl rounded-2xl p-8 border border-red-500/30 shadow-2xl text-center">
-            <div className="text-6xl mb-4">\u{1F6AB}</div>
+            <div className="text-6xl mb-4">🚫</div>
             <h2 className="text-2xl font-bold text-red-300 mb-4">
-              {lang === 'fr' ? "Mauvaise r\u00e9ponse !" : "Wrong answer!"}
+              {lang === 'fr' ? "Mauvaise réponse !" : "Wrong answer!"}
             </h2>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              {lang === 'fr' ? "On dirait que vous ne connaissez pas assez bien Nabil... Contactez-le pour obtenir les bonnes r\u00e9ponses !" : "Looks like you don\u2019t know Nabil well enough... Contact him to get the right answers!"}
+              {lang === 'fr' ? "On dirait que vous ne connaissez pas assez bien Nabil... Contactez-le pour obtenir les bonnes réponses !" : "Looks like you don’t know Nabil well enough... Contact him to get the right answers!"}
             </p>
             <div className="space-y-3">
               <a href="mailto:nabil.imdh@gmail.com" className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-colors">
                 {lang === 'fr' ? "Contacter Nabil" : "Contact Nabil"}
               </a>
               <button onClick={resetQuiz} className="block w-full bg-white/10 hover:bg-white/20 text-gray-200 font-medium py-3 rounded-xl transition-colors border border-white/10">
-                {lang === 'fr' ? "R\u00e9essayer" : "Try again"}
+                {lang === 'fr' ? "Réessayer" : "Try again"}
               </button>
             </div>
           </div>
