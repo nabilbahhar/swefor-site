@@ -29,7 +29,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <Image
-              src="/logo.svg"
+              src="/logo.png"
               alt="SweFOR Maghreb Network Logo"
               width={64}
               height={64}
