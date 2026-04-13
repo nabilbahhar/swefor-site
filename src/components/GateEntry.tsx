@@ -9,24 +9,24 @@ const questions = [
       en: "Which city does Nabil hate the most in Morocco?",
       fr: "Quelle ville Nabil déteste le plus au Maroc ?"
     },
-    options: ["Marrakech", "Casablanca", "Rabat", "Tangier", "Fes"],
-    answer: 1
+    options: ["Marrakech", "Rabat", "Tangier", "Casablanca", "Fes"],
+    answer: 3
   },
   {
     question: {
       en: "What is the thing that distinguishes Nabil's father, that he said one day?",
       fr: "Quelle est la chose qui distingue le père de Nabil, qu'il avait dit un jour ?"
     },
-    options: ["Driiiiiiiink!", "Eaaaaaat!", "WakeUuuuuuup!", "Ruuuuuuun!", "Sleeeeeep!"],
-    answer: 1
+    options: ["Eaaaaaat!", "Driiiiiiiink!", "WakeUuuuuuup!", "Ruuuuuuun!", "Sleeeeeep!"],
+    answer: 0
   },
   {
     question: {
       en: "How does Nabil pronounce the number 20?",
       fr: "Comment Nabil prononce le chiffre 20 ?"
     },
-    options: ["Twenty", "Twentiiiiine", "Twennny", "Twenteh"],
-    answer: 1
+    options: ["Twenty", "Twennny", "Twentiiiiine", "Twenteh"],
+    answer: 2
   }
 ];
 
