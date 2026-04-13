@@ -476,7 +476,13 @@
   "footer": {
     "description": "Réseau Maghreb SweFOR",
     "tagline": "Construire la Paix par le Dialogue et la Nonviolence",
+    "links": "Liens",
+    "home": "Accueil",
+    "timeline": "Chronologie",
+    "people": "Personnes",
+    "vision": "Vision",
     "contact": "Contact",
+    "contactDesc": "Construire la Paix par le Dialogue",
     "copyright": "Construit avec amour pour la paix",
     "year": "2026"
   }

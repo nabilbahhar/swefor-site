@@ -476,7 +476,13 @@
   "footer": {
     "description": "SweFOR Maghreb Network",
     "tagline": "Building Peace Through Dialogue and Nonviolence",
+    "links": "Links",
+    "home": "Home",
+    "timeline": "Timeline",
+    "people": "People",
+    "vision": "Vision",
     "contact": "Contact",
+    "contactDesc": "Building Peace Through Dialogue",
     "copyright": "Built with love for peace",
     "year": "2026"
   }
