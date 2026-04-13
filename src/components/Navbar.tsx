@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import Image from 'next/image';
+import logo from '@/public/logo.png';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-8">
             <Link href="/" className="flex-shrink-0">
               <Image
-                src="/logo.png"
+                src={logo}
                 alt="SweFOR"
                 width={120}
                 height={56}
@@ -50,7 +51,7 @@ export function Navbar() {
           {/* Mobile: logo */}
           <Link href="/" className="flex-shrink-0 lg:hidden mr-auto">
             <Image
-              src="/logo.png"
+              src={logo}
               alt="SweFOR"
               width={120}
               height={56}
