@@ -96,9 +96,9 @@ const KS: Activity[] = [
   },
   {
     id: 'a8',
-    fr: 'Audit indépendant des conditions à Tindouf via partenaires HCR/CNDH.',
-    ar: 'تدقيق مستقل لأوضاع تندوف عبر شركاء (المفوضية والمجلس الوطني).',
-    curlePhase: '2→3',
+    fr: 'Cadre juridique + guichet unique "Retour Digne" : statut civique automatique, équivalences diplômes / cadres ex-Polisario, restitution propriétés tribales, scolarisation enfants, CIN, sécurité sociale.',
+    ar: 'إطار قانوني + شباك وحيد «العودة الكريمة»: وضع مدني تلقائي، معادلة شواهد وكوادر البوليساريو السابقة، استرداد الملكيات القبلية، تمدرس الأبناء، بطاقة التعريف الوطنية، الضمان الاجتماعي.',
+    curlePhase: '3→4',
   },
 ];
 
@@ -131,7 +131,8 @@ const arrows: Array<{ from: string; to: string; label?: string }> = [
   { from: 'a4', to: 'a11', label: 'feed' },
   { from: 'a2', to: 'a1', label: 'amplifie' },
   { from: 'a1', to: 'a10', label: 'légitime' },
-  { from: 'a8', to: 'a9', label: 'documente' },
+  { from: 'a8', to: 'a4', label: 'alimente' },
+  { from: 'a8', to: 'a11', label: 'cadre' },
   { from: 'a9', to: 'a3', label: 'amplifie' },
   { from: 'a6', to: 'a11', label: 'cadre' },
   { from: 'a5', to: 'a10', label: 'nourrit' },
@@ -317,8 +318,8 @@ export default function RPPPage() {
               },
               {
                 ok: true,
-                fr: 'Critère 3 : au niveau Socio-political, atteindre Key people ET More people — KS (charte CNDH, plaidoyer Parlement, audit) et MS (média, Centre, insertion économique) avec liens entre eux (a6→a11). ✓',
-                ar: 'المعيار 3: على المستوى الاجتماعي-السياسي، الوصول للأشخاص الرئيسيين وعدد أكبر معاً — KS (ميثاق المجلس الوطني، مناصرة البرلمان، التدقيق) وMS (الإعلام، المركز، الإدماج الاقتصادي) مع روابط بينها (a6→a11). ✓',
+                fr: 'Critère 3 : au niveau Socio-political, atteindre Key people ET More people — KS (charte CNDH, plaidoyer Parlement, guichet "Retour Digne") et MS (média, Centre, insertion économique) avec liens entre eux (a6→a11, a8→a11). ✓',
+                ar: 'المعيار 3: على المستوى الاجتماعي-السياسي، الوصول للأشخاص الرئيسيين وعدد أكبر معاً — KS (ميثاق المجلس الوطني، مناصرة البرلمان، شباك «العودة الكريمة») وMS (الإعلام، المركز، الإدماج الاقتصادي) مع روابط بينها (a6→a11، a8→a11). ✓',
               },
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
