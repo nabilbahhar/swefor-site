@@ -185,9 +185,9 @@ export default function PropositionPage() {
           {/* Methodology badge */}
           <div className="mt-6 inline-flex flex-wrap justify-center gap-2 text-xs">
             <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full font-semibold">Step 1 — 3-Box ✓</span>
-            <span className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full font-semibold">Step 2 — Curle ✓</span>
-            <span className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full">Step 3 — RPP (à venir)</span>
-            <span className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full">Step 4 — ToC (à venir)</span>
+            <Link href="/proposition/curle" className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full font-semibold hover:bg-amber-200 transition-colors">Step 2 — Curle ✓</Link>
+            <Link href="/proposition/rpp" className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full font-semibold hover:bg-purple-200 transition-colors">Step 3 — RPP ✓</Link>
+            <Link href="/proposition/toc" className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full font-semibold hover:bg-emerald-200 transition-colors">Step 4 — ToC ✓</Link>
           </div>
         </div>
 
@@ -508,45 +508,53 @@ export default function PropositionPage() {
           </div>
         </div>
 
-        {/* === Steps 3 + 4 placeholders === */}
+        {/* === Steps 3 + 4 — completed === */}
         <div className="grid md:grid-cols-2 gap-4 mb-12">
-          <div className="bg-purple-50 dark:bg-purple-900/20 border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-2xl p-6">
+          <Link
+            href="/proposition/rpp"
+            className="bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/40 border-2 border-purple-300 dark:border-purple-700 rounded-2xl p-6 transition-colors group"
+          >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-purple-200 dark:bg-purple-800 p-2 rounded-lg">
                 <Target className="w-6 h-6 text-purple-700 dark:text-purple-300" />
               </div>
-              <div>
-                <div className="text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">Step 3 — à venir</div>
+              <div className="flex-1">
+                <div className="text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">Step 3 ✓</div>
                 <h3 className="font-bold text-gray-900 dark:text-white">RPP Matrix</h3>
                 <ArOnly className="font-bold text-gray-900 dark:text-white">مصفوفة RPP</ArOnly>
               </div>
+              <ChevronRight className="w-5 h-5 text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform" />
             </div>
             <Bi
-              fr="Plotter les activités du Curle sur la matrice 2×2 (Key people / More people × Individual / Socio-political), tracer les flèches de causalité, vérifier les 3 critères RPP."
-              ar="وضع أنشطة كيرل على مصفوفة 2×2 (الأشخاص الرئيسيون / عدد أكبر × فردي / اجتماعي-سياسي)، رسم أسهم العلاقة السببية، التحقق من معايير RPP الثلاثة."
+              fr="11 activités plottées sur la matrice 2×2, 8 flèches causales tracées, 3 critères RPP vérifiés ✓."
+              ar="11 نشاط موضوع على المصفوفة 2×2، 8 أسهم سببية، 3 معايير RPP مُتحقَّق منها ✓."
               small
               className="text-gray-700 dark:text-gray-300"
             />
-          </div>
+          </Link>
 
-          <div className="bg-emerald-50 dark:bg-emerald-900/20 border-2 border-dashed border-emerald-300 dark:border-emerald-700 rounded-2xl p-6">
+          <Link
+            href="/proposition/toc"
+            className="bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 border-2 border-emerald-300 dark:border-emerald-700 rounded-2xl p-6 transition-colors group"
+          >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-emerald-200 dark:bg-emerald-800 p-2 rounded-lg">
                 <Sparkles className="w-6 h-6 text-emerald-700 dark:text-emerald-300" />
               </div>
-              <div>
-                <div className="text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">Step 4 — à venir</div>
+              <div className="flex-1">
+                <div className="text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">Step 4 ✓</div>
                 <h3 className="font-bold text-gray-900 dark:text-white">Theory of Change</h3>
                 <ArOnly className="font-bold text-gray-900 dark:text-white">نظرية التغيير</ArOnly>
               </div>
+              <ChevronRight className="w-5 h-5 text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform" />
             </div>
             <Bi
-              fr="Tester chaque hypothèse causale via la formule : « Si nous accomplissons [activité], cela mènera à [résultat] parce que… ». Macro et micro level."
-              ar="اختبار كل فرضية سببية عبر الصيغة: «إذا أنجزنا [نشاط]، سيؤدي إلى [نتيجة] لأنّ...». على المستوى الكلّي والجزئي."
+              fr="MACRO ToC + 5 MICRO ToCs (formule If/Then/Because/Risk) avec niveaux de confiance HIGH/MEDIUM/LOW."
+              ar="نظرية تغيير كلّية + 5 جزئية (صيغة If/Then/Because/Risk) بمستويات ثقة HIGH/MEDIUM/LOW."
               small
               className="text-gray-700 dark:text-gray-300"
             />
-          </div>
+          </Link>
         </div>
 
         {/* === Sources === */}

@@ -14,6 +14,8 @@ export const routing = defineRouting({
     '/tools': '/tools',
     '/proposition': '/proposition',
     '/proposition/curle': '/proposition/curle',
+    '/proposition/rpp': '/proposition/rpp',
+    '/proposition/toc': '/proposition/toc',
     '/vision': '/vision',
   },
 });
