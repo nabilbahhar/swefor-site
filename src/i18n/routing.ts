@@ -13,6 +13,7 @@ export const routing = defineRouting({
     '/documents': '/documents',
     '/tools': '/tools',
     '/proposition': '/proposition',
+    '/proposition/curle': '/proposition/curle',
     '/vision': '/vision',
   },
 });
