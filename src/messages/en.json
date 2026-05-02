@@ -6,6 +6,7 @@
     "people": "People",
     "projects": "Projects",
     "documents": "Documents",
+    "tools": "Tools",
     "vision": "Vision",
     "language": "Language",
     "theme": "Theme"
@@ -758,5 +759,131 @@
     "contactDesc": "Building Peace Through Dialogue",
     "copyright": "Built with love for peace",
     "year": "2026"
+  },
+  "tools": {
+    "badge": "Refresher Toolkit",
+    "title": "Peacebuilding Tools",
+    "subtitle": "A quick refresher before you design your project ideas",
+    "introTitle": "Why these tools matter",
+    "intro": "Before jumping into project design, take a moment to ground your thinking. These four tools work together: analyze the conflict (3-Box), understand its trajectory (Curle), position your strategy (RPP), then map your logic of change (ToC). They are not bureaucratic checklists — they protect your project from common blind spots.",
+    "flow": {
+      "analyze": "Analyze",
+      "transform": "Transform",
+      "position": "Position",
+      "design": "Design"
+    },
+    "threeBox": {
+      "title": "The 3-Box Model",
+      "subtitle": "Sort what you know about the conflict",
+      "description": "A simple sorting frame to make sense of complex conflict information. Lay every fact you have about the situation into one of three columns. The goal is clarity — not perfection.",
+      "box1": {
+        "title": "Forces FOR Peace / Against Conflict",
+        "q1": "What forces exist NOW that we can build on?",
+        "q2": "Where do people already cooperate across conflict lines?"
+      },
+      "box2": {
+        "title": "Key Actors",
+        "q1": "Who can strongly influence the conflict — positively or negatively?",
+        "q2": "Note: not necessarily program participants — these are decision-makers."
+      },
+      "box3": {
+        "title": "Forces FOR Conflict / Against Peace",
+        "q1": "What dynamics push people toward violence or division?",
+        "q2": "Which issues divide people, and how?"
+      },
+      "useTitle": "Use it when",
+      "use": "You are starting a new analysis and need to organize raw information before identifying the Key Driving Factors (KDFs) of the conflict."
+    },
+    "curle": {
+      "title": "The Curle Diagram",
+      "subtitle": "Where is the conflict on its transformation curve?",
+      "description": "Adam Curle's model maps the journey from latent conflict to sustainable peace. Each phase needs a different kind of intervention — what works in phase 1 fails in phase 4, and vice versa.",
+      "axis": {
+        "unbalanced": "Unbalanced Power",
+        "balanced": "Balanced Power",
+        "lowAware": "Low Awareness of Issues",
+        "highAware": "High Awareness"
+      },
+      "phase1": {
+        "title": "Latent Conflict",
+        "desc": "Raise awareness, organize community, build coalitions, conscientization."
+      },
+      "phase2": {
+        "title": "Overt Conflict",
+        "desc": "Nonviolent action to balance power: monitoring, advocacy, peacekeeping."
+      },
+      "phase3": {
+        "title": "Conflict Settlement",
+        "desc": "Negotiation, mediation, persuasion to convert or accommodate interests."
+      },
+      "phase4": {
+        "title": "Sustainable Peace & Justice",
+        "desc": "Principled negotiation that addresses the main interests of all groups."
+      },
+      "useTitle": "Use it when",
+      "use": "You need to choose the RIGHT type of intervention for the current phase. A dialogue program in latent conflict misses the mark — you need consciousness-raising first."
+    },
+    "rpp": {
+      "title": "RPP Matrix",
+      "subtitle": "Reflecting on Peace Practice — position your strategy",
+      "description": "A 2×2 matrix asking two questions about your project: WHO are you working with, and WHAT KIND of change are you seeking? Most projects sit in just one cell — the lesson from RPP is that this is rarely enough.",
+      "colMore": "More People (the population)",
+      "colKey": "Key People (decision-makers)",
+      "rowIndividual": "Individual / Personal Change",
+      "rowSocial": "Socio-Political Change",
+      "cell1": {
+        "label": "More × Individual",
+        "example": "Mass dialogue, youth training, awareness campaigns reaching wide audiences."
+      },
+      "cell2": {
+        "label": "Key × Individual",
+        "example": "Leadership coaching, working with influential individuals to shift their views."
+      },
+      "cell3": {
+        "label": "More × Socio-Political",
+        "example": "Mobilization, civic movements, popular pressure for systemic reform."
+      },
+      "cell4": {
+        "label": "Key × Socio-Political",
+        "example": "Policy advocacy, institutional reform, peace agreements with elites."
+      },
+      "keyTitle": "Three lessons RPP keeps teaching",
+      "key1": "Work in just ONE cell rarely creates lasting change — you need bridges between cells.",
+      "key2": "Individual-level work alone doesn't translate into political/structural change.",
+      "key3": "Engaging only key people without broader support — or only the population without leaders — both fail.",
+      "useTitle": "Use it when",
+      "use": "You have a project idea and want to test whether it will actually scale into structural change. Map your activities on the matrix — where are the gaps?"
+    },
+    "toc": {
+      "title": "Theory of Change",
+      "subtitle": "From your activities to the change you want to see",
+      "description": "A Theory of Change is the explicit logic linking what you DO to the change you want to SEE. It surfaces the assumptions hiding between activities and impact — the places where projects most often fail.",
+      "step1": { "label": "Inputs", "desc": "Resources, funding, partners, expertise you bring." },
+      "step2": { "label": "Activities", "desc": "Workshops, dialogues, trainings, advocacy you run." },
+      "step3": { "label": "Outputs", "desc": "Direct, countable results: # trained, # events held." },
+      "step4": { "label": "Outcomes", "desc": "Behavior, attitude, capacity changes in participants." },
+      "step5": { "label": "Impact", "desc": "Long-term peace and justice transformation." },
+      "questionsTitle": "Critical questions to stress-test your ToC",
+      "q1": "WHY do we believe that doing X will lead to Y? What is the assumption?",
+      "q2": "What evidence do we have that this causal chain works?",
+      "q3": "What could break the chain — and how do we mitigate it?",
+      "q4": "Are our outcomes truly within our power to influence — or are we promising what we can't deliver?",
+      "useTitle": "Use it when",
+      "use": "You are designing or pitching a project. A clear ToC makes assumptions visible, helps donors trust the logic, and gives you a roadmap for measuring whether it actually works."
+    },
+    "tips": {
+      "title": "Quick Tips Before You Start",
+      "subtitle": "Common pitfalls to avoid when designing your project",
+      "t1": "Don't confuse conflict analysis with context analysis — focus on dynamics, not background.",
+      "t2": "There is no single objective truth about a conflict. Your analysis is shaped by who is in the room.",
+      "t3": "Update your analysis regularly. Conflicts evolve — your tools should too.",
+      "t4": "Identify factors as quantities (level of, amount of) — not as actors. Actors aren't factors; their behavior is.",
+      "t5": "Test every Key Driving Factor: if it changes, does the situation really change?",
+      "t6": "Combine tools when needed. They complement each other — no single tool gives the whole picture."
+    },
+    "cta": {
+      "title": "Now — design your project",
+      "text": "These tools are scaffolding, not cages. Use them to surface blind spots, then trust your judgment as practitioners. The goal is a project that is clear, honest about its assumptions, and rooted in real conflict dynamics — not a project that ticks boxes."
+    }
   }
 }

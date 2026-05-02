@@ -6,6 +6,7 @@
     "people": "Personnes",
     "projects": "Projets",
     "documents": "Documents",
+    "tools": "Outils",
     "vision": "Vision",
     "language": "Langue",
     "theme": "Thème"
@@ -758,5 +759,131 @@
     "contactDesc": "Construire la Paix par le Dialogue",
     "copyright": "Construit avec amour pour la paix",
     "year": "2026"
+  },
+  "tools": {
+    "badge": "Boîte à outils — Rappel",
+    "title": "Outils de Construction de la Paix",
+    "subtitle": "Un rappel rapide avant de concevoir vos idées de projet",
+    "introTitle": "Pourquoi ces outils comptent",
+    "intro": "Avant de plonger dans la conception de projet, prenez un moment pour ancrer votre réflexion. Ces quatre outils fonctionnent ensemble : analyser le conflit (3 Boîtes), comprendre sa trajectoire (Curle), positionner votre stratégie (RPP), puis cartographier votre logique de changement (TdC). Ce ne sont pas des checklists bureaucratiques — ils protègent votre projet des angles morts les plus fréquents.",
+    "flow": {
+      "analyze": "Analyser",
+      "transform": "Transformer",
+      "position": "Positionner",
+      "design": "Concevoir"
+    },
+    "threeBox": {
+      "title": "Le Modèle des 3 Boîtes",
+      "subtitle": "Trier ce que vous savez du conflit",
+      "description": "Un cadre de tri simple pour donner du sens à des informations complexes sur un conflit. Placez chaque fait que vous avez sur la situation dans l'une des trois colonnes. L'objectif est la clarté — pas la perfection.",
+      "box1": {
+        "title": "Forces POUR la Paix / Contre le Conflit",
+        "q1": "Quelles forces existent MAINTENANT sur lesquelles s'appuyer ?",
+        "q2": "Où les gens coopèrent-ils déjà à travers les lignes de conflit ?"
+      },
+      "box2": {
+        "title": "Acteurs Clés",
+        "q1": "Qui peut influencer fortement le conflit — positivement ou négativement ?",
+        "q2": "Note : pas forcément les participants au programme — ce sont les décideurs."
+      },
+      "box3": {
+        "title": "Forces POUR le Conflit / Contre la Paix",
+        "q1": "Quelles dynamiques poussent les gens vers la violence ou la division ?",
+        "q2": "Quelles questions divisent les gens, et comment ?"
+      },
+      "useTitle": "À utiliser quand",
+      "use": "Vous démarrez une nouvelle analyse et avez besoin d'organiser des informations brutes avant d'identifier les Facteurs Moteurs Clés (KDFs) du conflit."
+    },
+    "curle": {
+      "title": "Le Diagramme de Curle",
+      "subtitle": "Où en est le conflit sur sa courbe de transformation ?",
+      "description": "Le modèle d'Adam Curle cartographie le parcours du conflit latent à la paix durable. Chaque phase appelle un type d'intervention différent — ce qui marche en phase 1 échoue en phase 4, et vice-versa.",
+      "axis": {
+        "unbalanced": "Pouvoir Déséquilibré",
+        "balanced": "Pouvoir Équilibré",
+        "lowAware": "Faible Conscience des Enjeux",
+        "highAware": "Forte Conscience"
+      },
+      "phase1": {
+        "title": "Conflit Latent",
+        "desc": "Sensibiliser, organiser la communauté, construire des coalitions, conscientiser."
+      },
+      "phase2": {
+        "title": "Conflit Ouvert",
+        "desc": "Action non-violente pour équilibrer le pouvoir : monitoring, plaidoyer, protection."
+      },
+      "phase3": {
+        "title": "Règlement du Conflit",
+        "desc": "Négociation, médiation, persuasion pour convertir ou accommoder les intérêts."
+      },
+      "phase4": {
+        "title": "Paix & Justice Durables",
+        "desc": "Négociation de principe qui répond aux intérêts essentiels de tous les groupes."
+      },
+      "useTitle": "À utiliser quand",
+      "use": "Vous devez choisir le BON type d'intervention pour la phase actuelle. Un programme de dialogue en conflit latent rate sa cible — il faut d'abord la conscientisation."
+    },
+    "rpp": {
+      "title": "Matrice RPP",
+      "subtitle": "Reflecting on Peace Practice — positionnez votre stratégie",
+      "description": "Une matrice 2×2 posant deux questions sur votre projet : AVEC QUI travaillez-vous, et QUEL TYPE de changement cherchez-vous ? La plupart des projets se logent dans une seule case — la leçon de RPP est que c'est rarement suffisant.",
+      "colMore": "Plus de Personnes (la population)",
+      "colKey": "Personnes Clés (décideurs)",
+      "rowIndividual": "Changement Individuel / Personnel",
+      "rowSocial": "Changement Socio-Politique",
+      "cell1": {
+        "label": "Masse × Individuel",
+        "example": "Dialogue de masse, formation jeunesse, campagnes de sensibilisation grand public."
+      },
+      "cell2": {
+        "label": "Clés × Individuel",
+        "example": "Coaching de leadership, travail avec des individus influents pour faire évoluer leur vision."
+      },
+      "cell3": {
+        "label": "Masse × Socio-Politique",
+        "example": "Mobilisation, mouvements citoyens, pression populaire pour la réforme systémique."
+      },
+      "cell4": {
+        "label": "Clés × Socio-Politique",
+        "example": "Plaidoyer politique, réforme institutionnelle, accords de paix avec les élites."
+      },
+      "keyTitle": "Trois leçons que RPP répète sans cesse",
+      "key1": "Travailler dans UNE SEULE case crée rarement un changement durable — il faut des ponts entre les cases.",
+      "key2": "Le travail au niveau individuel seul ne se traduit pas en changement politique/structurel.",
+      "key3": "Engager uniquement les personnes clés sans soutien populaire — ou la population sans les leaders — échoue dans les deux cas.",
+      "useTitle": "À utiliser quand",
+      "use": "Vous avez une idée de projet et voulez tester si elle va vraiment se traduire en changement structurel. Cartographiez vos activités sur la matrice — où sont les manques ?"
+    },
+    "toc": {
+      "title": "Théorie du Changement",
+      "subtitle": "De vos activités au changement que vous voulez voir",
+      "description": "Une Théorie du Changement est la logique explicite reliant ce que vous FAITES au changement que vous voulez VOIR. Elle fait remonter les hypothèses cachées entre activités et impact — là où les projets échouent le plus souvent.",
+      "step1": { "label": "Intrants", "desc": "Ressources, financement, partenaires, expertise apportés." },
+      "step2": { "label": "Activités", "desc": "Ateliers, dialogues, formations, plaidoyer menés." },
+      "step3": { "label": "Extrants", "desc": "Résultats directs et chiffrables : nb formés, nb événements." },
+      "step4": { "label": "Effets", "desc": "Changements de comportements, attitudes, capacités chez les participants." },
+      "step5": { "label": "Impact", "desc": "Transformation de long terme vers paix et justice." },
+      "questionsTitle": "Questions critiques pour tester votre TdC",
+      "q1": "POURQUOI croyons-nous que faire X mènera à Y ? Quelle est l'hypothèse ?",
+      "q2": "Quelles preuves avons-nous que cette chaîne causale fonctionne ?",
+      "q3": "Qu'est-ce qui pourrait briser la chaîne — et comment l'atténuer ?",
+      "q4": "Nos effets sont-ils vraiment dans notre pouvoir d'influence — ou promettons-nous ce qu'on ne peut tenir ?",
+      "useTitle": "À utiliser quand",
+      "use": "Vous concevez ou défendez un projet. Une TdC claire rend les hypothèses visibles, aide les bailleurs à faire confiance à la logique, et vous donne une feuille de route pour mesurer si ça marche vraiment."
+    },
+    "tips": {
+      "title": "Conseils Rapides Avant de Commencer",
+      "subtitle": "Pièges courants à éviter dans la conception de votre projet",
+      "t1": "Ne pas confondre analyse de conflit et analyse de contexte — concentrez-vous sur les dynamiques, pas sur l'arrière-plan.",
+      "t2": "Il n'existe pas de vérité objective unique sur un conflit. Votre analyse est façonnée par qui est dans la salle.",
+      "t3": "Mettez à jour votre analyse régulièrement. Les conflits évoluent — vos outils aussi.",
+      "t4": "Identifiez les facteurs comme des grandeurs (niveau de, quantité de) — pas comme des acteurs. Les acteurs ne sont pas des facteurs ; leurs comportements le sont.",
+      "t5": "Testez chaque Facteur Moteur Clé : s'il change, la situation change-t-elle vraiment ?",
+      "t6": "Combinez les outils si nécessaire. Ils se complètent — aucun outil seul ne donne le tableau complet."
+    },
+    "cta": {
+      "title": "Maintenant — concevez votre projet",
+      "text": "Ces outils sont un échafaudage, pas une cage. Utilisez-les pour faire remonter les angles morts, puis faites confiance à votre jugement de praticien·ne·s. L'objectif est un projet clair, honnête sur ses hypothèses, ancré dans les vraies dynamiques du conflit — pas un projet qui coche des cases."
+    }
   }
 }

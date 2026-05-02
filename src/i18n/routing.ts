@@ -11,6 +11,7 @@ export const routing = defineRouting({
     '/people': '/people',
     '/projects': '/projects',
     '/documents': '/documents',
+    '/tools': '/tools',
     '/vision': '/vision',
   },
 });

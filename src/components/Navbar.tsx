@@ -18,6 +18,7 @@ export function Navbar() {
     { href: '/people', label: t('people') },
     { href: '/projects', label: t('projects') },
     { href: '/documents', label: t('documents') },
+    { href: '/tools', label: t('tools') },
     { href: '/vision', label: t('vision') },
   ];
 
