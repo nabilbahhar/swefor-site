@@ -11,41 +11,37 @@ function unauthorized() {
   return new NextResponse('Authentication required', {
     status: 401,
     headers: {
-      'WWW-Authenticate': 'Basic realm="SweFOR — Restricted"',
+      'WWW-Authenticate': 'Basic realm="SweFOR"',
       'Content-Type': 'text/plain; charset=utf-8',
     },
   });
 }
 
-export default function middleware(req: NextRequest) {
-  const auth = req.headers.get('authorization');
+function checkAuth(req: NextRequest): boolean {
+  const auth = req.headers.get('authorization') || '';
+  if (!auth.toLowerCase().startsWith('basic ')) return false;
 
-  if (!auth || !auth.startsWith('Basic ')) {
-    return unauthorized();
-  }
-
-  let decoded = '';
   try {
-    decoded = atob(auth.slice(6));
+    const decoded = atob(auth.slice(6).trim());
+    const sep = decoded.indexOf(':');
+    if (sep < 0) return false;
+    const user = decoded.slice(0, sep);
+    const pass = decoded.slice(sep + 1);
+    return user === BASIC_AUTH_USER && pass === BASIC_AUTH_PASSWORD;
   } catch {
+    return false;
+  }
+}
+
+export default function middleware(req: NextRequest) {
+  if (!checkAuth(req)) {
     return unauthorized();
   }
-
-  const sep = decoded.indexOf(':');
-  if (sep === -1) {
-    return unauthorized();
-  }
-
-  const user = decoded.slice(0, sep);
-  const pass = decoded.slice(sep + 1);
-
-  if (user !== BASIC_AUTH_USER || pass !== BASIC_AUTH_PASSWORD) {
-    return unauthorized();
-  }
-
   return intlMiddleware(req);
 }
 
 export const config = {
-  matcher: ['/', '/(en|fr)/:path*'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|logo.png|og-image.png|robots.txt|sitemap.xml|documents/.*).*)',
+  ],
 };
