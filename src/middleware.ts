@@ -12,6 +12,7 @@ function unauthorized() {
     status: 401,
     headers: {
       'WWW-Authenticate': 'Basic realm="SweFOR — Restricted"',
+      'Content-Type': 'text/plain; charset=utf-8',
     },
   });
 }
@@ -23,8 +24,18 @@ export default function middleware(req: NextRequest) {
     return unauthorized();
   }
 
-  const decoded = Buffer.from(auth.slice(6), 'base64').toString('utf-8');
+  let decoded = '';
+  try {
+    decoded = atob(auth.slice(6));
+  } catch {
+    return unauthorized();
+  }
+
   const sep = decoded.indexOf(':');
+  if (sep === -1) {
+    return unauthorized();
+  }
+
   const user = decoded.slice(0, sep);
   const pass = decoded.slice(sep + 1);
 
