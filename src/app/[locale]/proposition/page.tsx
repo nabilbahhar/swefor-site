@@ -1,13 +1,15 @@
 'use client';
 
+import Link from 'next/link';
 import {
-  Heart, Users, Swords, AlertTriangle, CheckCircle, Target, Zap,
-  Shield, Globe, TrendingUp, Sparkles, MessageSquare, Quote,
-  ArrowRight, Calendar, MapPin, BookOpen, Network, Compass,
-  Briefcase, Flame, Scale
+  Heart, Users, Swords, AlertTriangle, CheckCircle, Target, Zap, Star,
+  Shield, Globe, TrendingUp, Sparkles, Quote, ArrowRight, Calendar,
+  BookOpen, GitBranch, Compass, Briefcase, Flame, Scale, Eye, ChevronRight,
 } from 'lucide-react';
 
-// ===== Bilingual helpers =====
+// ============================================================
+// Bilingual helpers
+// ============================================================
 function ArOnly({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <div
@@ -31,553 +33,519 @@ function Bi({ fr, ar, className = '', small = false }: { fr: string; ar: string;
   );
 }
 
-function SectionTitle({
-  icon: Icon,
-  fr,
-  ar,
-  color,
-  number,
-}: {
-  icon: any;
+// ============================================================
+// 3-Box DATA — exactly per document methodology
+// 4 columns: Actors | Factors against peace | Definition of peace | Factors for peace
+// ============================================================
+
+type Item = {
   fr: string;
   ar: string;
-  color: string;
-  number?: string;
-}) {
-  return (
-    <div className={`bg-gradient-to-r ${color} px-6 md:px-8 py-5 rounded-t-2xl text-white`}>
-      <div className="flex items-start gap-4">
-        <div className="bg-white/20 backdrop-blur p-3 rounded-xl flex-shrink-0">
-          <Icon className="w-7 h-7" />
-        </div>
-        <div className="flex-1 min-w-0">
-          {number && (
-            <div className="text-white/70 text-xs font-bold tracking-widest uppercase mb-1">
-              {number}
-            </div>
-          )}
-          <h2 className="text-xl md:text-2xl font-bold leading-tight">{fr}</h2>
-          <ArOnly className="text-xl md:text-2xl font-bold leading-snug mt-1">{ar}</ArOnly>
-        </div>
-      </div>
-    </div>
-  );
-}
+  isKey?: boolean;
+};
 
-// ===== Page =====
+const factorsAgainst: Item[] = [
+  { fr: 'Trauma intergénérationnel des 50 ans (Tindouf : Maroc = ennemi dans le récit familial transmis).', ar: 'صدمة عابرة للأجيال خلال 50 سنة (في تندوف: المغرب = العدو في السرد العائلي المتوارث).', isKey: true },
+  { fr: 'Économie de rente du conflit à Tindouf (dizaines de milliers vivent de l\'aide humanitaire — pas d\'alternative).', ar: 'اقتصاد ريع النزاع بتندوف (عشرات الآلاف يعيشون من المساعدات الإنسانية — لا بديل).', isKey: true },
+  { fr: 'Récit héroïque du Polisario : "la lutte armée nous a définis" — sortir de ce récit = perdre une identité.', ar: 'السردية البطولية للبوليساريو: "الكفاح المسلح هو ما عرّفنا" — الخروج منها = فقدان هوية.', isKey: true },
+  { fr: 'Risque de radicalisation violente : acceptation tactique de l\'autonomie comme moyen de revenir au territoire pour mener des attaques (Rabat, Casa). Soutenu par cit. peace builders sahraouis (Kenya, 01/05/2026).', ar: 'خطر التطرف العنيف: قبول تكتيكي للحكم الذاتي كوسيلة للعودة لتنفيذ هجمات (الرباط، الدار البيضاء). تدعمه شهادات بُناة السلام الصحراويين (كينيا، 01/05/2026).', isKey: true },
+  { fr: 'Asymétrie « accueillant / accueilli » : risque de relation hiérarchique implicite Marocain → Sahraoui revenant.', ar: 'عدم تماثل بين «المستقبِل» و«المستقبَل»: خطر علاقة هرمية ضمنية مغربي → صحراوي عائد.' },
+  { fr: 'Risque de jalousie identitaire intra-sahraouie (Sahraouis du Maroc déjà installés vs. revenants traités comme prioritaires).', ar: 'خطر غيرة هوياتية بين الصحراويين (صحراويو المغرب القائمون مقابل عائدين تُمنح لهم الأولوية).' },
+  { fr: 'Récupération étatique : si le projet est perçu comme bras civil du Makhzen, perd toute crédibilité côté Sahraouis sceptiques.', ar: 'الاستحواذ الرسمي: إذا اعتُبر المشروع ذراعاً مدنياً للمخزن، يفقد كل مصداقيته لدى المتشككين الصحراويين.' },
+  { fr: 'Pression internationale opposée résiduelle (~40 États, ONG en Europe et Afrique du Sud) maintenant le récit d\'occupation.', ar: 'ضغط دولي مضاد متبقٍّ (~40 دولة، منظمات في أوروبا وجنوب إفريقيا) تحافظ على سردية الاحتلال.' },
+  { fr: 'Régime algérien instable pouvant instrumentaliser la cause pour distraire de problèmes internes.', ar: 'النظام الجزائري غير المستقر، قد يوظّف القضية لصرف الانتباه عن مشاكله الداخلية.' },
+  { fr: 'Désignation terroriste US potentielle (Polisario Terrorist Designation Act, mars 2026) — radicaliserait des deux côtés.', ar: 'التصنيف الإرهابي الأمريكي المحتمل (قانون مارس 2026) — يُجذّر المواقف على الجانبين.' },
+];
+
+const factorsFor: Item[] = [
+  { fr: 'Liens de parenté tribaux transterritoriaux (Reguibat, Tekna, Ouled Delim) — chaque famille de Tindouf a un parent à Laâyoune ou Dakhla.', ar: 'روابط القرابة القبلية العابرة للحدود (الرڭيبات، تكنة، أولاد دليم) — لكل عائلة في تندوف قريب بالعيون أو الداخلة.', isKey: true },
+  { fr: 'Hassanya partagée des deux côtés du mur — pas de barrière linguistique réelle.', ar: 'اللهجة الحسانية المشتركة على جانبي الجدار — لا حاجز لغوي حقيقي.', isKey: true },
+  { fr: 'Précédent IER 2004-2005 : le Maroc est le seul pays arabe à avoir mené une commission vérité-réconciliation officielle.', ar: 'سابقة هيئة الإنصاف والمصالحة 2004-2005: المغرب البلد العربي الوحيد بتجربة عدالة انتقالية رسمية.', isKey: true },
+  { fr: 'Discours royal du retour (Awda) post-2797 : cadrage politique et symbolique décisif.', ar: 'الخطاب الملكي عن "العودة" بعد قرار 2797: تأطير سياسي ورمزي حاسم.', isKey: true },
+  { fr: 'Régionalisation avancée du Maroc (réforme 2015) : cadre juridique d\'autonomie déjà existant.', ar: 'الجهوية المتقدمة بالمغرب (إصلاح 2015): الإطار القانوني للحكم الذاتي موجود فعلاً.', isKey: true },
+  { fr: 'Force diplomatique : ~120 États soutiennent le plan d\'autonomie. USA, France, UK, Espagne ralliés. Résolution 2797 ONU (oct. 2025).', ar: 'قوة دبلوماسية: ~120 دولة تدعم مخطط الحكم الذاتي. أمريكا، فرنسا، بريطانيا، إسبانيا منحازة. قرار 2797 (أكتوبر 2025).' },
+  { fr: 'Stabilité institutionnelle relative du Maroc (FSI 2024 : 68,8 — meilleur que les grands voisins nord-africains).', ar: 'استقرار مؤسساتي نسبي للمغرب (مؤشر الدول الهشّة 2024: 68.8 — أفضل من جيرانه الكبار في شمال إفريقيا).' },
+  { fr: 'Boom économique du Sahara : Dakhla port (~10 Mds $), énergies renouvelables, phosphates → opportunités emploi pour les revenants.', ar: 'ازدهار اقتصادي للصحراء: ميناء الداخلة (~10 مليار دولار)، طاقات متجددة، فوسفاط → فرص شغل للعائدين.' },
+  { fr: 'Charte ONU (art. 2.4) + doctrine OUA/UA depuis 1964 : intégrité territoriale comme principe juridique cadre.', ar: 'ميثاق الأمم المتحدة (المادة 2.4) + عقيدة منظمة الوحدة الإفريقية/الاتحاد منذ 1964: السلامة الإقليمية كمبدأ قانوني.' },
+  { fr: 'Maroc, leader Afrique en propriété intellectuelle 2026 (1er continental, 22e mondial). Stratégie Digital 2030 : 1,1 Md $ investis.', ar: 'المغرب، الأول إفريقياً في مؤشر الملكية الفكرية 2026 (22 عالمياً). استراتيجية رقمنة 2030: 1.1 مليار دولار.' },
+  { fr: 'Génération jeune de Tindouf née après 1991 : épuisée des camps, connectée socialement, voit la prospérité de Dakhla.', ar: 'جيل تندوف المولود بعد 1991: مُنهك من المخيمات، متصل رقمياً، يرى ازدهار الداخلة.' },
+  { fr: 'Cadres ralliés du Polisario (depuis 2010) : capital humain de passeurs déjà disponible.', ar: 'كوادر سابقة للبوليساريو عادت (منذ 2010): رأسمال بشري من حاملي الذاكرة متوفّر.' },
+  { fr: 'Islam malékite + zaouïas : tissu religieux et autorité morale traditionnelle communs.', ar: 'الإسلام المالكي + الزوايا: نسيج ديني وسلطة معنوية تقليدية مشتركة.' },
+];
+
+const actors: Item[] = [
+  { fr: 'SM le Roi Mohammed VI (autorité morale + religieuse + politique)', ar: 'صاحب الجلالة الملك محمد السادس (سلطة معنوية ودينية وسياسية)', isKey: true },
+  { fr: 'Cadres Polisario ralliés (depuis 2010)', ar: 'الكوادر العائدون من البوليساريو (منذ 2010)', isKey: true },
+  { fr: 'Élite politico-militaire Polisario à Tindouf', ar: 'النخبة السياسية والعسكرية للبوليساريو بتندوف', isKey: true },
+  { fr: 'Jeunes 18-30 ans (Tindouf + Sud marocain)', ar: 'الشباب 18-30 سنة (تندوف + جنوب المغرب)', isKey: true },
+  { fr: 'Sécurité militaire algérienne', ar: 'المخابرات العسكرية الجزائرية', isKey: true },
+  { fr: 'Femmes sahraouies des deux côtés (porteuses de mémoire familiale)', ar: 'النساء الصحراويات على الجانبين (حاملات الذاكرة العائلية)' },
+  { fr: 'Chouyoukh des tribus traditionnelles', ar: 'شيوخ القبائل التقليديون' },
+  { fr: 'Sahraouis du Maroc (Laâyoune, Dakhla, Smara)', ar: 'الصحراويون المغاربة (العيون، الداخلة، السمارة)' },
+  { fr: 'Marocains du Nord (perception "traître" possible)', ar: 'مغاربة الشمال (إمكانية تصور «الخائن»)' },
+  { fr: 'Diaspora sahraouie en Espagne', ar: 'الجالية الصحراوية بإسبانيا' },
+  { fr: 'CNDH — Conseil National des Droits de l\'Homme', ar: 'المجلس الوطني لحقوق الإنسان' },
+  { fr: 'HCR / ONU / MINURSO', ar: 'المفوضية السامية للاجئين / الأمم المتحدة / المينورسو' },
+  { fr: 'Union africaine (reconnaît toujours la RASD)', ar: 'الاتحاد الإفريقي (لا يزال يعترف بالجمهورية الصحراوية)' },
+  { fr: 'Mauritanie (porte logistique potentielle)', ar: 'موريتانيا (بوابة لوجستيكية محتملة)' },
+  { fr: 'ONG internationales pro-indépendance (Europe, Afrique du Sud)', ar: 'منظمات دولية مؤيّدة للاستقلال (أوروبا، جنوب إفريقيا)' },
+];
+
+// ============================================================
+// Curle Result/Activity table — methodology Step 2
+// ============================================================
+const curleSteps = [
+  {
+    phase: 'Phase 1 → 2',
+    transitionFr: 'Sortir du conflit latent vers la conscience',
+    transitionAr: 'الخروج من النزاع الكامن نحو الوعي',
+    color: 'from-red-500 to-orange-500',
+    rows: [
+      {
+        result: { fr: 'Les jeunes de Tindouf (18-30) connaissent l\'existence d\'alternatives au récit Polisario.', ar: 'شباب تندوف (18-30) يعرفون بوجود بدائل لسردية البوليساريو.' },
+        activity: { fr: 'Diffusion de contenus digitaux indirects (TikTok, podcasts en Hassanya), témoignages de ralliés via canaux discrets, blogs de la diaspora.', ar: 'بث محتوى رقمي غير مباشر (تيك توك، بودكاست بالحسانية)، شهادات لعائدين عبر قنوات مَخفيّة، مدوّنات الجالية.' },
+      },
+      {
+        result: { fr: 'La famille élargie est consciente que le retour est possible et digne.', ar: 'العائلة الموسّعة واعية بأن العودة ممكنة وكريمة.' },
+        activity: { fr: 'Cartographie des familles séparées + reprise de contact via émissaires tribaux (chouyoukh) et appels privés.', ar: 'خرائط العائلات المنفصلة + استئناف التواصل عبر مبعوثين قبليين والمكالمات الخاصة.' },
+      },
+    ],
+  },
+  {
+    phase: 'Phase 2 → 3',
+    transitionFr: 'Équilibrer le pouvoir vers la possibilité de négociation',
+    transitionAr: 'موازنة السلطة نحو إمكانية التفاوض',
+    color: 'from-orange-500 to-yellow-500',
+    rows: [
+      {
+        result: { fr: 'Asymétrie informationnelle Tindouf-Maroc réduite — les conditions réelles dans les camps sont documentées et publiques.', ar: 'تقليص عدم التوازن المعلوماتي بين تندوف والمغرب — الأوضاع الحقيقية في المخيمات موثَّقة وعلنية.' },
+        activity: { fr: 'Plateforme média trilingue (Hassanya / Darija / Espagnol) + audit indépendant des conditions à Tindouf via partenaires HCR/CNDH.', ar: 'منصة إعلامية ثلاثية اللغة + تدقيق مستقل لأوضاع تندوف عبر شركاء (المفوضية / المجلس الوطني لحقوق الإنسان).' },
+      },
+      {
+        result: { fr: 'Les revenants ont une protection juridique et économique stable, créant un précédent rassurant.', ar: 'العائدون يتمتعون بحماية قانونية واقتصادية مستقرة، تخلق سابقة مطمئِنة.' },
+        activity: { fr: 'Cellule d\'accompagnement individuel (case work) : statut juridique, emploi, logement, suivi psycho-social (CNDH + ONG).', ar: 'خلية مرافقة فردية (case work): وضع قانوني، شغل، سكن، متابعة نفسية اجتماعية.' },
+      },
+      {
+        result: { fr: 'Risque de radicalisation violente détecté tôt, neutralisé sans diabolisation collective.', ar: 'خطر التطرف العنيف يُرصَد مبكراً ويُحيَّد دون شيطنة جماعية.' },
+        activity: { fr: 'Mécanisme d\'alerte précoce avec leaders sahraouis fiables (cf. Fatimatou, Ghaylani, Hfdallah) + alternatives socio-économiques crédibles.', ar: 'آلية إنذار مبكر مع قياديين صحراويين موثوقين + بدائل اجتماعية اقتصادية موثوقة.' },
+      },
+    ],
+  },
+  {
+    phase: 'Phase 3 → 4',
+    transitionFr: 'Du settlement vers une paix et justice durables',
+    transitionAr: 'من التسوية نحو سلام وعدالة مستدامين',
+    color: 'from-yellow-500 to-emerald-500',
+    rows: [
+      {
+        result: { fr: 'Espace civil indépendant existe physiquement et est utilisé pour la médiation entre revenants et Marocains.', ar: 'فضاء مدني مستقل قائم فعلياً ويُستخدم للوساطة بين العائدين والمغاربة.' },
+        activity: { fr: 'Centre Rihab al-Karama à Tan-Tan ou Guelmim : témoignages publics format IER, archivage, médiation tribale + IER-style.', ar: 'مركز رحاب الكرامة بطانطان أو كلميم: شهادات علنية بنموذج هيئة الإنصاف والمصالحة، أرشفة، وساطة قبلية.' },
+      },
+      {
+        result: { fr: 'Les institutions marocaines intègrent les revenants sans paternalisme — "marocains qui sont revenus", égaux.', ar: 'المؤسسات المغربية تُدمج العائدين دون استعلاء — «مغاربة عادوا»، متساوون.' },
+        activity: { fr: 'Charte d\'accueil signée par CNDH + universités + collectivités du Sud : non-discrimination explicite, mémoire sahraouie protégée.', ar: 'ميثاق استقبال موقّع من المجلس الوطني لحقوق الإنسان + الجامعات + جماعات الجنوب: عدم تمييز صريح، حماية الذاكرة الصحراوية.' },
+      },
+      {
+        result: { fr: 'Identité sahraouie distincte préservée et célébrée dans le cadre marocain (langue, mémoire, culture).', ar: 'الهوية الصحراوية المتميزة محفوظة ومحتفى بها داخل الإطار المغربي (لغة، ذاكرة، ثقافة).' },
+        activity: { fr: 'Caravanes culturelles Hassanya, programme académique sur la mémoire, bourses aux étudiants de Tindouf, festival biennal.', ar: 'قوافل ثقافية حسانية، برنامج أكاديمي عن الذاكرة، منح للطلبة من تندوف، مهرجان كل سنتين.' },
+      },
+    ],
+  },
+];
+
+// ============================================================
+// Page
+// ============================================================
 export default function PropositionPage() {
   return (
     <div className="min-h-screen">
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
         {/* === Header === */}
-        <div className="text-center mb-10 animate-fade-in">
+        <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 rounded-full text-sm font-semibold mb-4">
             <Flame className="w-4 h-4" />
-            <span>Document interne — Projet en cours</span>
+            <span>Document interne — Diffusion restreinte</span>
             <span className="opacity-50">·</span>
-            <ArOnly className="inline">وثيقة داخلية — مشروع قيد الإعداد</ArOnly>
+            <ArOnly className="inline">وثيقة داخلية — توزيع محدود</ArOnly>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
             Proposition Projet Maroc
           </h1>
-          <ArOnly className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+          <ArOnly className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
             مقترح المشروع — المغرب
           </ArOnly>
-          <p className="text-base md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Espace de paix, mosala7a et bina'a mochtarak — préparer la transition post-règlement
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            Espace de paix, mosala7a et bina'a mochtarak — analyse selon la méthode SweFOR « From theory to practice ».
           </p>
-          <ArOnly className="text-base md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mt-2 leading-relaxed">
-            فضاء سلام، مصالحة وبناء مشترك — تهيئة مرحلة ما بعد التسوية
+          <ArOnly className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mt-2">
+            فضاء سلام، مصالحة وبناء مشترك — تحليل وفق منهجية سويفور «من النظرية إلى الممارسة».
           </ArOnly>
-        </div>
 
-        {/* === Vision === */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 border border-blue-200 dark:border-blue-800 rounded-2xl p-6 md:p-8 mb-10 animate-fade-in-up-d1">
-          <div className="flex items-start gap-3 mb-3">
-            <Sparkles className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
-            <div>
-              <h3 className="font-bold text-gray-900 dark:text-white text-lg">Vision du projet</h3>
-              <ArOnly className="font-bold text-gray-900 dark:text-white text-lg">رؤية المشروع</ArOnly>
-            </div>
+          {/* Methodology badge */}
+          <div className="mt-6 inline-flex flex-wrap justify-center gap-2 text-xs">
+            <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full font-semibold">Step 1 — 3-Box ✓</span>
+            <span className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full font-semibold">Step 2 — Curle ✓</span>
+            <span className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full">Step 3 — RPP (à venir)</span>
+            <span className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full">Step 4 — ToC (à venir)</span>
           </div>
-          <Bi
-            fr="Créer un espace civil — indépendant de l'État — où la mosala7a (réconciliation) et la bina'a mochtarak (construction commune) entre Marocains et Sahraouis revenant de Tindouf deviennent réalité avant que le règlement politique ne soit finalisé. Hypothèse stratégique : le moment où l'incertitude crée l'ouverture, c'est maintenant."
-            ar="إنشاء فضاء مدني — مستقل عن الدولة — تتحقق فيه المصالحة والبناء المشترك بين المغاربة والصحراويين العائدين من تندوف، قبل أن يُحسم الملف السياسي رسمياً. الفرضية الاستراتيجية: اللحظة التي يخلق فيها الغموض الانفتاح هي الآن."
-            className="text-gray-700 dark:text-gray-300 leading-relaxed"
-          />
         </div>
 
-        {/* === SECTION 1 : Three Box Analysis === */}
+        {/* === Step 1 = Definition + 3-Box === */}
         <div className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            1. Analyse 3-Box <span className="text-gray-400 text-base font-normal">— تحليل الصناديق الثلاثة</span>
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Cartographie des forces en présence — base de toute la stratégie du projet.
-          </p>
-
-          {/* === BOX 1 : Forces POUR la paix === */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 mb-6">
-            <SectionTitle
-              icon={Heart}
-              fr="Forces POUR la paix / la réconciliation"
-              ar="القوى الدافعة للسلام والمصالحة"
-              color="from-green-600 to-emerald-700 dark:from-green-500 dark:to-emerald-600"
-              number="Box 1"
-            />
-            <div className="p-6 md:p-8 space-y-5">
-              {/* 1A - terrain */}
-              <div>
-                <h4 className="font-bold text-green-800 dark:text-green-300 mb-2 text-sm uppercase tracking-wider">
-                  Sur le terrain — على الأرض
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    {
-                      fr: "IER (2004-2005) : le Maroc est l'unique pays arabe à avoir mené une commission vérité-réconciliation officielle. Précédent institutionnel et symbolique majeur — modèle réplicable.",
-                      ar: "هيئة الإنصاف والمصالحة (2004-2005): المغرب الدولة العربية الوحيدة التي قادت تجربة عدالة انتقالية رسمية. سابقة مؤسساتية ورمزية قابلة للاستنساخ.",
-                    },
-                    {
-                      fr: "Discours royal post-2797 : cadrage du retour (عودة) et non de l'intégration forcée. Mot-clé politique et culturel décisif.",
-                      ar: "الخطاب الملكي بعد قرار 2797: تأطير العودة بدل الإدماج بالقوة. كلمة مفتاحية سياسياً وثقافياً.",
-                    },
-                    {
-                      fr: "Liens de parenté traversant Tindouf-Sahara-Sud : familles séparées depuis 50 ans, mêmes tribus (Reguibat, Tekna, Ouled Delim). Chaque famille des camps a un parent à Laâyoune ou Dakhla.",
-                      ar: "روابط القرابة العابرة بين تندوف والصحراء والجنوب: عائلات منفصلة منذ 50 سنة، نفس القبائل (الرڭيبات، تكنة، أولاد دليم).",
-                    },
-                    {
-                      fr: "Hassanya partagée + Islam malékite + zaouïas : pas de barrière culturelle ou religieuse réelle.",
-                      ar: "اللهجة الحسانية المشتركة + الإسلام المالكي + الزوايا: لا حاجز ثقافي أو ديني حقيقي.",
-                    },
-                    {
-                      fr: "Génération de Tindouf née après 1991 : épuisée des camps, voit sur les réseaux sociaux la prospérité de Dakhla / Laâyoune.",
-                      ar: "جيل تندوف المولود بعد 1991: مُنهك من المخيمات، يرى ازدهار الداخلة والعيون عبر الشبكات الاجتماعية.",
-                    },
-                    {
-                      fr: "Régionalisation avancée du Maroc (réforme 2015) : cadre juridique pour absorber le statut d'autonomie, déjà existant.",
-                      ar: "الجهوية المتقدمة (إصلاح 2015): الإطار القانوني لاستيعاب وضع الحكم الذاتي موجود بالفعل.",
-                    },
-                    {
-                      fr: "Boom économique du Sahara marocain : port de Dakhla (~10 Mds $), énergies renouvelables, phosphates → opportunités d'emploi réelles pour les revenants.",
-                      ar: "الازدهار الاقتصادي للصحراء المغربية: ميناء الداخلة (~10 مليار دولار)، طاقات متجددة، فوسفاط → فرص شغل حقيقية للعائدين.",
-                    },
-                    {
-                      fr: "Ralliements antérieurs : des dizaines d'anciens cadres du Polisario rentrés depuis 2010 — capital humain de passeurs déjà disponible.",
-                      ar: "التحاقات سابقة: عشرات الأطر السابقين للبوليساريو عادوا منذ 2010 — رأسمال بشري من حاملي الذاكرة متوفّر.",
-                    },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-green-50/50 dark:bg-green-900/10 rounded-lg border border-green-100 dark:border-green-900/30">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-500 dark:to-indigo-600 text-white rounded-t-2xl px-6 md:px-8 py-5">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 backdrop-blur p-3 rounded-xl">
+                <Eye className="w-7 h-7" />
               </div>
-
-              {/* 1B - Diplomatic & Geopolitical force === NEW === */}
               <div>
-                <h4 className="font-bold text-green-800 dark:text-green-300 mb-2 text-sm uppercase tracking-wider">
-                  Force diplomatique du Maroc — القوة الدبلوماسية للمغرب
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    {
-                      fr: "Soutien des États-Unis — première puissance mondiale (reconnaissance Trump 2020, réaffirmée 2025). Christopher Landau (sous-secrétaire d'État) appelle à une issue rapide.",
-                      ar: "دعم الولايات المتحدة — القوة العالمية الأولى (اعتراف ترامب 2020، مُعاد تأكيده 2025). كريستوفر لانداو يدعو إلى حل سريع.",
-                    },
-                    {
-                      fr: "France (oct. 2024), Royaume-Uni (juin 2025), Espagne (2022) — trois autres puissances occidentales ralliées au plan d'autonomie.",
-                      ar: "فرنسا (أكتوبر 2024)، المملكة المتحدة (يونيو 2025)، إسبانيا (2022) — ثلاث قوى غربية أخرى منحازة لمخطط الحكم الذاتي.",
-                    },
-                    {
-                      fr: "Résolution 2797 du Conseil de sécurité (oct. 2025) : 11 pour, Russie/Chine/Pakistan abstention, pas de veto. Cadre ONU explicitement basé sur le plan marocain.",
-                      ar: "قرار مجلس الأمن 2797 (أكتوبر 2025): 11 مؤيد، روسيا/الصين/باكستان امتناع، دون فيتو. الإطار الأممي مُؤسّس صراحة على المخطط المغربي.",
-                    },
-                    {
-                      fr: "~120 États soutiennent le plan d'autonomie marocain ; effondrement progressif du soutien régional au Polisario (Mali avril 2026, Mauritanie ambivalente).",
-                      ar: "حوالي 120 دولة تدعم مخطط الحكم الذاتي المغربي؛ انهيار تدريجي للدعم الإقليمي للبوليساريو (مالي أبريل 2026، موريتانيا متذبذبة).",
-                    },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-blue-50/50 dark:bg-blue-900/10 rounded-lg border border-blue-100 dark:border-blue-900/30">
-                      <Globe className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* 1C - Maroc stable et développé === NEW === */}
-              <div>
-                <h4 className="font-bold text-green-800 dark:text-green-300 mb-2 text-sm uppercase tracking-wider">
-                  Stabilité et développement du Maroc — استقرار وتنمية المغرب
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    {
-                      fr: "5e économie d'Afrique en 2026 (PIB ~196 Mds $), diversifiée — automobile, aéronautique, agroalimentaire, énergies renouvelables. Source : Daba Finance / IMF 2026.",
-                      ar: "خامس اقتصاد إفريقي في 2026 (الناتج الداخلي الخام ~196 مليار دولار)، اقتصاد متنوع — السيارات، الطيران، الصناعات الغذائية، الطاقات المتجددة.",
-                    },
-                    {
-                      fr: "1er en Afrique au Indice de Propriété Intellectuelle 2026 (22e mondial, score 59,19) — Source : Ecofin Agency / U.S. Chamber.",
-                      ar: "الأول إفريقياً في مؤشر الملكية الفكرية 2026 (22 عالمياً، نقطة 59.19) — وكالة إيكوفان / غرفة التجارة الأمريكية.",
-                    },
-                    {
-                      fr: "Stratégie Digital 2030 : 1,1 Md $ investis, 240 000 emplois ciblés, 100 000 talents formés/an. Objectif : Top 50 mondial e-Gov (depuis 90e en 2024).",
-                      ar: "استراتيجية الرقمنة 2030: 1.1 مليار دولار استثمار، 240,000 منصب شغل، تكوين 100,000 شاب سنوياً. الهدف: الـ50 عالمياً في الحكومة الرقمية.",
-                    },
-                    {
-                      fr: "GITEX Africa accueilli au Maroc (4e édition 2026) — devenu hub technologique africain reconnu.",
-                      ar: "احتضان GITEX إفريقيا في المغرب (الدورة الرابعة 2026) — قطب تكنولوجي إفريقي معترف به.",
-                    },
-                    {
-                      fr: "Stabilité institutionnelle relative : Fragile States Index 2024 score 68,8 — meilleur que la moyenne des grands pays nord-africains (Algérie, Libye, Egypte).",
-                      ar: "استقرار مؤسساتي نسبي: مؤشر الدول الهشّة 2024 نقطة 68.8 — أفضل من معدل دول شمال إفريقيا الكبرى.",
-                    },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
-                      <TrendingUp className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* 1D - Organisations internationales pour intégrité territoriale === NEW === */}
-              <div>
-                <h4 className="font-bold text-green-800 dark:text-green-300 mb-2 text-sm uppercase tracking-wider">
-                  Organisations internationales contre la séparation des États — منظمات دولية ضد تفتيت الدول
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    {
-                      fr: "Charte des Nations unies : principe d'intégrité territoriale (art. 2.4) — limite structurellement le droit de sécession en dehors du cadre colonial.",
-                      ar: "ميثاق الأمم المتحدة: مبدأ السلامة الإقليمية (المادة 2.4) — يُقيّد بنيوياً حق الانفصال خارج الإطار الاستعماري.",
-                    },
-                    {
-                      fr: "Charte de l'Union africaine et héritage de l'OUA (1964) : intangibilité des frontières héritées de l'indépendance — doctrine constante depuis 60 ans.",
-                      ar: "ميثاق الاتحاد الإفريقي وإرث منظمة الوحدة الإفريقية (1964): مبدأ عدم المساس بحدود الاستقلال — عقيدة ثابتة منذ 60 سنة.",
-                    },
-                    {
-                      fr: "Tendance globale post-2014 : majorité des États rejettent les sécessions unilatérales (Crimée, Catalogne, Kurdistan irakien) — ce courant conforte la position marocaine.",
-                      ar: "اتجاه عالمي ما بعد 2014: أغلبية الدول ترفض الانفصالات الأحادية (شبه جزيرة القرم، كاتالونيا، كردستان العراق) — يُعزّز هذا التيار الموقف المغربي.",
-                    },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-lg border border-indigo-100 dark:border-indigo-900/30">
-                      <Scale className="w-5 h-5 text-indigo-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
+                <div className="text-white/70 text-xs font-bold tracking-widest uppercase">Step 1</div>
+                <h2 className="text-xl md:text-2xl font-bold leading-tight">3-Box Analysis — تحليل الصناديق الثلاثة</h2>
+                <p className="text-white/80 text-sm mt-1">Définition du conflit + facteurs + acteurs</p>
+                <ArOnly className="text-white/80 text-sm">تعريف النزاع + العوامل + الفاعلون</ArOnly>
               </div>
             </div>
           </div>
 
-          {/* === BOX 2 : Acteurs clés === */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 mb-6">
-            <SectionTitle
-              icon={Users}
-              fr="Acteurs clés"
-              ar="الفاعلون الأساسيون"
-              color="from-amber-600 to-orange-700 dark:from-amber-500 dark:to-orange-600"
-              number="Box 2"
-            />
-            <div className="p-6 md:p-8 space-y-5">
-              {/* For peace */}
-              <div>
-                <h4 className="font-bold text-amber-800 dark:text-amber-300 mb-2 text-sm uppercase tracking-wider">
-                  Acteurs qui peuvent décider POUR la paix — قادرون على ترجيح كفة السلام
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    { fr: "SM le Roi Mohammed VI : autorité morale + religieuse (Amir al-Mouminine) + politique. Cadrage du retour change tout.", ar: "صاحب الجلالة الملك محمد السادس: سلطة معنوية ودينية (أمير المؤمنين) وسياسية. تأطير العودة يُغيّر كل شيء." },
-                    { fr: "Anciens cadres Polisario ralliés : légitimité de témoignage (j'y étais, j'ai changé d'avis, voici pourquoi).", ar: "أطر سابقون للبوليساريو التحقوا: شرعية الشهادة (كنتُ هناك، غيّرتُ رأيي، وهذا السبب)." },
-                    { fr: "Femmes sahraouies des deux côtés : porteuses de mémoire familiale, souvent moins idéologisées. Pivot stratégique.", ar: "النساء الصحراويات من الجانبين: حاملات الذاكرة العائلية، أقل تأدلجاً غالباً. محور استراتيجي." },
-                    { fr: "Chouyoukh des tribus traditionnelles : autorité prépolitique, capable de rouvrir les liens familiaux.", ar: "شيوخ القبائل التقليديون: سلطة ما قبل سياسية، قادرة على إعادة فتح الروابط العائلية." },
-                    { fr: "Diaspora sahraouie en Espagne : pivot souvent négligé — beaucoup veulent une issue.", ar: "الجالية الصحراوية في إسبانيا: محور مُهمل غالباً — كثيرون يريدون مخرجاً." },
-                    { fr: "Jeunes 18-30 ans des deux côtés : démographiquement majoritaires, fatigués de l'héritage, connectés. Cœur de cible.", ar: "الشباب من 18 إلى 30 سنة على الجانبين: أغلبية ديموغرافياً، مُتعَبون من الإرث، متصلون. الفئة المستهدفة الأساسية." },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-amber-50/50 dark:bg-amber-900/10 rounded-lg">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="bg-white dark:bg-gray-800 rounded-b-2xl shadow-lg border-x border-b border-gray-200 dark:border-gray-700 p-6 md:p-8">
 
-              {/* Against */}
-              <div>
-                <h4 className="font-bold text-amber-800 dark:text-amber-300 mb-2 text-sm uppercase tracking-wider">
-                  Acteurs qui peuvent bloquer / saboter — قادرون على عرقلة المشروع
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    { fr: "Élite politico-militaire du Polisario à Tindouf : perdent statut, salaires, pouvoir → résistance maximale prévisible.", ar: "النخبة السياسية والعسكرية للبوليساريو في تندوف: يفقدون مكانة ورواتب ونفوذاً → مقاومة قصوى متوقعة." },
-                    { fr: "Sécurité militaire algérienne : capacité de sabotage de toute initiative perçue comme « marocanisation ».", ar: "المخابرات العسكرية الجزائرية: قدرة على تخريب أي مبادرة تُعتبر مغربنة." },
-                    { fr: "Marocains conservateurs voyant les ralliés comme « traîtres récompensés » : risque de rejet interne.", ar: "محافظون مغاربة يرون العائدين خونة يُكافأون: خطر رفض داخلي." },
-                    { fr: "Sahraouis « historiques » du Maroc se sentant mis de côté si les revenants reçoivent un traitement préférentiel : risque de jalousie identitaire intra-sahraouie.", ar: "الصحراويون التاريخيون في المغرب الذين قد يشعرون بالتهميش: خطر غيرة هوياتية بين الصحراويين أنفسهم." },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-red-50/50 dark:bg-red-900/10 rounded-lg">
-                      <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* === BOX 3 : Forces CONTRE la paix === */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 mb-6">
-            <SectionTitle
-              icon={Swords}
-              fr="Forces CONTRE la paix / la réconciliation"
-              ar="القوى الدافعة ضد السلام والمصالحة"
-              color="from-red-600 to-rose-700 dark:from-red-500 dark:to-rose-600"
-              number="Box 3"
-            />
-            <div className="p-6 md:p-8 space-y-5">
-
-              {/* === CRITICAL : Risque terrorisme — NEW === */}
+            {/* === Conflict / Peace definitions === */}
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
               <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-300 dark:border-red-800 rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Flame className="w-6 h-6 text-red-600 dark:text-red-400" />
-                  <h4 className="font-bold text-red-800 dark:text-red-300 uppercase tracking-wider text-sm">
-                    Risque critique : terrorisme et extrémisme violent
-                  </h4>
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400" />
+                  <h3 className="font-bold text-red-800 dark:text-red-300 text-sm uppercase tracking-wider">
+                    Définition du conflit / problème
+                  </h3>
                 </div>
-                <ArOnly className="font-bold text-red-800 dark:text-red-300 uppercase tracking-wider text-sm mb-3">
-                  خطر حرج: الإرهاب والتطرف العنيف
+                <ArOnly className="font-bold text-red-800 dark:text-red-300 text-sm uppercase tracking-wider mb-3">
+                  تعريف النزاع / المشكل
                 </ArOnly>
                 <Bi
-                  fr="Acceptation tactique du Hokm Dati (autonomie) par certains éléments avec arrière-pensée de retour sur le territoire marocain pour mener des actions violentes — pas nécessairement au Sahara, mais potentiellement à Rabat, Casablanca, Marrakech. Les liens avérés ou allégués entre certains éléments du Polisario et des groupes affiliés à Al-Qaïda au Sahel (JNIM) — confirmés par l'armée malienne en avril 2026 — rendent ce risque non hypothétique."
-                  ar="قبول تكتيكي للحكم الذاتي من طرف بعض العناصر مع نية مبيتة للعودة إلى التراب المغربي لتنفيذ أعمال عنيفة — ليس بالضرورة في الصحراء، بل ربما في الرباط أو الدار البيضاء أو مراكش. الصلات المثبتة أو المُدّعاة بين بعض عناصر البوليساريو وجماعات تابعة للقاعدة في الساحل (نصرة الإسلام والمسلمين) — أكدها الجيش المالي في أبريل 2026 — تجعل هذا الخطر غير افتراضي."
-                  className="text-red-900 dark:text-red-200 leading-relaxed"
+                  fr="Le décalage croissant entre la résolution institutionnelle qui se profile (autonomie sous souveraineté marocaine, soutenue par ~120 États et la Résolution ONU 2797) et l'absorption sociale réelle dans les populations sahraouies de Tindouf et marocaines. Sans préparation civile, le règlement politique risque de produire une réconciliation administrative sans réconciliation humaine — terrain favorable à la radicalisation violente, à la marginalisation des revenants, et à la perte de l'identité sahraouie distincte."
+                  ar="الفجوة المتنامية بين الحل المؤسساتي الذي يلوح في الأفق (حكم ذاتي تحت السيادة المغربية، مدعوم من حوالي 120 دولة وقرار 2797) والاستيعاب الاجتماعي الفعلي لدى السكان الصحراويين بتندوف والمغاربة. دون تهيئة مدنية، قد ينتج التسوية السياسية مصالحة إدارية بلا مصالحة إنسانية — أرض خصبة للتطرف العنيف، وتهميش العائدين، وضياع الهوية الصحراوية المتميزة."
+                  className="text-gray-800 dark:text-gray-200 leading-relaxed"
                 />
+              </div>
 
-                {/* Quote des peace builders */}
-                <div className="mt-5 bg-white dark:bg-gray-800 border-l-4 border-red-500 p-4 rounded-r-lg">
-                  <Quote className="w-6 h-6 text-red-500 mb-2" />
-                  <p className="text-gray-700 dark:text-gray-300 italic mb-2 text-sm md:text-base">
-                    « Nous, peace builders du Sahara, ne serons jamais à l'aise jusqu'au moment où nous verrons le sang. »
-                  </p>
-                  <ArOnly className="text-gray-700 dark:text-gray-300 italic mb-2 text-sm md:text-base leading-loose">
-                    «نحن، بُناة السلام من الصحراء، لن نرتاح إلى أن نرى الدم.»
-                  </ArOnly>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                    — Fatimatou, Ghaylani, Hfdallah · Kenya, 1er mai 2026 · propos répétés depuis 2018
-                  </p>
-                  <ArOnly className="text-xs text-gray-500 dark:text-gray-400">
-                    — فاطمتو، غيلاني، حفظ الله · كينيا، 1 ماي 2026 · كلام متكرر منذ 2018
-                  </ArOnly>
+              <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-300 dark:border-green-800 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  <h3 className="font-bold text-green-800 dark:text-green-300 text-sm uppercase tracking-wider">
+                    Définition de la paix / état désiré
+                  </h3>
                 </div>
+                <ArOnly className="font-bold text-green-800 dark:text-green-300 text-sm uppercase tracking-wider mb-3">
+                  تعريف السلام / الحالة المرغوبة
+                </ArOnly>
                 <Bi
-                  fr="Cette parole — répétée par des Sahraouis eux-mêmes engagés dans la paix depuis 2018 — n'est pas une projection extérieure. C'est une lecture interne du tissu social. Elle implique que le projet doit intégrer dès le départ une dimension de prévention de la radicalisation."
-                  ar="هذه العبارة — يكرّرها صحراويون منخرطون أنفسهم في بناء السلام منذ 2018 — ليست إسقاطاً خارجياً. إنها قراءة داخلية للنسيج الاجتماعي. وهذا يعني أن المشروع يجب أن يُدمج منذ البداية بُعد الوقاية من التطرف."
-                  small
-                  className="mt-4 text-red-800 dark:text-red-300 font-medium"
+                  fr="Une coexistence digne et participative entre Sahraouis revenants de Tindouf, Sahraouis du Maroc et Marocains, dans un cadre où : (1) l'identité sahraouie distincte est préservée et célébrée, (2) la mobilité humaine et économique est sécurisée, (3) la mémoire des deux camps est reconnue sans hiérarchie, (4) les institutions du retour fonctionnent sans paternalisme, (5) la radicalisation violente est prévenue par des alternatives socio-économiques crédibles."
+                  ar="تعايش كريم وتشاركي بين الصحراويين العائدين من تندوف، والصحراويين المغاربة، والمغاربة، في إطار: (1) الهوية الصحراوية المتميزة محفوظة ومحتفى بها، (2) الحركية البشرية والاقتصادية مؤمَّنة، (3) ذاكرة الطرفين معترف بها دون تراتبية، (4) مؤسسات العودة تشتغل بدون استعلاء، (5) التطرف العنيف يُمنَع ببدائل اجتماعية اقتصادية موثوقة."
+                  className="text-gray-800 dark:text-gray-200 leading-relaxed"
                 />
               </div>
+            </div>
 
-              {/* Trauma + structures */}
-              <div>
-                <h4 className="font-bold text-red-800 dark:text-red-300 mb-2 text-sm uppercase tracking-wider">
-                  Forces structurelles — قوى بنيوية
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    { fr: "Trauma intergénérationnel des 50 ans : pour beaucoup à Tindouf, le Maroc reste l'ennemi dans le récit familial. La haine est mémorielle, pas seulement politique.", ar: "صدمة عابرة للأجيال خلال 50 سنة: لكثيرين في تندوف، المغرب يبقى العدو في السرد العائلي. الكراهية ذاكراتية لا سياسية فقط." },
-                    { fr: "Économie de la rente du conflit : à Tindouf, des dizaines de milliers vivent de l'aide humanitaire. Pas d'alternative économique → résistance au changement.", ar: "اقتصاد ريع النزاع: في تندوف، عشرات الآلاف يعيشون من المساعدات الإنسانية. لا بديل اقتصادي → مقاومة التغيير." },
-                    { fr: "Récit héroïque du Polisario : « la lutte armée nous a définis » — sortir de ce récit = perdre une identité collective.", ar: "السردية البطولية للبوليساريو: «الكفاح المسلح هو ما عرّفنا» — الخروج من هذه السردية = فقدان هوية جماعية." },
-                    { fr: "Mémoire des disparus marocains des années de plomb au Sahara (1975-1999) : encore vive chez certains Sahraouis et leurs descendants.", ar: "ذاكرة المختفين المغاربة في سنوات الرصاص بالصحراء (1975-1999): لا تزال حية لدى بعض الصحراويين وأبنائهم." },
-                    { fr: "Asymétrie de la souffrance perçue : « vous ne savez pas ce qu'on a vécu » — des deux côtés.", ar: "عدم تماثل الإحساس بالمعاناة: «لا تعرفون ما عشناه» — على الجانبين." },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-red-50/30 dark:bg-red-900/10 rounded-lg">
-                      <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
+            {/* === The 3-Box table itself — 4 columns per document === */}
+            <div className="mb-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold mb-2">
+                Table 3-Box (méthode SweFOR) — جدول الصناديق الثلاثة
+              </p>
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                <Star className="inline w-3 h-3 text-yellow-500 mr-1" />
+                = Key actor / Key factor (changement = changement majeur du conflit)
               </div>
+            </div>
 
-              {/* International against */}
-              <div>
-                <h4 className="font-bold text-red-800 dark:text-red-300 mb-2 text-sm uppercase tracking-wider">
-                  Pression internationale opposée — ضغط دولي مضاد
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    { fr: "Organisations internationales pro-indépendance (Europe, Afrique du Sud, ~40 États) : maintiennent la sardia (récit) d'« occupation ».", ar: "منظمات دولية مؤيّدة للاستقلال (أوروبا، جنوب إفريقيا، ~40 دولة): تحافظ على سردية «الاحتلال»." },
-                    { fr: "Union africaine reconnaît toujours la RASD comme membre — pression diplomatique persistante.", ar: "الاتحاد الإفريقي لا يزال يعترف بالجمهورية الصحراوية عضواً — ضغط دبلوماسي مستمر." },
-                    { fr: "Régime algérien instable : peut instrumentaliser la cause sahraouie pour distraire de problèmes internes.", ar: "النظام الجزائري غير المستقر: قادر على توظيف القضية الصحراوية لصرف الانتباه عن مشاكله الداخلية." },
-                    { fr: "Désignation terroriste US (en cours au Congrès) : si elle passe, elle radicalise des deux côtés et tue le dialogue civil.", ar: "التصنيف الإرهابي الأمريكي (قيد المناقشة): إذا مرّ، يُجذّر المواقف ويقتل الحوار المدني." },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-orange-50/30 dark:bg-orange-900/10 rounded-lg">
-                      <Globe className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[900px] border-collapse">
+                <thead>
+                  <tr>
+                    <th className="bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-200 text-left px-4 py-3 border border-amber-300 dark:border-amber-700 text-sm w-1/4 align-top">
+                      <div className="font-bold">4. Actors</div>
+                      <ArOnly className="font-bold">الفاعلون</ArOnly>
+                    </th>
+                    <th className="bg-red-100 dark:bg-red-900/40 text-red-900 dark:text-red-200 text-left px-4 py-3 border border-red-300 dark:border-red-700 text-sm w-1/4 align-top">
+                      <div className="font-bold">2. Factors AGAINST peace</div>
+                      <ArOnly className="font-bold">العوامل ضد السلام</ArOnly>
+                    </th>
+                    <th className="bg-blue-100 dark:bg-blue-900/40 text-blue-900 dark:text-blue-200 text-left px-4 py-3 border border-blue-300 dark:border-blue-700 text-sm w-1/4 align-top">
+                      <div className="font-bold">1. Definition of peace</div>
+                      <ArOnly className="font-bold">تعريف السلام</ArOnly>
+                    </th>
+                    <th className="bg-green-100 dark:bg-green-900/40 text-green-900 dark:text-green-200 text-left px-4 py-3 border border-green-300 dark:border-green-700 text-sm w-1/4 align-top">
+                      <div className="font-bold">3. Factors FOR peace</div>
+                      <ArOnly className="font-bold">العوامل من أجل السلام</ArOnly>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {/* Actors column */}
+                    <td className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/50 p-3 align-top">
+                      <ul className="space-y-2">
+                        {actors.map((a, i) => (
+                          <li key={i} className={`p-2 rounded-md ${a.isKey ? 'bg-amber-200/60 dark:bg-amber-800/30 border border-amber-400 dark:border-amber-700' : ''}`}>
+                            <div className="flex items-start gap-1.5">
+                              {a.isKey && <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500 flex-shrink-0 mt-0.5" />}
+                              <Bi fr={a.fr} ar={a.ar} small className="text-gray-800 dark:text-gray-200" />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
 
-              {/* Project internal risks */}
-              <div>
-                <h4 className="font-bold text-red-800 dark:text-red-300 mb-2 text-sm uppercase tracking-wider">
-                  Risques internes au projet — مخاطر داخلية للمشروع
-                </h4>
-                <ul className="space-y-3">
-                  {[
-                    { fr: "Récupération étatique : si le projet est perçu comme bras civil du Makhzen, il perd toute crédibilité chez les Sahraouis sceptiques.", ar: "الاستحواذ الرسمي: إذا اعتُبر المشروع ذراعاً مدنياً للمخزن، يفقد كل مصداقية لدى المتشككين الصحراويين." },
-                    { fr: "Asymétrie « accueillant / accueilli » : un Marocain qui accueille un Sahraoui qui revient → relation hiérarchique implicite. Toxique sur la durée.", ar: "عدم تماثل بين «المُستقبِل» و«المُستقبَل»: مغربي يستقبل صحراوياً عائداً → علاقة هرمية ضمنية. سامة على المدى البعيد." },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 bg-yellow-50/30 dark:bg-yellow-900/10 rounded-lg">
-                      <Shield className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                    {/* Factors against */}
+                    <td className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800/50 p-3 align-top">
+                      <ul className="space-y-2">
+                        {factorsAgainst.map((f, i) => (
+                          <li key={i} className={`p-2 rounded-md ${f.isKey ? 'bg-red-200/60 dark:bg-red-800/30 border border-red-400 dark:border-red-700' : ''}`}>
+                            <div className="flex items-start gap-1.5">
+                              {f.isKey && <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500 flex-shrink-0 mt-0.5" />}
+                              <Bi fr={f.fr} ar={f.ar} small className="text-gray-800 dark:text-gray-200" />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+
+                    {/* Definition of peace — center column */}
+                    <td className="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800/50 p-4 align-top">
+                      <div className="space-y-3">
+                        <Bi
+                          fr="Coexistence digne entre Sahraouis revenants, Sahraouis du Maroc, et Marocains."
+                          ar="تعايش كريم بين الصحراويين العائدين، والصحراويين المغاربة، والمغاربة."
+                          small
+                          className="text-blue-900 dark:text-blue-200 font-semibold"
+                        />
+                        <Bi
+                          fr="Identité sahraouie préservée et célébrée."
+                          ar="هوية صحراوية محفوظة ومحتفى بها."
+                          small
+                          className="text-blue-900 dark:text-blue-200 font-semibold"
+                        />
+                        <Bi
+                          fr="Mobilité humaine et économique sécurisée."
+                          ar="حركية بشرية واقتصادية مؤمَّنة."
+                          small
+                          className="text-blue-900 dark:text-blue-200 font-semibold"
+                        />
+                        <Bi
+                          fr="Mémoires reconnues sans hiérarchie."
+                          ar="ذاكرات معترف بها دون تراتبية."
+                          small
+                          className="text-blue-900 dark:text-blue-200 font-semibold"
+                        />
+                        <Bi
+                          fr="Retour digne, sans paternalisme."
+                          ar="عودة كريمة، بلا استعلاء."
+                          small
+                          className="text-blue-900 dark:text-blue-200 font-semibold"
+                        />
+                        <Bi
+                          fr="Radicalisation violente prévenue par alternatives socio-économiques."
+                          ar="تطرف عنيف ممنوع ببدائل اجتماعية اقتصادية."
+                          small
+                          className="text-blue-900 dark:text-blue-200 font-semibold"
+                        />
+                      </div>
+                    </td>
+
+                    {/* Factors for peace */}
+                    <td className="bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800/50 p-3 align-top">
+                      <ul className="space-y-2">
+                        {factorsFor.map((f, i) => (
+                          <li key={i} className={`p-2 rounded-md ${f.isKey ? 'bg-green-200/60 dark:bg-green-800/30 border border-green-400 dark:border-green-700' : ''}`}>
+                            <div className="flex items-start gap-1.5">
+                              {f.isKey && <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500 flex-shrink-0 mt-0.5" />}
+                              <Bi fr={f.fr} ar={f.ar} small className="text-gray-800 dark:text-gray-200" />
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Quote des peace builders */}
+            <div className="mt-6 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border-l-4 border-red-500 dark:border-red-400 p-5 rounded-r-xl">
+              <Quote className="w-6 h-6 text-red-500 dark:text-red-400 mb-2" />
+              <p className="text-gray-800 dark:text-gray-200 italic mb-2 text-sm md:text-base">
+                « Nous, peace builders du Sahara, ne serons jamais à l'aise jusqu'au moment où nous verrons le sang. »
+              </p>
+              <ArOnly className="text-gray-800 dark:text-gray-200 italic mb-2 text-sm md:text-base leading-loose">
+                «نحن، بُناة السلام من الصحراء، لن نرتاح إلى أن نرى الدم.»
+              </ArOnly>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                — Fatimatou, Ghaylani, Hfdallah · Kenya, 1er mai 2026 · propos répétés depuis 2018
+              </p>
+              <ArOnly className="text-xs text-gray-600 dark:text-gray-400">
+                — فاطمتو، غيلاني، حفظ الله · كينيا، 1 ماي 2026 · كلام متكرر منذ 2018
+              </ArOnly>
+              <Bi
+                fr="Cette parole, exprimée par des Sahraouis eux-mêmes engagés dans la paix, n'est pas une projection externe. C'est une lecture interne du tissu social. Elle classe le risque de radicalisation violente comme key factor."
+                ar="هذه العبارة، يعبّر عنها صحراويون منخرطون في بناء السلام، ليست إسقاطاً خارجياً. إنها قراءة داخلية للنسيج الاجتماعي. تُصنّف خطر التطرف العنيف كعامل أساسي."
+                small
+                className="mt-3 text-red-800 dark:text-red-300 font-medium"
+              />
             </div>
           </div>
         </div>
 
-        {/* === SECTION 2 : Key Driving Factors === */}
-        <div className="bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border border-yellow-300 dark:border-yellow-800 rounded-2xl p-6 md:p-8 mb-12">
-          <div className="flex items-center gap-3 mb-3">
-            <Zap className="w-7 h-7 text-yellow-600 dark:text-yellow-400" />
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-                2. Key Driving Factors (KDFs)
-              </h2>
-              <ArOnly className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                العوامل الدافعة الرئيسية
+        {/* === Step 2 = Curle === */}
+        <div className="mb-12">
+          <div className="bg-gradient-to-r from-amber-600 to-orange-700 dark:from-amber-500 dark:to-orange-600 text-white rounded-t-2xl px-6 md:px-8 py-5">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 backdrop-blur p-3 rounded-xl">
+                <GitBranch className="w-7 h-7" />
+              </div>
+              <div>
+                <div className="text-white/70 text-xs font-bold tracking-widest uppercase">Step 2</div>
+                <h2 className="text-xl md:text-2xl font-bold leading-tight">Curle Diagram — مخطط كيرل</h2>
+                <p className="text-white/80 text-sm mt-1">Position actuelle et trajectoire d'intervention</p>
+                <ArOnly className="text-white/80 text-sm">الموقع الحالي ومسار التدخل</ArOnly>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-b-2xl shadow-lg border-x border-b border-gray-200 dark:border-gray-700 p-6 md:p-8">
+
+            {/* Diagnostic */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-300 dark:border-amber-800 rounded-xl p-5 mb-6">
+              <h3 className="font-bold text-amber-900 dark:text-amber-200 mb-3 flex items-center gap-2">
+                <Compass className="w-5 h-5" /> Diagnostic central
+                <span className="text-gray-400">·</span>
+                <span>التشخيص المحوري</span>
+              </h3>
+              <Bi
+                fr="Le dossier est officiellement entre Phase 3 (Settlement) et Phase 4 (Sustainable Peace) côté institutions et droit international. Mais les sahraouis de Tindouf vivent encore en Phase 1-2. Ce DÉCALAGE DE PHASE entre les groupes est le problème opérationnel principal et la valeur ajoutée du projet."
+                ar="الملف رسمياً بين المرحلة 3 (تسوية) والمرحلة 4 (سلام مستدام) على مستوى المؤسسات والقانون الدولي. لكن صحراويي تندوف لا يزالون يعيشون في المرحلتين 1-2. هذا «اختلال المرحلة» بين الفئات هو المشكل التنفيذي الأساسي والقيمة المضافة للمشروع."
+                className="text-gray-800 dark:text-gray-200 leading-relaxed"
+              />
+
+              {/* Link to canvas */}
+              <Link
+                href="/proposition/curle"
+                className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold transition-colors"
+              >
+                <GitBranch className="w-4 h-4" />
+                Voir le canevas Curle visualisé (SVG)
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+              <ArOnly className="mt-2 text-xs text-amber-800 dark:text-amber-300">
+                للاطّلاع على المنحنى البصري انقر فوق الرابط أعلاه
               </ArOnly>
             </div>
-          </div>
-          <Bi
-            fr="6 facteurs déterminants — si l'un dérape, le projet déraille."
-            ar="6 عوامل محورية — إذا اختلّ أحدها، يخرج المشروع عن سكته."
-            small
-            className="text-gray-700 dark:text-gray-300 mb-5"
-          />
-          <ol className="space-y-3">
-            {[
-              { fr: "Niveau de confiance ressentie par les jeunes de Tindouf envers le projet marocain.", ar: "مستوى ثقة شباب تندوف في المشروع المغربي." },
-              { fr: "Capacité à offrir une dignité économique aux revenants (place réelle, pas aumône).", ar: "القدرة على تقديم كرامة اقتصادية للعائدين (مكانة حقيقية، لا صدقة)." },
-              { fr: "Espace symbolique préservé pour l'identité sahraouie distincte (langue, culture, mémoire — pas effacement).", ar: "الفضاء الرمزي المحفوظ للهوية الصحراوية المتميزة (لغة، ثقافة، ذاكرة — لا محو)." },
-              { fr: "Visibilité et crédibilité des passeurs ralliés (nombre, écoute, non perçus comme vendus).", ar: "مرئية ومصداقية حاملي الذاكرة العائدين (عدد، استماع، عدم اعتبارهم مُباعين)." },
-              { fr: "Niveau de protection contre l'instrumentalisation politique (élections, médias).", ar: "مستوى الحماية من التوظيف السياسي (انتخابات، إعلام)." },
-              { fr: "Capacité de prévention de la radicalisation violente — surveillance discrète + alternatives crédibles.", ar: "قدرة الوقاية من التطرف العنيف — رصد متبصّر + بدائل موثوقة." },
-            ].map((kdf, i) => (
-              <li key={i} className="flex items-start gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl border border-yellow-200 dark:border-yellow-800/50">
-                <span className="bg-yellow-500 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
-                  {i + 1}
-                </span>
-                <Bi fr={kdf.fr} ar={kdf.ar} className="text-gray-800 dark:text-gray-200 flex-1" />
-              </li>
-            ))}
-          </ol>
-        </div>
 
-        {/* === SECTION 3 : Le Projet === */}
-        <div className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            3. Le projet : Rihab al-Karama
-          </h2>
-          <ArOnly className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            المشروع: رحاب الكرامة
-          </ArOnly>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm italic">
-            « L'espace de la dignité » — nom court, neutre, ancré dans l'hospitalité maghrébine.
-          </p>
+            {/* Result / Activity tables per phase transition */}
+            <div className="space-y-6">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold mb-2">
+                Tableau Result → Activity (méthode SweFOR : écrire le résultat AVANT l'activité)
+              </p>
+              <ArOnly className="text-xs text-gray-500 dark:text-gray-400">
+                جدول النتيجة ← النشاط (المنهج: نكتب النتيجة المرغوبة قبل النشاط)
+              </ArOnly>
 
-          {/* Phases */}
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              {
-                num: 'Phase 0',
-                durationFr: '12 mois — préparer le terrain',
-                durationAr: '12 شهراً — تهيئة الميدان',
-                color: 'from-blue-500 to-indigo-600',
-                items: [
-                  { fr: 'Cartographie des familles séparées', ar: 'رسم خريطة العائلات المنفصلة' },
-                  { fr: 'Banque de 50 témoignages bilingues (FR/AR/EN)', ar: 'بنك 50 شهادة ثلاثية اللغة' },
-                  { fr: 'Charte d\'éthique : pas de récupération étatique', ar: 'ميثاق أخلاقي: لا استحواذ من الدولة' },
-                  { fr: 'Audit sécuritaire discret avec partenaires', ar: 'تدقيق أمني محتشم مع الشركاء' },
-                ],
-              },
-              {
-                num: 'Phase 1',
-                durationFr: '18 mois — créer l\'espace',
-                durationAr: '18 شهراً — خلق الفضاء',
-                color: 'from-purple-500 to-violet-600',
-                items: [
-                  { fr: 'Lieu physique à Tan-Tan ou Guelmim (zone de contact historique)', ar: 'مكان مادي بطانطان أو كلميم' },
-                  { fr: 'Format inspiré IER : témoignages publics, archivage, médiation', ar: 'شكل مستوحى من هيئة الإنصاف والمصالحة' },
-                  { fr: 'Programme jeunes (18-30) : 100 participants/an', ar: 'برنامج للشباب: 100 مشارك سنوياً' },
-                  { fr: 'Mécanisme d\'alerte précoce sur signaux de radicalisation', ar: 'آلية إنذار مبكر على إشارات التطرف' },
-                ],
-              },
-              {
-                num: 'Phase 2',
-                durationFr: '3 ans — bridges & impact',
-                durationAr: '3 سنوات — جسور وأثر',
-                color: 'from-emerald-500 to-teal-600',
-                items: [
-                  { fr: 'Bourses universitaires marocaines pour étudiants de Tindouf', ar: 'منح جامعية للطلبة من تندوف' },
-                  { fr: 'Caravanes culturelles Hassanya', ar: 'قوافل ثقافية حسانية' },
-                  { fr: 'Plateforme média trilingue Hassanya/Darija/Espagnol', ar: 'منصة إعلامية ثلاثية اللغة' },
-                  { fr: 'Programme insertion économique des revenants', ar: 'برنامج إدماج اقتصادي للعائدين' },
-                ],
-              },
-            ].map((phase, i) => (
-              <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div className={`bg-gradient-to-r ${phase.color} text-white p-4`}>
-                  <div className="text-white/70 text-xs font-bold tracking-widest uppercase">{phase.num}</div>
-                  <h3 className="font-bold text-base">{phase.durationFr}</h3>
-                  <ArOnly className="font-bold text-sm mt-1">{phase.durationAr}</ArOnly>
+              {curleSteps.map((step, idx) => (
+                <div key={idx} className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className={`bg-gradient-to-r ${step.color} text-white px-5 py-3`}>
+                    <div className="flex items-center gap-3">
+                      <span className="bg-white/20 backdrop-blur w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm">
+                        {idx + 1}
+                      </span>
+                      <div>
+                        <div className="text-white/80 text-xs font-bold tracking-wider">{step.phase}</div>
+                        <div className="font-bold text-base">{step.transitionFr}</div>
+                        <ArOnly className="font-bold text-base">{step.transitionAr}</ArOnly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[700px]">
+                      <thead className="bg-gray-50 dark:bg-gray-900/40">
+                        <tr>
+                          <th className="text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 w-1/2">
+                            Result · النتيجة
+                          </th>
+                          <th className="text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 w-1/2">
+                            Activity · النشاط
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {step.rows.map((r, i) => (
+                          <tr key={i} className="border-t border-gray-200 dark:border-gray-700">
+                            <td className="px-4 py-3 align-top bg-blue-50/50 dark:bg-blue-900/10">
+                              <Bi fr={r.result.fr} ar={r.result.ar} small className="text-gray-800 dark:text-gray-200" />
+                            </td>
+                            <td className="px-4 py-3 align-top bg-amber-50/50 dark:bg-amber-900/10">
+                              <Bi fr={r.activity.fr} ar={r.activity.ar} small className="text-gray-800 dark:text-gray-200" />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <ul className="p-4 space-y-3">
-                  {phase.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      <ArrowRight className="w-4 h-4 text-blue-500 flex-shrink-0 mt-1" />
-                      <Bi fr={item.fr} ar={item.ar} small className="text-gray-700 dark:text-gray-300" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
+              ))}
+            </div>
 
-        {/* === SECTION 4 : Ce qu'on prépare maintenant === */}
-        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 dark:from-blue-500 dark:to-indigo-600 rounded-2xl p-6 md:p-8 text-white mb-10">
-          <div className="flex items-center gap-3 mb-4">
-            <Briefcase className="w-7 h-7" />
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">4. Ce qu'on prépare maintenant</h2>
-              <ArOnly className="text-xl md:text-2xl font-bold mt-1">ما نُحضّره الآن</ArOnly>
+            {/* Spinning arrow note */}
+            <div className="mt-6 bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <div className="flex items-start gap-2">
+                <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                <Bi
+                  fr="Note méthodologique : le processus n'est pas linéaire. Curle inclut une « flèche de retour » : les négociations peuvent échouer et nous ramener temporairement aux confrontations. Le projet doit prévoir des mécanismes de résilience pour absorber ces chocs sans abandonner."
+                  ar="ملاحظة منهجية: العملية ليست خطية. كيرل يُضمّن «سهم الرجوع»: قد تفشل المفاوضات وتُعيدنا مؤقتاً إلى المواجهة. يجب أن يَتوقّع المشروع آليات صمود لاستيعاب هذه الصدمات دون التخلي."
+                  small
+                  className="text-gray-700 dark:text-gray-300"
+                />
+              </div>
             </div>
           </div>
-          <Bi
-            fr="Prochaines étapes concrètes pour le groupe Mohamed Boussad, Soulaimane Mimouni, Kenza Samoud, Boutaina Benhmida — avant la prochaine rencontre :"
-            ar="الخطوات الملموسة المقبلة للمجموعة (محمد بوسعد، سليمان ميموني، كنزة سامود، بثينة بنحميدة) — قبل اللقاء المقبل:"
-            small
-            className="mb-5 text-blue-100"
-          />
-          <div className="grid md:grid-cols-2 gap-3">
-            {[
-              { fr: 'Finaliser l\'analyse 3-Box avec ce document comme base', ar: 'إنهاء تحليل الصناديق الثلاثة بناءً على هذه الوثيقة' },
-              { fr: 'Passer à l\'analyse Curle (positionnement du conflit)', ar: 'الانتقال إلى تحليل كيرل (تموقع النزاع)' },
-              { fr: 'Application matrice RPP (positionnement stratégique)', ar: 'تطبيق مصفوفة RPP (التموقع الاستراتيجي)' },
-              { fr: 'Construire la Théorie du Changement complète', ar: 'بناء نظرية التغيير الكاملة' },
-              { fr: 'Identifier 3 partenaires de mise en œuvre potentiels', ar: 'تحديد 3 شركاء محتملين للتنفيذ' },
-              { fr: 'Plan de financement initial (montant, sources, jalons)', ar: 'خطة تمويل أولية (مبلغ، مصادر، محطات)' },
-            ].map((step, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 bg-white/10 backdrop-blur rounded-lg">
-                <CheckCircle className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
-                <Bi fr={step.fr} ar={step.ar} small className="text-white flex-1" />
+        </div>
+
+        {/* === Steps 3 + 4 placeholders === */}
+        <div className="grid md:grid-cols-2 gap-4 mb-12">
+          <div className="bg-purple-50 dark:bg-purple-900/20 border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="bg-purple-200 dark:bg-purple-800 p-2 rounded-lg">
+                <Target className="w-6 h-6 text-purple-700 dark:text-purple-300" />
               </div>
-            ))}
+              <div>
+                <div className="text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">Step 3 — à venir</div>
+                <h3 className="font-bold text-gray-900 dark:text-white">RPP Matrix</h3>
+                <ArOnly className="font-bold text-gray-900 dark:text-white">مصفوفة RPP</ArOnly>
+              </div>
+            </div>
+            <Bi
+              fr="Plotter les activités du Curle sur la matrice 2×2 (Key people / More people × Individual / Socio-political), tracer les flèches de causalité, vérifier les 3 critères RPP."
+              ar="وضع أنشطة كيرل على مصفوفة 2×2 (الأشخاص الرئيسيون / عدد أكبر × فردي / اجتماعي-سياسي)، رسم أسهم العلاقة السببية، التحقق من معايير RPP الثلاثة."
+              small
+              className="text-gray-700 dark:text-gray-300"
+            />
+          </div>
+
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 border-2 border-dashed border-emerald-300 dark:border-emerald-700 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="bg-emerald-200 dark:bg-emerald-800 p-2 rounded-lg">
+                <Sparkles className="w-6 h-6 text-emerald-700 dark:text-emerald-300" />
+              </div>
+              <div>
+                <div className="text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">Step 4 — à venir</div>
+                <h3 className="font-bold text-gray-900 dark:text-white">Theory of Change</h3>
+                <ArOnly className="font-bold text-gray-900 dark:text-white">نظرية التغيير</ArOnly>
+              </div>
+            </div>
+            <Bi
+              fr="Tester chaque hypothèse causale via la formule : « Si nous accomplissons [activité], cela mènera à [résultat] parce que… ». Macro et micro level."
+              ar="اختبار كل فرضية سببية عبر الصيغة: «إذا أنجزنا [نشاط]، سيؤدي إلى [نتيجة] لأنّ...». على المستوى الكلّي والجزئي."
+              small
+              className="text-gray-700 dark:text-gray-300"
+            />
           </div>
         </div>
 
@@ -585,21 +553,19 @@ export default function PropositionPage() {
         <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <BookOpen className="w-5 h-5" />
-            Sources vérifiées
-            <span className="text-gray-400 text-sm font-normal">— مصادر موثّقة</span>
+            Méthodologie + sources
+            <span className="text-gray-400 text-sm font-normal">— المنهجية والمصادر</span>
           </h2>
           <ul className="space-y-2 text-sm">
             {[
+              { label: 'SweFOR — From theory to practice : doing analysis to build strategy (handout interne)', url: '#' },
+              { label: 'USIP (2018) — SNAP Synergizing Nonviolent Action and Peacebuilding Action Guide', url: 'https://www.usip.org/publications/2018/06/synergizing-nonviolent-action-and-peacebuilding-snap-action-guide' },
+              { label: 'CDA Reflecting on Peace Practice (RPP) — manual in Arabic', url: 'https://www.cdacollaborative.org/publication/reflecting-on-peace-practice-rpp-training-of-consultants-and-advisers-manual-in-arabic/' },
               { label: 'UN Security Council Resolution 2797 (2025) — MINURSO renewal', url: 'https://press.un.org/en/2025/sc16208.doc.htm' },
-              { label: 'Western Sahara April 2026 Monthly Forecast — Security Council Report', url: 'https://www.securitycouncilreport.org/monthly-forecast/2026-04/western-sahara-16.php' },
-              { label: 'Top 10 Largest African Economies by GDP in 2026 — Daba Finance', url: 'https://www.dabafinance.com/en/insights/top-10-largest-african-economies-by-gdp-in-2026' },
-              { label: 'Morocco Leads Africa in 2026 Intellectual Property Index — Ecofin Agency', url: 'https://www.ecofinagency.com/news/1703-53839-morocco-leads-africa-in-2026-intellectual-property-index' },
-              { label: 'Morocco Digital Economy — U.S. Department of Commerce', url: 'https://www.trade.gov/country-commercial-guides/morocco-digital-economy' },
+              { label: 'Top 10 Largest African Economies by GDP 2026 — Daba Finance', url: 'https://www.dabafinance.com/en/insights/top-10-largest-african-economies-by-gdp-in-2026' },
+              { label: 'Morocco Leads Africa in 2026 IP Index — Ecofin Agency', url: 'https://www.ecofinagency.com/news/1703-53839-morocco-leads-africa-in-2026-intellectual-property-index' },
               { label: 'Fragile States Index 2024 — Fund for Peace', url: 'https://fragilestatesindex.org/' },
-              { label: 'AU Principle on Territorial Integrity — Princeton Encyclopedia', url: 'https://pesd.princeton.edu/node/686' },
-              { label: 'Polisario Front and Algeria Reject US Resolution — Atalayar', url: 'https://www.atalayar.com/en/articulo/politics/polisario-front-and-algeria-reject-us-resolution-on-western-sahara/20251027160000219827.html' },
               { label: 'Polisario in Mali instability — Morocco World News (April 2026)', url: 'https://www.moroccoworldnews.com/2026/04/289112/video-captures-algerian-backed-polisarios-involvement-in-mali-instability/' },
-              { label: 'Morocco-Algeria-Polisario US-Backed Talks in Madrid (Feb 2026)', url: 'https://www.moroccoworldnews.com/2026/02/277826/morocco-algeria-and-polisario-to-hold-us-backed-talks-in-madrid/' },
             ].map((src, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-gray-400">{i + 1}.</span>
@@ -617,9 +583,9 @@ export default function PropositionPage() {
         </div>
 
         {/* === Footer note === */}
-        <div className="mt-10 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg text-center">
+        <div className="mt-8 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg text-center">
           <p className="text-xs text-amber-800 dark:text-amber-300">
-            Document de travail interne — diffusion restreinte au groupe SweFOR Maroc.
+            Document de travail interne — diffusion restreinte au groupe SweFOR Maroc (Mohamed Boussad, Soulaimane Mimouni, Kenza Samoud, Boutaina Benhmida).
           </p>
           <ArOnly className="text-xs text-amber-800 dark:text-amber-300 mt-1">
             وثيقة عمل داخلية — توزيع محدود لمجموعة سويفور المغرب.
