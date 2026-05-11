@@ -16,6 +16,7 @@ export const routing = defineRouting({
     '/proposition/curle': '/proposition/curle',
     '/proposition/rpp': '/proposition/rpp',
     '/proposition/toc': '/proposition/toc',
+    '/sila': '/sila',
     '/vision': '/vision',
   },
 });
