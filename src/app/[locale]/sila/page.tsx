@@ -704,6 +704,27 @@ export default function SilaPage() {
           transform: translateY(-1px);
           box-shadow: 0 4px 12px rgba(185, 28, 28, 0.3);
         }
+        .word-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 7px 14px;
+          background: linear-gradient(135deg, #1E40AF, #2563EB);
+          color: white;
+          border: none;
+          border-radius: 999px;
+          font-size: 11pt;
+          font-weight: 700;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all .15s;
+          letter-spacing: 1px;
+        }
+        .word-btn:hover {
+          background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
       `}</style>
 
       <div className="sila-doc">
@@ -727,6 +748,15 @@ export default function SilaPage() {
                 <a className="pdf-btn" href="/documents/sila/Sila_FR.pdf" download>FR</a>
                 <a className="pdf-btn" href="/documents/sila/Sila_EN.pdf" download>EN</a>
                 <a className="pdf-btn" href="/documents/sila/Sila_ES.pdf" download>ES</a>
+              </div>
+            </div>
+            <div className="lang-group">
+              <span className="lang-group-label">📝 Télécharger Word</span>
+              <div className="lang-buttons">
+                <a className="word-btn" href="/documents/sila/Sila_AR.docx" download>AR</a>
+                <a className="word-btn" href="/documents/sila/Sila_FR.docx" download>FR</a>
+                <a className="word-btn" href="/documents/sila/Sila_EN.docx" download>EN</a>
+                <a className="word-btn" href="/documents/sila/Sila_ES.docx" download>ES</a>
               </div>
             </div>
           </div>
