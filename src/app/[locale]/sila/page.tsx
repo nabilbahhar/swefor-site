@@ -644,18 +644,19 @@ export default function SilaPage() {
           <div className="bottom">
             <div className="lbl">Team of Analysis and Drafting</div>
             <div className="names">
-              Mohamed Boussad &nbsp;·&nbsp; Boutaina Benhmida &nbsp;·&nbsp; Kenza Sammoud &nbsp;·&nbsp; Soulaimane El Mimouni &nbsp;·&nbsp; Chaimae Haida
+              Mohamed Boussad &nbsp;·&nbsp; Boutaina Benhmida &nbsp;·&nbsp; Kenza Sammoud &nbsp;·&nbsp; Soulaimane El Mimouni
             </div>
             <div className="lbl" style={{ marginTop: 14 }}>Facilitator / الميسر</div>
             <div className="names">Nabil Bahhar</div>
             <div className="meta">ماي 2026 — وفق منهجية: الصناديق الثلاثة · مخطط كيرل · مصفوفة RPP · نظرية التغيير</div>
+            <div className="meta" style={{ marginTop: 8, direction: 'ltr', textAlign: 'right' }}>Available in: العربية · Français · English · Español</div>
           </div>
         </div>
 
         {/* ============== ABOUT + TOC ============== */}
         <section className="a4-page">
           <h2>حول هذه الوثيقة</h2>
-          <p>تَأتي هذه الوثيقة كَمُخرَج ختامي لمسار طويل من العمل التحليلي والميداني المنجز بشراكة مع <strong>شبكة سويفور المغاربية</strong>، التي رافَقت منذ عدة سنوات مجموعات مغربية متعاقبة من النشطاء والممارسين في حقل السلام وحل النزاعات.</p>
+          <p>تَأتي هذه الوثيقة كَمُخرَج ختامي لمسار طويل من العمل التحليلي والميداني الذي قادَته منذ سنة 2018 <strong>منظمة سويفور السويدية</strong> (Swedish Fellowship of Reconciliation — SweFOR)، وهي منظمة سويدية متخصصة في بناء السلام وحل النزاعات، رافَقت عبر السنوات مجموعات شبابية مغاربية متعاقبة (من المغرب، الجزائر، تونس، الصحراء، وموريتانيا).</p>
           <p>أُنجزَت هذه الوثيقة من قِبَل المجموعة المغربية الراهنة في إطار ورشاتها الختامية. وقد تَزامَن عملها مع <strong>المنعطف الديبلوماسي الذي عَرَفه ملف الصحراء سنة 2025</strong> (قرار مجلس الأمن 2797، التحاق نحو 120 دولة بدعم مخطط الحكم الذاتي، التحوّل في موقف الجزائر). هذا التزامُن جَعَل من الممكن — للمرة الأولى — أن نَنتقِل من التحليل النظري إلى <strong>اقتراح مشروع قابل للتنزيل الميداني</strong>، يَستجيب للحظة الراهنة ويُحَضّرها معاً.</p>
 
           <div className="panel blue">
@@ -1167,7 +1168,8 @@ export default function SilaPage() {
 
           <div className="footer-mark">
             <p><strong>صِلَة</strong> — وثيقة استراتيجية</p>
-            <p>Mohamed Boussad · Boutaina Benhmida · Kenza Sammoud · Soulaimane El Mimouni · Chaimae Haida</p>
+            <p>Mohamed Boussad · Boutaina Benhmida · Kenza Sammoud · Soulaimane El Mimouni</p>
+            <p style={{ marginTop: 6, fontSize: '8.5pt' }}>Available in: العربية · Français · English · Español</p>
             <p>Facilitator: Nabil Bahhar &nbsp;·&nbsp; ماي 2026</p>
           </div>
         </section>
