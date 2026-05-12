@@ -624,9 +624,113 @@ export default function SilaPage() {
           font-size: 10pt;
         }
         .footer-mark p { margin: 4pt 0; }
+
+        /* Language + Download bar */
+        .lang-bar {
+          width: 210mm;
+          max-width: 100%;
+          margin: 0 auto 16px;
+          background: white;
+          border-radius: 12px;
+          padding: 14px 20px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+          direction: ltr;
+        }
+        .lang-bar-inner {
+          display: flex;
+          gap: 28px;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+        .lang-group {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .lang-group-label {
+          font-size: 10pt;
+          font-weight: 700;
+          color: var(--muted);
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+        .lang-buttons {
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+        }
+        .lang-btn {
+          display: inline-block;
+          padding: 7px 14px;
+          background: var(--light);
+          color: var(--ink);
+          border: 1px solid #E5E7EB;
+          border-radius: 999px;
+          font-size: 11pt;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all .15s;
+        }
+        .lang-btn:hover {
+          background: var(--panel-blue);
+          border-color: var(--primary);
+          color: var(--primary);
+        }
+        .lang-btn.active {
+          background: var(--primary);
+          color: white;
+          border-color: var(--primary);
+        }
+        .pdf-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 7px 14px;
+          background: linear-gradient(135deg, #B91C1C, #DC2626);
+          color: white;
+          border: none;
+          border-radius: 999px;
+          font-size: 11pt;
+          font-weight: 700;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all .15s;
+          letter-spacing: 1px;
+        }
+        .pdf-btn:hover {
+          background: linear-gradient(135deg, #991B1B, #B91C1C);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(185, 28, 28, 0.3);
+        }
       `}</style>
 
       <div className="sila-doc">
+
+        {/* ============== LANGUAGE & DOWNLOAD BAR ============== */}
+        <div className="lang-bar print:hidden">
+          <div className="lang-bar-inner">
+            <div className="lang-group">
+              <span className="lang-group-label">Langue · لغة · Language · Idioma</span>
+              <div className="lang-buttons">
+                <button className="lang-btn active" aria-current="true">العربية</button>
+                <a className="lang-btn" href="/documents/sila/sila_fr.html" target="_blank" rel="noreferrer">Français</a>
+                <a className="lang-btn" href="/documents/sila/sila_en.html" target="_blank" rel="noreferrer">English</a>
+                <a className="lang-btn" href="/documents/sila/sila_es.html" target="_blank" rel="noreferrer">Español</a>
+              </div>
+            </div>
+            <div className="lang-group">
+              <span className="lang-group-label">📄 Télécharger PDF</span>
+              <div className="lang-buttons">
+                <a className="pdf-btn" href="/documents/sila/Sila_AR.pdf" download>AR</a>
+                <a className="pdf-btn" href="/documents/sila/Sila_FR.pdf" download>FR</a>
+                <a className="pdf-btn" href="/documents/sila/Sila_EN.pdf" download>EN</a>
+                <a className="pdf-btn" href="/documents/sila/Sila_ES.pdf" download>ES</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* ============== COVER ============== */}
         <div className="cover">

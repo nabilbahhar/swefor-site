@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Sila — Strategic Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@500;700;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --primary:#1E3A8A; --accent:#0891B2; --warning:#D97706; --success:#047857; --danger:#B91C1C; --purple:#7C3AED; --muted:#6B7280; --light:#F3F4F6; --ink:#0F172A; --panel-blue:#EFF6FF; --panel-green:#ECFDF5; --panel-amber:#FEF3C7; --panel-red:#FEE2E2; --panel-purple:#F3E8FF; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: A4 portrait; margin: 18mm 16mm 22mm 16mm; }
+  @page :first { margin: 0; }
+  html { font-family: 'Inter','Segoe UI',sans-serif; color: var(--ink); }
+  body { line-height: 1.75; font-size: 11.5pt; }
+  body, p, h1, h2, h3, h4, ul, ol, table, div { direction: ltr; text-align: left; }
+  h1 { font-family: 'Manrope'; font-size: 28pt; font-weight: 800; color: var(--primary); margin: 18pt 0 8pt; line-height: 1.3; }
+  h2 { font-family: 'Manrope'; font-size: 19pt; font-weight: 800; color: var(--primary); margin: 22pt 0 10pt; padding-bottom: 6pt; border-bottom: 2px solid var(--primary); }
+  h3 { font-family: 'Inter'; font-size: 14pt; font-weight: 700; color: var(--accent); margin: 16pt 0 6pt; }
+  h4 { font-family: 'Inter'; font-size: 12pt; font-weight: 700; color: var(--ink); margin: 10pt 0 4pt; }
+  p { margin: 6pt 0; line-height: 1.85; }
+  ul, ol { margin: 6pt 0; padding-left: 22pt; }
+  li { margin: 4pt 0; line-height: 1.8; }
+  strong { font-weight: 700; color: var(--ink); }
+  em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .cover { width: 210mm; height: 297mm; background: linear-gradient(160deg, #1E3A8A 0%, #0891B2 50%, #047857 100%); color: white; padding: 30mm 25mm; display: flex; flex-direction: column; justify-content: space-between; page-break-after: always; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 40%); pointer-events: none; }
+  .cover .top, .cover .center, .cover .bottom { z-index: 2; position:relative; }
+  .cover .ribbon { font-family: 'Manrope'; font-size: 12pt; opacity: 0.9; letter-spacing: 2px; text-transform: uppercase; }
+  .cover .center { text-align: center; }
+  .cover .badge { display: inline-block; padding: 8pt 20pt; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); border-radius: 30pt; font-size: 13pt; font-weight: 500; margin-bottom: 30pt; }
+  .cover .title-ar { font-family: 'Tajawal'; font-size: 130pt; font-weight: 700; line-height: 1; letter-spacing: -3px; margin-bottom: 12pt; text-shadow: 0 4px 24px rgba(0,0,0,0.25); direction: rtl; }
+  .cover .title-en { font-family: 'Manrope'; font-size: 26pt; font-weight: 800; letter-spacing: 4px; margin-bottom: 14pt; opacity:0.95; }
+  .cover .subtitle-main { font-family: 'Inter'; font-size: 16pt; font-weight: 400; line-height: 1.7; max-width: 88%; margin: 0 auto; }
+  .cover .bottom { border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16pt; }
+  .cover .bottom .lbl { font-size: 10pt; font-weight: 700; opacity: 0.85; letter-spacing: 1.5px; margin-bottom: 6pt; text-transform: uppercase; }
+  .cover .bottom .names { font-size: 12pt; line-height: 1.95; }
+  .cover .bottom .meta { font-size: 9.5pt; opacity: 0.8; margin-top: 14pt; letter-spacing: 1px; }
+  .section-header { background: linear-gradient(95deg, var(--primary), var(--accent)); color: white; padding: 14pt 22pt; border-radius: 10pt; margin: 0 0 22pt; page-break-after: avoid; }
+  .section-header.amber  { background: linear-gradient(95deg, #D97706, #F59E0B); }
+  .section-header.purple { background: linear-gradient(95deg, #7C3AED, #A855F7); }
+  .section-header.green  { background: linear-gradient(95deg, #047857, #10B981); }
+  .section-header.muted  { background: linear-gradient(95deg, #4B5563, #6B7280); }
+  .section-header .num { font-size: 10pt; opacity: 0.85; letter-spacing: 2px; }
+  .section-header .title { font-family: 'Manrope'; font-size: 24pt; font-weight: 800; margin-top: 4pt; }
+  .panel { border-radius: 10pt; padding: 16pt 20pt; margin: 14pt 0; border-left: 4pt solid var(--primary); page-break-inside: avoid; }
+  .panel.blue   { background: var(--panel-blue);   border-color: var(--primary); }
+  .panel.green  { background: var(--panel-green);  border-color: var(--success); }
+  .panel.amber  { background: var(--panel-amber);  border-color: var(--warning); }
+  .panel.red    { background: var(--panel-red);    border-color: var(--danger); }
+  .panel-label { font-size: 9.5pt; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 7pt; color: var(--primary); }
+  .panel.green .panel-label  { color: var(--success); }
+  .panel.amber .panel-label  { color: var(--warning); }
+  .panel.red .panel-label    { color: var(--danger); }
+  table { width: 100%; border-collapse: collapse; margin: 14pt 0; font-size: 10.5pt; page-break-inside: avoid; }
+  th { background: var(--primary); color: white; padding: 10pt 12pt; font-weight: 700; font-size: 10.5pt; text-align: left; border: 1px solid rgba(255,255,255,0.2); }
+  th.amber  { background: var(--warning); }
+  td { padding: 8pt 12pt; border: 1px solid #E5E7EB; vertical-align: top; line-height: 1.7; }
+  tr:nth-child(even) td { background: #FAFAFA; }
+  .table-3box th { padding: 14pt; font-size: 11pt; }
+  .table-3box th.peace    { background: var(--success); }
+  .table-3box th.actors   { background: var(--warning); }
+  .table-3box th.conflict { background: var(--danger); }
+  .table-3box td.peace    { background: var(--panel-green); vertical-align: top; }
+  .table-3box td.actors   { background: var(--panel-amber); vertical-align: top; }
+  .table-3box td.conflict { background: var(--panel-red); vertical-align: top; }
+  .table-3box td ul { padding-left: 16pt; }
+  .table-3box td li { font-size: 10pt; line-height: 1.65; margin: 6pt 0; }
+  .matrix-rpp { display: grid; grid-template-columns: 22% 39% 39%; gap: 5pt; margin: 16pt 0; page-break-inside: avoid; }
+  .matrix-rpp .head { background: linear-gradient(135deg, #4338CA, #7C3AED); color: white; padding: 12pt; text-align: center; font-weight: 700; border-radius: 6pt; font-size: 10.5pt; line-height: 1.4; }
+  .matrix-rpp .head.row { background: linear-gradient(135deg, #4338CA, #2563EB); display: flex; align-items: center; justify-content: center; }
+  .matrix-rpp .head.col-key  { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+  .matrix-rpp .head.col-more { background: linear-gradient(135deg, #0891B2, #06B6D4); }
+  .matrix-rpp .empty { background: #1E1B4B; border-radius: 6pt; }
+  .matrix-rpp .cell { background: white; border: 2pt solid; border-radius: 6pt; padding: 10pt; }
+  .matrix-rpp .cell.q-ki { border-color: var(--purple);  background: var(--panel-purple); }
+  .matrix-rpp .cell.q-mi { border-color: var(--accent);  background: var(--panel-blue); }
+  .matrix-rpp .cell.q-ks { border-color: #A855F7;        background: #FAE8FF; }
+  .matrix-rpp .cell.q-ms { border-color: var(--success); background: var(--panel-green); }
+  .matrix-rpp .cell .quad-label { font-size: 9pt; font-weight: 700; line-height: 1.4; margin-bottom: 6pt; padding-bottom: 4pt; border-bottom: 1pt dashed currentColor; }
+  .matrix-rpp .cell.q-ki .quad-label { color: var(--purple); }
+  .matrix-rpp .cell.q-mi .quad-label { color: var(--accent); }
+  .matrix-rpp .cell.q-ks .quad-label { color: #A855F7; }
+  .matrix-rpp .cell.q-ms .quad-label { color: var(--success); }
+  .matrix-rpp .activity { background: white; border-radius: 4pt; padding: 7pt 9pt; margin: 5pt 0; font-size: 9.5pt; line-height: 1.6; border: 1px solid #E5E7EB; }
+  .matrix-rpp .activity .id { display: inline-block; background: var(--ink); color: white; padding: 1pt 6pt; border-radius: 3pt; font-family: monospace; font-size: 8.5pt; margin-right: 5pt; vertical-align: middle; }
+  .matrix-rpp .activity .phase { display: inline-block; color: var(--muted); font-size: 8.5pt; font-style: italic; }
+  .rpp-legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8pt; margin: 14pt 0; padding: 14pt; background: var(--light); border-radius: 8pt; font-size: 9.5pt; }
+  .rpp-legend .item { display: flex; align-items: center; gap: 8pt; line-height: 1.5; }
+  .rpp-legend .code { display: inline-block; background: var(--primary); color: white; padding: 3pt 8pt; border-radius: 4pt; font-family: monospace; font-weight: 700; font-size: 9pt; min-width: 26pt; text-align: center; }
+  .rpp-legend .code.ki { background: var(--purple); }
+  .rpp-legend .code.mi { background: var(--accent); }
+  .rpp-legend .code.ks { background: #A855F7; }
+  .rpp-legend .code.ms { background: var(--success); }
+  .curle-diagram { margin: 16pt 0; padding: 16pt; background: linear-gradient(135deg, #FFF7ED, #FEF3C7); border-radius: 12pt; page-break-inside: avoid; }
+  .curle-axes { display: flex; justify-content: space-between; font-size: 9pt; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10pt; }
+  .curle-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; }
+  .curle-phase { border: 2pt solid; border-radius: 8pt; padding: 12pt; background: white; }
+  .curle-phase .num { display: inline-flex; width: 24pt; height: 24pt; color: white; border-radius: 50%; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 6pt; }
+  .curle-phase h4 { margin-top: 4pt; font-size: 11pt; }
+  .curle-phase p { font-size: 9.5pt; line-height: 1.6; margin: 4pt 0; }
+  .curle-phase.p1 { border-color: var(--danger); } .curle-phase.p1 .num { background: var(--danger); }
+  .curle-phase.p2 { border-color: var(--warning); } .curle-phase.p2 .num { background: var(--warning); }
+  .curle-phase.p3 { border-color: #EAB308; } .curle-phase.p3 .num { background: #EAB308; }
+  .curle-phase.p4 { border-color: var(--success); } .curle-phase.p4 .num { background: var(--success); }
+  .toc-block { border: 2pt solid; border-radius: 10pt; padding: 14pt 18pt; margin: 10pt 0; page-break-inside: avoid; }
+  .toc-block.if      { border-color: var(--primary); background: var(--panel-blue); }
+  .toc-block.then    { border-color: var(--success); background: var(--panel-green); }
+  .toc-block.because { border-color: var(--warning); background: var(--panel-amber); }
+  .toc-block.risk    { border-color: var(--danger);  background: var(--panel-red); }
+  .toc-block .lbl { font-size: 9.5pt; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 5pt; text-transform: uppercase; }
+  .toc-block.if .lbl      { color: var(--primary); }
+  .toc-block.then .lbl    { color: var(--success); }
+  .toc-block.because .lbl { color: var(--warning); }
+  .toc-block.risk .lbl    { color: var(--danger); }
+  .micro-toc { border: 1pt solid #E5E7EB; border-radius: 12pt; padding: 16pt; margin: 16pt 0; background: white; page-break-inside: avoid; }
+  .micro-toc .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10pt; border-bottom: 1px solid #E5E7EB; margin-bottom: 12pt; }
+  .micro-toc .id { font-size: 12pt; font-weight: 700; color: var(--success); }
+  .conf-badge { display: inline-block; padding: 4pt 12pt; border-radius: 14pt; font-size: 9pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .conf-high   { background: var(--panel-green); color: var(--success); }
+  .conf-medium { background: var(--panel-amber); color: var(--warning); }
+  .conf-low    { background: var(--panel-red);   color: var(--danger); }
+  .arrows-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; }
+  .arrow { background: var(--panel-purple); border: 1pt solid var(--purple); border-radius: 6pt; padding: 7pt 11pt; font-size: 10pt; text-align: center; }
+  .arrow .from, .arrow .to { display: inline-block; background: var(--purple); color: white; padding: 2pt 7pt; border-radius: 4pt; font-family: monospace; font-weight: 700; font-size: 9.5pt; }
+  .arrow .lbl { display: inline-block; margin: 0 6pt; color: var(--purple); font-weight: 700; }
+  .kdf-list { counter-reset: kdf; padding-left: 0; list-style: none; }
+  .kdf-list li { counter-increment: kdf; list-style: none; position: relative; padding-left: 36pt; margin: 10pt 0; line-height: 1.7; }
+  .kdf-list li::before { content: counter(kdf); position: absolute; left: 0; top: 0; width: 26pt; height: 26pt; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11pt; }
+  .sources { counter-reset: src; padding-left: 0; list-style: none; }
+  .sources li { counter-increment: src; list-style: none; margin: 7pt 0; padding: 7pt 10pt 7pt 36pt; position: relative; font-size: 10.5pt; line-height: 1.6; }
+  .sources li::before { content: counter(src); position: absolute; left: 0; top: 7pt; width: 26pt; height: 26pt; background: var(--muted); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10pt; }
+  .page-break { page-break-after: always; }
+  .highlight { background: linear-gradient(transparent 60%, #FEF08A 60%); padding: 0 2pt; }
+  .conclusion { background: linear-gradient(135deg, var(--panel-blue), white); border: 2pt solid var(--primary); border-radius: 12pt; padding: 20pt 24pt; margin: 16pt 0; }
+  .conclusion h3 { color: var(--primary); margin-top: 10pt; }
+  .toc-summary { background: var(--light); padding: 22pt 26pt; border-radius: 12pt; margin: 14pt 0; }
+  .toc-summary h2 { border: none; margin-top: 0; padding-bottom: 6pt; }
+  .toc-summary ol { padding-left: 22pt; }
+  .toc-summary li { margin: 8pt 0; font-size: 12pt; }
+  .toc-summary .num { color: var(--primary); font-weight: 700; margin-right: 8pt; }
+  .footer-mark { margin-top: 32pt; text-align: center; padding: 20pt; border-top: 2pt solid var(--primary); color: var(--muted); font-size: 10pt; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="top"><div class="ribbon">Strategic Document</div></div>
+  <div class="center">
+    <div class="badge">Civic Project for Peace and Reconciliation</div>
+    <div class="title-ar">صِلَة</div>
+    <div class="title-en">SILA</div>
+    <div class="subtitle-main">
+      An Independent Civic Space for Peace, Reconciliation and Co-Construction<br>
+      between Moroccans and Sahrawis Returning from Tindouf
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="lbl">Analysis and Drafting Team</div>
+    <div class="names">Mohamed Boussad &nbsp;·&nbsp; Boutaina Benhmida &nbsp;·&nbsp; Kenza Sammoud &nbsp;·&nbsp; Soulaimane El Mimouni</div>
+    <div class="lbl" style="margin-top:12pt">Facilitator</div>
+    <div class="names">Nabil Bahhar</div>
+    <div class="meta">May 2026 — Methodology: 3 Boxes · Curle Diagram · RPP Matrix · Theory of Change</div>
+    <div class="meta" style="margin-top:6pt">Available in: العربية · Français · English · Español</div>
+  </div>
+</div>
+
+<div style="padding: 18mm 0;">
+  <h2>About this Document</h2>
+  <p>This document is the final output of a long path of analytical and field work led since 2018 by <strong>SweFOR — Swedish Fellowship of Reconciliation</strong>, a Swedish organization specialised in peacebuilding and conflict resolution, which has accompanied over the years successive Maghrebi youth groups (Morocco, Algeria, Tunisia, Western Sahara, Mauritania).</p>
+  <p>This document was produced by the current Moroccan group as part of its closing workshops. Its work coincided with <strong>the diplomatic turning point on the Sahara file in 2025</strong> (UN Security Council Resolution 2797, around 120 states backing the autonomy plan, Algerian repositioning). This coincidence made it possible — for the first time — to move from theoretical analysis to <strong>an operational, field-ready project proposal</strong> that responds to the present moment and prepares for it together.</p>
+
+  <div class="panel blue">
+    <div class="panel-label">Why Now?</div>
+    <p>We start from the conviction that <span class="highlight">the next phase of the Sahara file will not be political but societal</span>. When the political agreement is signed, politics will be over — but the real human work will only just have begun. This document is a call to start that work <strong>before the signature</strong>, not after.</p>
+  </div>
+
+  <h3>Methodology</h3>
+  <p>The group adopted the « <strong>From Theory to Practice</strong> » methodology grounded in the Reflecting on Peace Practice (RPP) and Strategic Nonviolent Action and Peacebuilding (SNAP) frameworks of the United States Institute of Peace (USIP).</p>
+  <ol style="padding-left:22pt">
+    <li>3 Boxes analysis</li>
+    <li>Curle Diagram</li>
+    <li>RPP Matrix</li>
+    <li>Theory of Change</li>
+  </ol>
+
+  <div class="toc-summary" style="margin-top:24pt">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><span class="num">1.</span> Context of the Problem — Historical Background and Recent Developments</li>
+      <li><span class="num">2.</span> Methodology</li>
+      <li><span class="num">3.</span> Step 1 — 3 Boxes Analysis</li>
+      <li><span class="num">4.</span> Step 2 — Curle Diagram</li>
+      <li><span class="num">5.</span> Step 3 — RPP Matrix</li>
+      <li><span class="num">6.</span> Step 4 — Theory of Change</li>
+      <li><span class="num">7.</span> Conclusion and Recommendations</li>
+      <li><span class="num">8.</span> Sources</li>
+    </ol>
+  </div>
+</div>
+<div class="page-break"></div>
+
+<div class="section-header">
+  <div class="num">SECTION 1</div>
+  <div class="title">Context of the Problem</div>
+</div>
+<p>Before any analysis, the reader must grasp the historical and diplomatic framework of the Sahara dossier to understand why the present moment compels Moroccan civil society to intervene with a reconciliation and co-construction project.</p>
+
+<h2>1.1 — Historical Background</h2>
+<h3>Before 1975 — The Spanish Colonial Period</h3>
+<p>The territory has been a Spanish colony under the name "Spanish Sahara" since 1884. The Sahrawi population consists mainly of nomadic tribes bound by cross-border kinship networks (Rguibat, Tekna, Ouled Delim) — links that still exist today and form the social foundation of any future reconciliation project.</p>
+
+<h3>1975 — The Pivotal Year</h3>
+<ul>
+  <li><strong>October 1975:</strong> The International Court of Justice issues its advisory opinion. It recognizes ties of allegiance between certain Sahrawi tribes and Moroccan sultans, but concludes these do not constitute a territorial sovereignty annulling the Sahrawi people's right to self-determination.</li>
+  <li><strong>6 November 1975:</strong> King Hassan II launches the Green March — 350,000 Moroccan civilians enter the territory peacefully.</li>
+  <li><strong>14 November 1975:</strong> The Madrid Tripartite Accords — Spain hands over administration of the territory to Morocco (two northern thirds) and Mauritania (southern third).</li>
+  <li><strong>27 February 1976:</strong> The day after the last Spanish soldier's withdrawal, the Polisario proclaims the "Sahrawi Arab Democratic Republic" in Bir Lahlou. War breaks out immediately, and tens of thousands of Sahrawis move toward the Tindouf area in Algeria.</li>
+</ul>
+
+<h3>1976 - 1991 — The War Phase</h3>
+<p>An asymmetric war between the Moroccan army and the Polisario, militarily and financially backed by Algeria and Gaddafi's Libya. Mauritania withdraws from the conflict in 1979; Morocco regains the remaining disputed territories. In the 1980s, Morocco builds a 2,700 km defensive wall to limit Polisario attacks.</p>
+
+<h3>1991 — Ceasefire and MINURSO</h3>
+<p>The UN secures a ceasefire and establishes MINURSO. Stated mission: organize a self-determination referendum. <strong>This referendum has never taken place</strong>, due to an intractable disagreement on the voter list.</p>
+
+<h3>2007 — Moroccan Autonomy Plan</h3>
+<p>Morocco presents its autonomy plan: the territory would become an autonomous region with parliament, government, and local administration, under Moroccan sovereignty.</p>
+
+<h3>2020 — US Recognition</h3>
+<p>The United States of America recognizes Moroccan sovereignty over the Sahara — the first permanent member of the Security Council to do so. This recognition marked a major diplomatic turning point that prepared what followed at the international level.</p>
+
+<div class="page-break"></div>
+
+<h2>1.2 — Latest Developments (2022 - 2026)</h2>
+<p>The diplomatic dynamic has clearly tilted in Morocco's favor since 2022, with strong acceleration after Security Council Resolution 2797.</p>
+
+<table>
+  <thead><tr><th style="width:22%">Date</th><th>Event</th></tr></thead>
+  <tbody>
+    <tr><td><strong>March 2022</strong></td><td>Spain (the historical colonial power) officially supports the Moroccan autonomy plan.</td></tr>
+    <tr><td><strong>October 2024</strong></td><td>The French President declares before the Moroccan Parliament that "the present and future of the Sahara fall within the framework of Moroccan sovereignty".</td></tr>
+    <tr><td><strong>June 2025</strong></td><td>The United Kingdom joins the pro-autonomy camp, describing the plan as "the most credible basis".</td></tr>
+    <tr><td><strong>October 2025</strong></td><td>Security Council Resolution <strong>2797</strong>: 11 votes in favor, Algeria did not participate. The resolution explicitly refocuses negotiations on the Moroccan autonomy plan.</td></tr>
+    <tr><td><strong>November 2025</strong></td><td>Algeria surprisingly proposes to "mediate" between Morocco and the Polisario — signal of repositioning.</td></tr>
+    <tr><td><strong>February 2026</strong></td><td>Madrid talks between Morocco, Algeria, and the Polisario under US sponsorship. Morocco presents an expanded version of the autonomy plan (~40 pages).</td></tr>
+    <tr><td><strong>March 2026</strong></td><td>US senators introduce a "Polisario Front Terrorist Designation Act" in Congress.</td></tr>
+    <tr><td><strong>April 2026</strong></td><td>Mali suspends its recognition of the SADR and backs the Moroccan plan.</td></tr>
+  </tbody>
+</table>
+
+<div class="panel blue">
+  <div class="panel-label">In Summary</div>
+  <p>Roughly <strong>120 states</strong> support the Moroccan plan. The Security Council is refocusing negotiations on that basis. Algeria is hinting at mediation. Mali withdraws its recognition. <span class="highlight">The window of opportunity is open — and it is essentially open now.</span></p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section-header">
+  <div class="num">SECTION 2</div>
+  <div class="title">Methodology</div>
+</div>
+<p>This document adopts the « <strong>From Theory to Practice</strong> » methodology, grounded in the <em>Reflecting on Peace Practice</em> (RPP) and <em>Strategic Nonviolent Action and Peacebuilding</em> (SNAP) frameworks of the <strong>United States Institute of Peace</strong> (USIP).</p>
+
+<p>It comprises four integrated tools, applied sequentially:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="amber" style="width:6%">#</th>
+      <th class="amber" style="width:18%">Tool</th>
+      <th class="amber" style="width:42%">Function</th>
+      <th class="amber">Expected Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td><strong>3 Boxes</strong></td><td>Sort information about the conflict: peace-driving forces, key actors, conflict-driving forces.</td><td>Structural understanding.</td></tr>
+    <tr><td><strong>2</strong></td><td><strong>Curle Diagram</strong></td><td>Identify the current phase of the conflict on the transformation curve and choose the appropriate intervention.</td><td>Temporal positioning.</td></tr>
+    <tr><td><strong>3</strong></td><td><strong>RPP Matrix</strong></td><td>Position activities on a 2×2 matrix by target audience and change level.</td><td>Balanced intervention strategy.</td></tr>
+    <tr><td><strong>4</strong></td><td><strong>Theory of Change</strong></td><td>Articulate causal hypotheses as "If we do X, it will lead to Y because…".</td><td>Testable program logic.</td></tr>
+  </tbody>
+</table>
+
+<div class="panel blue">
+  <div class="panel-label">Founding Principle</div>
+  <p>It is not enough to identify actors and factors; one must understand the <strong>relationships and dynamics</strong> between them and how they evolve. Good analysis is explanatory and predictive, not merely descriptive.</p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section-header">
+  <div class="num">SECTION 3</div>
+  <div class="title">Step 1 — 3 Boxes Analysis</div>
+</div>
+<p>Sorting information on the Sahara file into three columns: peace-driving forces, key actors, and conflict-driving forces. Goal: <em>clarity, not completeness.</em></p>
+
+<table class="table-3box">
+  <thead>
+    <tr>
+      <th class="peace">Peace-driving forces<br>(to mobilize)</th>
+      <th class="actors">Key actors</th>
+      <th class="conflict">Conflict-driving forces<br>(to neutralize)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="peace">
+        <ul>
+          <li>Equity and Reconciliation Commission (IER 2004-2005): unique Arab precedent.</li>
+          <li>The post-2797 royal speech: a "return" frame rather than "forced integration".</li>
+          <li>Cross-border kinship ties: families separated for 50 years, same tribes (Rguibat, Tekna, Ouled Delim).</li>
+          <li>Shared Hassani dialect.</li>
+          <li>Maliki Islam and Sufi orders.</li>
+          <li>2015 Advanced Regionalization: legal framework ready.</li>
+          <li>Economic boom of Moroccan Sahara: Dakhla port, solar energy, phosphates — real job opportunities.</li>
+          <li>Moroccan diplomatic strength: support of USA, France, Spain, UK, and over 120 states.</li>
+          <li>Morocco's political and institutional stability: among the most stable in Africa.</li>
+        </ul>
+      </td>
+      <td class="actors">
+        <ul>
+          <li>King Mohammed VI: moral + religious + political authority.</li>
+          <li>Former Polisario cadres who have returned.</li>
+          <li>Sahrawi women on both sides.</li>
+          <li>Traditional tribal sheikhs.</li>
+          <li>Sahrawi diaspora in Spain.</li>
+          <li>Youth 18-30 (primary target group).</li>
+          <li>National Human Rights Council.</li>
+          <li>Moroccan universities and research centers.</li>
+        </ul>
+      </td>
+      <td class="conflict">
+        <ul>
+          <li>Polisario military elite in Tindouf: will lose influence and privileges — maximum resistance expected.</li>
+          <li>Algerian military intelligence.</li>
+          <li>Moroccan conservatives who may view returnees as "rewarded traitors".</li>
+          <li>"Historical" Sahrawis in Morocco: risk of identity-based jealousy.</li>
+          <li>International organizations supporting the separation of regions and the breakup of states, active in Europe and South Africa.</li>
+          <li>Intergenerational trauma: 50 years of hostile family narrative.</li>
+          <li>Tindouf's rent-economy of conflict.</li>
+          <li><strong>Risk of violent extremism from some returnees</strong>: for some, accepting autonomy could be a pretext to access Moroccan territory and carry out violent acts, even far from the Sahara. This risk was <strong>repeatedly and explicitly flagged by the Sahrawi participants themselves</strong> during the analytical process of the project.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Key Driving Factors</h2>
+<p>From the 3 Boxes analysis emerge <strong>five pivotal factors</strong> that ground the project:</p>
+<ol class="kdf-list">
+  <li>The level of <strong>trust</strong> Tindouf youth feel toward the Moroccan project.</li>
+  <li>The capacity to offer <strong>economic dignity</strong> to returnees (not charity, but status).</li>
+  <li>The size of symbolic space left for a distinct Sahrawi identity (language, culture, memory).</li>
+  <li>The visibility and credibility of returned "memory holders".</li>
+  <li>The level of protection against political and media instrumentalization, and against security infiltration.</li>
+</ol>
+
+<div class="page-break"></div>
+
+<div class="section-header amber">
+  <div class="num">SECTION 4</div>
+  <div class="title">Step 2 — Curle Diagram</div>
+</div>
+<p>Adam Curle's model maps the path from latent conflict to sustainable peace through <strong>four phases</strong>, along two axes: awareness of issues (horizontal) and balance of power (vertical).</p>
+
+<div class="curle-diagram">
+  <div class="curle-axes">
+    <span>→ Unbalanced Power</span>
+    <span>Balanced Power →</span>
+  </div>
+  <div class="curle-phases">
+    <div class="curle-phase p1">
+      <div class="num">1</div><h4>Latent Conflict</h4>
+      <p>Unbalanced power, low awareness, injustice not yet named.</p>
+      <p style="font-style:italic;color:var(--muted)">Intervention: awareness, organizing, sensitization.</p>
+    </div>
+    <div class="curle-phase p2">
+      <div class="num">2</div><h4>Overt Conflict</h4>
+      <p>High awareness, power still unbalanced, the conflict surfaces.</p>
+      <p style="font-style:italic;color:var(--muted)">Intervention: nonviolent action, advocacy, protection.</p>
+    </div>
+    <div class="curle-phase p3">
+      <div class="num">3</div><h4>Conflict Settlement</h4>
+      <p>Recognition of the need for resolution; power starts to balance.</p>
+      <p style="font-style:italic;color:var(--muted)">Intervention: negotiation, mediation, accommodation.</p>
+    </div>
+    <div class="curle-phase p4">
+      <div class="num">4</div><h4>Sustainable Peace</h4>
+      <p>Balanced power, high awareness, justice.</p>
+      <p style="font-style:italic;color:var(--muted)">Intervention: reconciliation, institution-building.</p>
+    </div>
+  </div>
+  <div class="curle-axes" style="margin-top:8pt;margin-bottom:0">
+    <span>Low Awareness</span>
+    <span>High Awareness of Issues</span>
+  </div>
+</div>
+
+<h2>Diagnosis: Phase Mismatch Between Parties</h2>
+<p>Each party to the conflict is living in a different phase of the curve. Understanding this mismatch is what makes intervention design precise:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="amber" style="width:30%">Party</th>
+      <th class="amber" style="width:18%">Phase</th>
+      <th class="amber">What it needs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Tindouf residents</strong></td><td><strong>1 → 2</strong></td><td>Awareness that the world has changed, presentation of alternatives, opening information windows.</td></tr>
+    <tr><td><strong>Returnees / prospective returnees</strong></td><td><strong>2 → 3</strong></td><td>Accompaniment in the transition, protection of dignity, gradual integration.</td></tr>
+    <tr><td><strong>Moroccans of the South and North</strong></td><td><strong>3 → 4</strong></td><td>Framing of reconciliation, avoid revenge discourse, equitable welcome.</td></tr>
+    <tr><td><strong>Former Polisario cadres</strong></td><td><strong>3 → 4</strong></td><td>Status, visibility, legitimization of "memory holder" role.</td></tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<div class="section-header purple">
+  <div class="num">SECTION 5</div>
+  <div class="title">Step 3 — RPP Matrix</div>
+</div>
+<p>The RPP matrix forces us to place each activity into one of four cells produced by the crossing of two dimensions:</p>
+<ul>
+  <li><strong>Target audience:</strong> Key people (decision-makers, leaders, institutional actors) vs. More people (broader public, youth, families).</li>
+  <li><strong>Change level:</strong> Individual / Personal (values, knowledge, behavior) vs. Socio-political (institutions, policies, structures).</li>
+</ul>
+
+<div class="matrix-rpp">
+  <div class="empty"></div>
+  <div class="head col-key">Key People<br>(Decision-makers)</div>
+  <div class="head col-more">More People<br>(Broader Public)</div>
+
+  <div class="head row">Individual<br>Change</div>
+  <div class="cell q-ki">
+    <div class="quad-label">KI — Cell 1: individual change in key people</div>
+    <div class="activity"><span class="id">a1</span> Public testimonies from returned former Polisario cadres. <span class="phase">— Curle 3 → 4</span></div>
+    <div class="activity"><span class="id">a2</span> Training tribal sheikhs to reopen cross-border ties. <span class="phase">— Curle 1 → 2</span></div>
+  </div>
+  <div class="cell q-mi">
+    <div class="quad-label">MI — Cell 2: individual change in more people</div>
+    <div class="activity"><span class="id">a3</span> Hassani-language digital content (TikTok, YouTube, podcast) → Tindouf youth. <span class="phase">— Curle 1 → 2</span></div>
+    <div class="activity"><span class="id">a4</span> Individual case-work cell (legal, employment, housing, psychological) for returnees. <span class="phase">— Curle 2 → 3</span></div>
+    <div class="activity"><span class="id">a5</span> Hassani cultural caravans and an academic program on shared memory. <span class="phase">— Curle 3 → 4</span></div>
+  </div>
+
+  <div class="head row">Socio-political<br>Change</div>
+  <div class="cell q-ks">
+    <div class="quad-label">KS — Cell 3: socio-political change in key people</div>
+    <div class="activity"><span class="id">a6</span> Welcome Charter signed by CNDH, universities, and local authorities. <span class="phase">— Curle 3 → 4</span></div>
+    <div class="activity"><span class="id">a7</span> Parliamentary advocacy for a "Dignified Return" legal framework. <span class="phase">— Curle 3 → 4</span></div>
+    <div class="activity"><span class="id">a8</span> Legal framework and one-stop "Dignified Return" desk: civic status, diploma equivalence for ex-Polisario cadres, property restitution, schooling, ID card, social security. <span class="phase">— Curle 3 → 4</span></div>
+  </div>
+  <div class="cell q-ms">
+    <div class="quad-label">MS — Cell 4: socio-political change in more people</div>
+    <div class="activity"><span class="id">a9</span> Trilingual media platform (Hassani / Darija / Spanish). <span class="phase">— Curle 2 → 3</span></div>
+    <div class="activity"><span class="id">a10</span> Sila Centre in Tan-Tan or Guelmim (structured civic space, independent of the State). <span class="phase">— Curle 3 → 4</span></div>
+    <div class="activity"><span class="id">a11</span> Economic integration program for returnees (grants, micro-credit, Dakhla partnerships). <span class="phase">— Curle 3 → 4</span></div>
+  </div>
+</div>
+
+<div class="rpp-legend">
+  <div class="item"><span class="code ki">KI</span><span><strong>Key × Individual</strong> — Key people × individual change</span></div>
+  <div class="item"><span class="code mi">MI</span><span><strong>More × Individual</strong> — More people × individual change</span></div>
+  <div class="item"><span class="code ks">KS</span><span><strong>Key × Socio-political</strong> — Key people × socio-political change</span></div>
+  <div class="item"><span class="code ms">MS</span><span><strong>More × Socio-political</strong> — More people × socio-political change</span></div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Causal Relationships Between Activities</h2>
+<p>How activities chain to produce cumulative effects:</p>
+<div class="arrows-grid">
+  <div class="arrow"><span class="from">a3</span><span class="lbl">→ attracts</span><span class="to">a4</span></div>
+  <div class="arrow"><span class="from">a4</span><span class="lbl">→ feeds</span><span class="to">a11</span></div>
+  <div class="arrow"><span class="from">a2</span><span class="lbl">→ amplifies</span><span class="to">a1</span></div>
+  <div class="arrow"><span class="from">a1</span><span class="lbl">→ legitimizes</span><span class="to">a10</span></div>
+  <div class="arrow"><span class="from">a8</span><span class="lbl">→ feeds</span><span class="to">a4</span></div>
+  <div class="arrow"><span class="from">a8</span><span class="lbl">→ frames</span><span class="to">a11</span></div>
+  <div class="arrow"><span class="from">a9</span><span class="lbl">→ amplifies</span><span class="to">a3</span></div>
+  <div class="arrow"><span class="from">a6</span><span class="lbl">→ frames</span><span class="to">a11</span></div>
+  <div class="arrow"><span class="from">a5</span><span class="lbl">→ feeds</span><span class="to">a10</span></div>
+</div>
+
+<h2>Verification of the 3 RPP Criteria</h2>
+<div class="panel green">
+  <div class="panel-label">Criterion 1 — Validated</div>
+  <p><strong>Not staying in a single cell:</strong> the strategy covers all four cells (Cell 1: 2 activities, Cell 2: 3 activities, Cell 3: 3 activities, Cell 4: 3 activities).</p>
+</div>
+<div class="panel green">
+  <div class="panel-label">Criterion 2 — Validated</div>
+  <p><strong>Linking individual change to socio-political change:</strong> arrows a4 → a11 (individual case-work leads to structural economic integration), a1 → a10 (testimonies lead to the Centre), a5 → a10 (cultural programs lead to infrastructure).</p>
+</div>
+<div class="panel green">
+  <div class="panel-label">Criterion 3 — Validated</div>
+  <p>At the socio-political level, <strong>reaching key people AND more people together:</strong> Cell 3 (CNDH charter, parliamentary advocacy, "Dignified Return" desk) and Cell 4 (media, Centre, economic integration) with effective bridges between them (a6 → a11, a8 → a11).</p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section-header green">
+  <div class="num">SECTION 6</div>
+  <div class="title">Step 4 — Theory of Change</div>
+</div>
+<p>We test the causal hypotheses underpinning the strategy using the formula: <em>"If we do [X], it will lead to [Y] because [causal mechanism]"</em>. On two levels: macro (global hypothesis) and micro (per-activity hypothesis).</p>
+
+<h2>Macro Level — Global Project Hypothesis</h2>
+<div class="toc-block if">
+  <div class="lbl">IF we accomplish</div>
+  <p>an independent civic space for peace, reconciliation, and co-construction between Moroccans and Sahrawis returned from Tindouf, operational and recognized, functioning during the post-settlement phase.</p>
+</div>
+<div class="toc-block then">
+  <div class="lbl">THEN it will lead to</div>
+  <p>a dignified and participatory coexistence between returning Sahrawis, Moroccan Sahrawis, and Moroccans — with Sahrawi identity preserved, memory acknowledged, mobility secured, and violent extremism prevented.</p>
+</div>
+<div class="toc-block because">
+  <div class="lbl">BECAUSE</div>
+  <ol style="padding-left:22pt">
+    <li>The institutional settlement is taking shape (Resolution 2797, around 120 states) but social absorption has not been prepared — without it, the solution remains administrative and never becomes human.</li>
+    <li>The IER 2004-2005 experience proved that Moroccan truth-and-reconciliation commissions work, and that civil society is more credible than the State for this work.</li>
+    <li>The Curle phase mismatch (Tindouf at phase 1-2, institutions at phase 3-4) creates a risk of post-settlement crisis if nothing is done.</li>
+    <li>The cross-border fabric (kinship, Hassani, Maliki Islam, tribes) is a latent social capital that no one else can activate — not the State (suspected), not the UN (external), not the Polisario (compromised).</li>
+    <li>Sahrawi participants themselves have explicitly voiced the possibility of resorting to violence and war to undermine settlement outcomes — making social and security preparation a duty, not a choice.</li>
+  </ol>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Micro Level — Hypothesis per Pivot Activity</h2>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">TC1 — Digital Content</span>
+    <span class="conf-badge conf-medium">Medium confidence</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">IF</div><p>we publish Hassani-language digital content targeting youth 18-30 in Tindouf (a3).</p></div>
+  <div class="toc-block then"><div class="lbl">THEN</div><p>alternative narratives will reach those who choose to seek them inside the camps, opening information windows for those who are ready.</p></div>
+  <div class="toc-block because"><div class="lbl">BECAUSE</div><p>the goal is not to convince everyone — most will not move. The goal is to ensure that those who genuinely question or hesitate find alternative material rather than an information vacuum. Even very limited impact is enough to create a current of would-be individual returnees.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ RISK</div><p>if Algerian intelligence detects and blocks the accounts, or if opponents use them to launch "Moroccan propaganda" accusations pushing hesitants toward hardening.</p></div>
+</div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">TC2 — Individual Case-work Cell</span>
+    <span class="conf-badge conf-high">High confidence</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">IF</div><p>we set up an individual case-work cell (legal, employment, housing, psychological) for returnees (a4).</p></div>
+  <div class="toc-block then"><div class="lbl">THEN</div><p>returnees will experience the return as dignified and stable, creating a reassuring precedent for those who follow.</p></div>
+  <div class="toc-block because"><div class="lbl">BECAUSE</div><p>early returnees serve as a social signal; their experience spreads rapidly through family networks between Tindouf and Moroccan Sahara. A positive experience is more powerful than any official communication.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ RISK</div><p>if resources are insufficient or accompaniment shallow, the effect reverses: those rejecting return use the first cases as counter-evidence.</p></div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">TC3 — Institutional Charter and Advocacy</span>
+    <span class="conf-badge conf-medium">Medium confidence</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">IF</div><p>we publish a Welcome Charter signed by the CNDH, universities, and local authorities (a6) + parliamentary advocacy for the "Dignified Return" framework (a7).</p></div>
+  <div class="toc-block then"><div class="lbl">THEN</div><p>dignified return will have an explicit and enforceable legal and institutional framework.</p></div>
+  <div class="toc-block because"><div class="lbl">BECAUSE</div><p>the IER 2004-2005 experience demonstrated that formal signed charters create a standard that local actors cannot circumvent.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ RISK</div><p>if signature is purely symbolic without follow-up mechanism, the charter becomes a dead letter.</p></div>
+</div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">TC4 — Sila Centre</span>
+    <span class="conf-badge conf-high">High confidence</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">IF</div><p>we open the Sila Centre in Tan-Tan or Guelmim with public testimonies (a10).</p></div>
+  <div class="toc-block then"><div class="lbl">THEN</div><p>both sides' memories will be acknowledged and archived, without hierarchy.</p></div>
+  <div class="toc-block because"><div class="lbl">BECAUSE</div><p>public archiving of narratives changes the conflict's nature: it shifts from living memory (unstable) to institutional memory (stable, shared). A core mechanism of any post-conflict reconciliation.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ RISK</div><p>if the Centre is perceived as a State arm, skeptical Sahrawis will refuse to testify. Institutional independence is a sine qua non condition.</p></div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">TC5 — Security Early-Warning Mechanism</span>
+    <span class="conf-badge conf-low">Low confidence (but necessary)</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">IF</div><p>we set up an early-warning mechanism in partnership with trusted Sahrawi leaders, to detect signs of violent extremism among returnees, alongside credible economic alternatives.</p></div>
+  <div class="toc-block then"><div class="lbl">THEN</div><p>the risk of violent extremism will be detected early and neutralized, without collective stigmatization or boomerang effect.</p></div>
+  <div class="toc-block because"><div class="lbl">BECAUSE</div><p>repeated warnings from Sahrawi participants themselves — over eight years of SweFOR workshops, the last one included — confirm that some opponents <strong>"will not be at peace until they see blood"</strong>. Sahrawi peers are the only reliable observers of that current.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ RISK</div><p>infiltration of the mechanism exposes innocent Sahrawis to unfair accusations. Over-broadening the definition of "extremism" can lead to political criminalization. The mechanism must remain narrow, operational, and independent.</p></div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section-header">
+  <div class="num">SECTION 7</div>
+  <div class="title">Conclusion and Recommendations</div>
+</div>
+<p>After applying the four steps, this document concludes with five strategic convictions:</p>
+
+<div class="conclusion">
+  <h3>1 · The Window Is Open Now</h3>
+  <p>The diplomatic dynamic has clearly tilted in Morocco's favor, but social absorption of the solution has not been prepared. Every month that passes without preparing the human and social ground is an irrecoverable loss.</p>
+
+  <h3>2 · Sila Is the Bridge Between Diplomacy and Humanity</h3>
+  <p>Without this bridge, the solution remains administrative and never becomes human. A political agreement without a social foundation eventually explodes years later — that is what every post-conflict experience of the last century teaches.</p>
+
+  <h3>3 · Institutional Independence Is a Sine Qua Non</h3>
+  <p>If the project is perceived as a State communications arm, it dies in front of Sahrawis. <span class="highlight">The project's strength is its civic nature, not its closeness to power.</span></p>
+
+  <h3 style="color:var(--danger)">4 · The Security Risk Is Real and Documented</h3>
+  <p>The warning that some opponents may use autonomy as a pretext to access Moroccan territory and carry out violent acts, even far from the Sahara (Rabat, Casablanca and others), has been repeated explicitly by <strong>the Sahrawi participants themselves</strong> over eight years of workshops. The early-warning mechanism <strong>is not optional, it is an existential necessity for the project</strong>.</p>
+
+  <h3>5 · The Real Work Begins After Signature</h3>
+  <p>Politics will be over. Reconciliation of people will take 20 years, and no one other than Moroccan civil society is positioned to carry it out credibly.</p>
+</div>
+
+<h2>Operational Recommendations</h2>
+<ol class="kdf-list">
+  <li>Secure independent and diversified funding (the Moroccan State must not be the sole funder).</li>
+  <li>Choose the Centre's geographic location (Tan-Tan or Guelmim — a historically neutral interaction zone).</li>
+  <li>Draft an ethical charter for the project: no appropriation, no victory narrative, parity in speech.</li>
+  <li>Build partnerships with the CNDH, universities, and local authorities.</li>
+  <li>Set up the early-warning mechanism.</li>
+  <li>Launch Phase 0 (field preparation, 12 months): mapping separated families, testimonies bank, preliminary partnerships.</li>
+  <li>Adopt cautious language: no "victory", no "end", but "the beginning of a new phase".</li>
+</ol>
+
+<div class="page-break"></div>
+
+<div class="section-header muted">
+  <div class="num">SECTION 8</div>
+  <div class="title">Sources</div>
+</div>
+<ol class="sources">
+  <li>UN Security Council Resolution 2797 (October 2025).</li>
+  <li>Security Council Report — Monthly Forecast, April 2026 — securitycouncilreport.org.</li>
+  <li>Human Rights Watch, "UN: Western Sahara Peoples' Self-Determination at Risk", 25 March 2026.</li>
+  <li>Modern Diplomacy, "The Fall of the Polisario", 30 October 2025.</li>
+  <li>Africa at LSE, "Diplomatic realism is ending a post-colonial stalemate in Western Sahara", 10 February 2026.</li>
+  <li>Atalayar, "Polisario Front and Algeria reject US resolution on Western Sahara", 27 October 2025.</li>
+  <li>Morocco World News, "Morocco, Algeria, and Polisario to Hold US-Backed Talks in Madrid", February 2026.</li>
+  <li>UK House of Commons Library, "Western Sahara" research briefing.</li>
+  <li>CDA Collaborative Learning, "Reflecting on Peace Practice (RPP) — From Theory to Practice".</li>
+  <li>USIP, "Synergizing Nonviolent Action and Peacebuilding (SNAP)", 2018.</li>
+  <li>Tony Hodges, "Western Sahara: The Roots of a Desert War", Lawrence Hill Books, 1983.</li>
+  <li>Adam Curle, "Making Peace", Tavistock Publications, 1971.</li>
+  <li>Equity and Reconciliation Commission (Morocco, 2004-2005) experience.</li>
+  <li>Testimonies and observations recorded during successive workshops (2018-2026), including the final workshop of May 2026.</li>
+</ol>
+
+<div class="footer-mark">
+  <p><strong>Sila</strong> — Strategic Document</p>
+  <p>Mohamed Boussad · Boutaina Benhmida · Kenza Sammoud · Soulaimane El Mimouni</p>
+  <p>Facilitator: Nabil Bahhar &nbsp;·&nbsp; May 2026</p>
+  <p style="margin-top:6pt;font-size:8.5pt">Available in: العربية · Français · English · Español</p>
+</div>
+
+</body>
+</html>

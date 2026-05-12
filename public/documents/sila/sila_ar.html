@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>صِلَة — وثيقة استراتيجية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Reem+Kufi:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:#1E3A8A; --accent:#0891B2; --warning:#D97706;
+    --success:#047857; --danger:#B91C1C; --purple:#7C3AED;
+    --muted:#6B7280; --light:#F3F4F6; --ink:#0F172A;
+    --panel-blue:#EFF6FF; --panel-green:#ECFDF5;
+    --panel-amber:#FEF3C7; --panel-red:#FEE2E2; --panel-purple:#F3E8FF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: A4 portrait; margin: 18mm 16mm 22mm 16mm; }
+  @page :first { margin: 0; }
+
+  html { font-family: 'Tajawal','Amiri','Segoe UI',sans-serif; color: var(--ink); }
+  body { line-height: 1.75; font-size: 11.5pt; }
+  body, p, h1, h2, h3, h4, ul, ol, table, div { direction: rtl; text-align: right; }
+
+  h1 { font-family: 'Reem Kufi'; font-size: 28pt; font-weight: 700; color: var(--primary); margin: 18pt 0 8pt; line-height: 1.3; }
+  h2 { font-family: 'Reem Kufi'; font-size: 19pt; font-weight: 700; color: var(--primary); margin: 22pt 0 10pt; padding-bottom: 6pt; border-bottom: 2px solid var(--primary); }
+  h3 { font-family: 'Tajawal'; font-size: 14pt; font-weight: 700; color: var(--accent); margin: 16pt 0 6pt; }
+  h4 { font-family: 'Tajawal'; font-size: 12pt; font-weight: 700; color: var(--ink); margin: 10pt 0 4pt; }
+  p { margin: 6pt 0; line-height: 1.85; }
+  ul, ol { margin: 6pt 0; padding-right: 22pt; }
+  li { margin: 4pt 0; line-height: 1.8; }
+  strong { font-weight: 700; color: var(--ink); }
+  em { font-style: normal; color: var(--accent); font-weight: 500; }
+
+  /* COVER */
+  .cover {
+    width: 210mm; height: 297mm;
+    background: linear-gradient(160deg, #1E3A8A 0%, #0891B2 50%, #047857 100%);
+    color: white; padding: 30mm 25mm;
+    display: flex; flex-direction: column; justify-content: space-between;
+    page-break-after: always; position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .cover .top, .cover .center, .cover .bottom { z-index: 2; }
+  .cover .top .ribbon { font-family: 'Reem Kufi'; font-size: 12pt; opacity: 0.85; letter-spacing: 1.5px; text-transform: uppercase; }
+  .cover .center { text-align: center; }
+  .cover .center .badge {
+    display: inline-block; padding: 8pt 18pt;
+    background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 30pt; font-size: 11pt; font-weight: 500; margin-bottom: 24pt;
+  }
+  .cover .center .title-ar {
+    font-family: 'Reem Kufi'; font-size: 110pt; font-weight: 700;
+    line-height: 1; letter-spacing: -2px; margin-bottom: 12pt;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+  .cover .center .subtitle-main {
+    font-family: 'Tajawal'; font-size: 15pt; font-weight: 500;
+    line-height: 1.6; max-width: 85%; margin: 0 auto 8pt;
+  }
+  .cover .center .meaning {
+    font-family: 'Tajawal'; font-size: 11pt; font-weight: 300;
+    opacity: 0.85; font-style: italic; margin-top: 14pt;
+  }
+  .cover .bottom { border-top: 1px solid rgba(255,255,255,0.3); padding-top: 14pt; }
+  .cover .bottom .lbl { font-size: 10pt; font-weight: 700; opacity: 0.85; letter-spacing: 1.2px; margin-bottom: 6pt; }
+  .cover .bottom .names { font-size: 11.5pt; line-height: 1.9; }
+  .cover .bottom .meta { font-size: 9pt; opacity: 0.75; margin-top: 12pt; letter-spacing: 1px; }
+
+  /* About-page */
+  .about-page {
+    padding: 18mm 0;
+    page-break-after: always;
+  }
+  .about-page h2 { color: var(--primary); border-bottom: 2pt solid var(--primary); }
+
+  /* Section header */
+  .section-header {
+    background: linear-gradient(95deg, var(--primary), var(--accent));
+    color: white; padding: 12pt 18pt; border-radius: 8pt;
+    margin: 20pt 0 18pt; page-break-after: avoid;
+  }
+  .section-header.amber { background: linear-gradient(95deg, #D97706, #F59E0B); }
+  .section-header.purple { background: linear-gradient(95deg, #7C3AED, #A855F7); }
+  .section-header.green { background: linear-gradient(95deg, #047857, #10B981); }
+  .section-header.muted { background: linear-gradient(95deg, #4B5563, #6B7280); }
+  .section-header .num { font-size: 10pt; opacity: 0.85; letter-spacing: 2px; }
+  .section-header .title { font-family: 'Reem Kufi'; font-size: 22pt; font-weight: 700; margin-top: 4pt; }
+
+  /* Panels */
+  .panel {
+    border-radius: 8pt; padding: 14pt 18pt; margin: 12pt 0;
+    border-right: 4pt solid var(--primary); page-break-inside: avoid;
+  }
+  .panel.blue   { background: var(--panel-blue);   border-color: var(--primary); }
+  .panel.green  { background: var(--panel-green);  border-color: var(--success); }
+  .panel.amber  { background: var(--panel-amber);  border-color: var(--warning); }
+  .panel.red    { background: var(--panel-red);    border-color: var(--danger); }
+  .panel.purple { background: var(--panel-purple); border-color: var(--purple); }
+  .panel.muted  { background: var(--light);        border-color: var(--muted); }
+  .panel-label {
+    font-size: 9.5pt; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 6pt; color: var(--primary);
+  }
+  .panel.green .panel-label  { color: var(--success); }
+  .panel.amber .panel-label  { color: var(--warning); }
+  .panel.red .panel-label    { color: var(--danger); }
+  .panel.purple .panel-label { color: var(--purple); }
+  .panel.muted .panel-label  { color: var(--muted); }
+
+  /* Tables */
+  table {
+    width: 100%; border-collapse: collapse; margin: 12pt 0;
+    font-size: 10.5pt; page-break-inside: avoid;
+  }
+  th {
+    background: var(--primary); color: white; padding: 8pt 10pt;
+    font-weight: 700; font-size: 10pt; text-align: right;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  th.amber  { background: var(--warning); }
+  th.purple { background: var(--purple); }
+  th.green  { background: var(--success); }
+  th.danger { background: var(--danger); }
+  th.muted  { background: var(--muted); }
+  td {
+    padding: 7pt 10pt; border: 1px solid #E5E7EB;
+    vertical-align: top; line-height: 1.7;
+  }
+  tr:nth-child(even) td { background: #FAFAFA; }
+
+  .table-3box th { padding: 12pt; font-size: 11pt; }
+  .table-3box th.peace    { background: var(--success); }
+  .table-3box th.actors   { background: var(--warning); }
+  .table-3box th.conflict { background: var(--danger); }
+  .table-3box td { vertical-align: top; }
+  .table-3box td.peace    { background: var(--panel-green); }
+  .table-3box td.actors   { background: var(--panel-amber); }
+  .table-3box td.conflict { background: var(--panel-red); }
+  .table-3box td ul { padding-right: 16pt; }
+  .table-3box td li { font-size: 10pt; line-height: 1.7; }
+
+  /* Matrix RPP */
+  .matrix-rpp {
+    display: grid; grid-template-columns: 22% 39% 39%;
+    gap: 4pt; margin: 14pt 0; page-break-inside: avoid;
+  }
+  .matrix-rpp .head {
+    background: linear-gradient(135deg, #4338CA, #7C3AED); color: white;
+    padding: 10pt; text-align: center; font-weight: 700; border-radius: 6pt;
+    font-size: 10.5pt; line-height: 1.4;
+  }
+  .matrix-rpp .head.row {
+    background: linear-gradient(135deg, #4338CA, #2563EB);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .matrix-rpp .head.col-key  { background: linear-gradient(135deg, #7C3AED, #A855F7); }
+  .matrix-rpp .head.col-more { background: linear-gradient(135deg, #0891B2, #06B6D4); }
+  .matrix-rpp .empty { background: #1E1B4B; border-radius: 6pt; }
+  .matrix-rpp .cell {
+    background: white; border: 2pt solid; border-radius: 6pt; padding: 10pt;
+  }
+  .matrix-rpp .cell.q-ki { border-color: var(--purple);  background: var(--panel-purple); }
+  .matrix-rpp .cell.q-mi { border-color: var(--accent);  background: var(--panel-blue); }
+  .matrix-rpp .cell.q-ks { border-color: #A855F7;        background: #FAE8FF; }
+  .matrix-rpp .cell.q-ms { border-color: var(--success); background: var(--panel-green); }
+  .matrix-rpp .cell .quad-label {
+    font-size: 9pt; font-weight: 700; line-height: 1.4;
+    margin-bottom: 6pt; padding-bottom: 4pt;
+    border-bottom: 1pt dashed currentColor;
+  }
+  .matrix-rpp .cell.q-ki .quad-label { color: var(--purple); }
+  .matrix-rpp .cell.q-mi .quad-label { color: var(--accent); }
+  .matrix-rpp .cell.q-ks .quad-label { color: #A855F7; }
+  .matrix-rpp .cell.q-ms .quad-label { color: var(--success); }
+  .matrix-rpp .activity {
+    background: white; border-radius: 4pt; padding: 6pt 8pt;
+    margin: 4pt 0; font-size: 9pt; line-height: 1.6;
+    border: 1px solid #E5E7EB;
+  }
+  .matrix-rpp .activity .id {
+    display: inline-block; background: var(--ink); color: white;
+    padding: 1pt 5pt; border-radius: 3pt; font-family: monospace;
+    font-size: 8pt; margin-left: 4pt; vertical-align: middle;
+  }
+  .matrix-rpp .activity .phase {
+    display: inline-block; color: var(--muted);
+    font-size: 8pt; font-style: italic;
+  }
+
+  /* Curle diagram */
+  .curle-diagram {
+    margin: 14pt 0; padding: 14pt;
+    background: linear-gradient(135deg, #FFF7ED, #FEF3C7);
+    border-radius: 10pt; page-break-inside: avoid;
+  }
+  .curle-axes {
+    display: flex; justify-content: space-between;
+    font-size: 9pt; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8pt;
+  }
+  .curle-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6pt; }
+  .curle-phase {
+    border: 2pt solid; border-radius: 8pt; padding: 10pt; background: white;
+  }
+  .curle-phase .num {
+    display: inline-flex; width: 22pt; height: 22pt; color: white;
+    border-radius: 50%; align-items: center; justify-content: center;
+    font-weight: 700; margin-bottom: 6pt;
+  }
+  .curle-phase h4 { margin-top: 4pt; font-size: 11pt; }
+  .curle-phase p { font-size: 9pt; line-height: 1.6; }
+  .curle-phase.p1 { border-color: var(--danger); }
+  .curle-phase.p1 .num { background: var(--danger); }
+  .curle-phase.p2 { border-color: var(--warning); }
+  .curle-phase.p2 .num { background: var(--warning); }
+  .curle-phase.p3 { border-color: #EAB308; }
+  .curle-phase.p3 .num { background: #EAB308; }
+  .curle-phase.p4 { border-color: var(--success); }
+  .curle-phase.p4 .num { background: var(--success); }
+
+  /* ToC blocks */
+  .toc-block {
+    border: 2pt solid; border-radius: 10pt;
+    padding: 14pt 18pt; margin: 10pt 0; page-break-inside: avoid;
+  }
+  .toc-block.if      { border-color: var(--primary); background: var(--panel-blue); }
+  .toc-block.then    { border-color: var(--success); background: var(--panel-green); }
+  .toc-block.because { border-color: var(--warning); background: var(--panel-amber); }
+  .toc-block.risk    { border-color: var(--danger);  background: var(--panel-red); }
+  .toc-block .lbl {
+    font-size: 9.5pt; font-weight: 700; letter-spacing: 1.5px;
+    margin-bottom: 4pt; text-transform: uppercase;
+  }
+  .toc-block.if .lbl      { color: var(--primary); }
+  .toc-block.then .lbl    { color: var(--success); }
+  .toc-block.because .lbl { color: var(--warning); }
+  .toc-block.risk .lbl    { color: var(--danger); }
+
+  .micro-toc {
+    border: 1pt solid #E5E7EB; border-radius: 10pt;
+    padding: 14pt; margin: 14pt 0; background: white; page-break-inside: avoid;
+  }
+  .micro-toc .header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 8pt; border-bottom: 1px solid #E5E7EB; margin-bottom: 10pt;
+  }
+  .micro-toc .id {
+    font-family: monospace; font-size: 11pt; font-weight: 700; color: var(--success);
+  }
+  .conf-badge {
+    display: inline-block; padding: 3pt 10pt; border-radius: 12pt;
+    font-size: 8.5pt; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .conf-high   { background: var(--panel-green); color: var(--success); }
+  .conf-medium { background: var(--panel-amber); color: var(--warning); }
+  .conf-low    { background: var(--panel-red);   color: var(--danger); }
+
+  /* Arrows */
+  .arrows-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6pt; }
+  .arrow {
+    background: var(--panel-purple); border: 1pt solid var(--purple);
+    border-radius: 6pt; padding: 6pt 10pt; font-size: 9.5pt;
+    text-align: center; direction: ltr;
+  }
+  .arrow .from, .arrow .to {
+    display: inline-block; background: var(--purple); color: white;
+    padding: 1pt 6pt; border-radius: 3pt;
+    font-family: monospace; font-weight: 700;
+  }
+  .arrow .lbl {
+    display: inline-block; margin: 0 6pt;
+    color: var(--purple); font-weight: 700;
+  }
+
+  /* KDF list */
+  .kdf-list { counter-reset: kdf; padding-right: 0; list-style: none; }
+  .kdf-list li {
+    counter-increment: kdf; list-style: none;
+    position: relative; padding-right: 32pt;
+    margin: 8pt 0; line-height: 1.7;
+  }
+  .kdf-list li::before {
+    content: counter(kdf); position: absolute; right: 0; top: 0;
+    width: 22pt; height: 22pt; background: var(--primary); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 10pt;
+  }
+
+  /* Sources */
+  .sources { counter-reset: src; padding-right: 0; list-style: none; }
+  .sources li {
+    counter-increment: src; list-style: none;
+    margin: 6pt 0; padding: 6pt 32pt 6pt 8pt;
+    position: relative; font-size: 10pt; line-height: 1.6;
+  }
+  .sources li::before {
+    content: counter(src); position: absolute; right: 0; top: 6pt;
+    width: 22pt; height: 22pt; background: var(--muted); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 9pt;
+  }
+
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  .highlight { background: linear-gradient(transparent 60%, #FEF08A 60%); padding: 0 2pt; }
+
+  .conclusion {
+    background: linear-gradient(135deg, var(--panel-blue), white);
+    border: 2pt solid var(--primary); border-radius: 10pt;
+    padding: 18pt 22pt; margin: 14pt 0;
+  }
+  .conclusion h3 { color: var(--primary); margin-top: 8pt; }
+
+  .toc-summary {
+    background: var(--light); padding: 18pt 22pt;
+    border-radius: 10pt; margin: 14pt 0;
+  }
+  .toc-summary h2 { border: none; margin-top: 0; padding-bottom: 4pt; }
+  .toc-summary ol { padding-right: 20pt; }
+  .toc-summary li { margin: 6pt 0; font-size: 11pt; }
+  .toc-summary .num { color: var(--primary); font-weight: 700; margin-left: 6pt; }
+
+  .footer-mark {
+    margin-top: 30pt; text-align: center; padding: 18pt;
+    border-top: 2pt solid var(--primary);
+    color: var(--muted); font-size: 9.5pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- COVER -->
+<!-- ============================================ -->
+<div class="cover">
+  <div class="top">
+    <div class="ribbon">وثيقة استراتيجية</div>
+  </div>
+
+  <div class="center">
+    <div class="badge">مشروع مُجتَمَعي للسلام والمصالحة</div>
+    <div class="title-ar">صِلَة</div>
+    <div class="subtitle-main">
+      فضاء مَدَني مُستَقِل للسلام والمصالحة والبناء المُشترَك<br>
+      بين المغاربة والصحراويين العائدين من تندوف
+    </div>
+    <div class="meaning">صِلَة الرَّحم — الرابط الذي يَجمع الأهل بعد الفُرقة</div>
+  </div>
+
+  <div class="bottom">
+    <div class="lbl">فريق التحليل والإعداد</div>
+    <div class="names">
+      محمد بوساد &nbsp;·&nbsp; بثينة بنحميدة &nbsp;·&nbsp; كنزة صمود &nbsp;·&nbsp; سليمان الميموني
+    </div>
+    <div class="lbl" style="margin-top: 12pt;">الميسر</div>
+    <div class="names">نبيل بحار</div>
+    <div class="meta">ماي 2026 — وفق منهجية: الصناديق الثلاثة · مخطط كيرل · مصفوفة RPP · نظرية التغيير</div>
+    <div class="meta" style="margin-top:8pt;direction:ltr;text-align:right;">Available in: العربية · Français · English · Español</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- ABOUT THIS DOCUMENT -->
+<!-- ============================================ -->
+<div class="about-page">
+  <h2>حول هذه الوثيقة</h2>
+
+  <p>تَأتي هذه الوثيقة كَمُخرَج ختامي لمسار طويل من العمل التحليلي والميداني الذي قادَته منذ سنة 2018 <strong>منظمة سويفور السويدية</strong> (Swedish Fellowship of Reconciliation — SweFOR)، وهي منظمة سويدية متخصصة في بناء السلام وحل النزاعات، رافَقت عبر السنوات مجموعات شبابية مغاربية متعاقبة (من المغرب، الجزائر، تونس، الصحراء، وموريتانيا).</p>
+
+  <p>أُنجزَت هذه الوثيقة من قِبَل المجموعة المغربية الراهنة في إطار ورشاتها الختامية. وقد تَزامَن عملها مع <strong>المنعطف الديبلوماسي الذي عَرَفه ملف الصحراء سنة 2025</strong> (قرار مجلس الأمن 2797، التحاق نحو 120 دولة بدعم مخطط الحكم الذاتي، التحوّل في موقف الجزائر). هذا التزامُن جَعَل من الممكن — للمرة الأولى — أن نَنتقِل من التحليل النظري إلى <strong>اقتراح مشروع قابل للتنزيل الميداني</strong>، يَستجيب للحظة الراهنة ويُحَضّرها معاً.</p>
+
+  <div class="panel blue">
+    <div class="panel-label">لماذا الآن؟</div>
+    <p>نَنطَلق من قناعة أنّ <span class="highlight">المرحلة المقبلة من ملف الصحراء لن تَكون سياسية بل مجتمعية</span>. حين يُوقَّع الاتفاق السياسي، تَكون السياسة قد انتهت — لكن العمل الإنساني الحقيقي يَكون قد بَدَأ للتو. هذه الوثيقة هي دعوة لِبَدء هذا العمل <strong>قبل التوقيع</strong>، لا بَعدَه. تَحضير الأرضية الاجتماعية والإنسانية في الوقت الذي ما زالت فيه النوافذ مَفتوحة.</p>
+  </div>
+
+  <h3>منهجية العمل</h3>
+  <p>اعتَمَدت المجموعة منهجية «<strong>من النظرية إلى الممارسة</strong>» التي تُدرّسها شبكة سويفور، والمستندة على أعمال «التفكير في ممارسة السلام» (RPP) و«مشروع تخطيط بناء السلام» (SNAP) لمعهد الولايات المتحدة للسلام (USIP). تَتضمّن هذه المنهجية أربع أدوات متكاملة طُبِّقت في هذه الوثيقة بشكل تَتابُعي وعميق:</p>
+  <ol style="padding-right: 22pt;">
+    <li>الصناديق الثلاثة لتحليل النزاع</li>
+    <li>مخطط كيرل لتحديد المرحلة</li>
+    <li>مصفوفة RPP لِتَموقع الاستراتيجية</li>
+    <li>نظرية التغيير لاختبار الفرضيات السببية</li>
+  </ol>
+
+  <h3>كيف تَقرأ هذه الوثيقة</h3>
+  <p>الوثيقة مُهَيكَلة في ثمانية أقسام مُتسلسلة. كل قسم يَتَأسس على ما سَبَقه. للقارئ المُستَعجِل، نَنصَح بالبَدء بالقسم 1 (السياق) ثم القفز مباشرة إلى القسم 7 (الخلاصة والتوصيات). للقارئ المُتَعمِّق، الترتيب الكامل مُوصى به.</p>
+</div>
+
+<div class="toc-summary">
+  <h2>الفهرس</h2>
+  <ol>
+    <li><span class="num">1.</span> سياق المشكلة — اللمحة التاريخية وآخر التطورات</li>
+    <li><span class="num">2.</span> المنهجية المُعتَمَدة</li>
+    <li><span class="num">3.</span> المرحلة 1 — تحليل الصناديق الثلاثة</li>
+    <li><span class="num">4.</span> المرحلة 2 — مخطط كيرل</li>
+    <li><span class="num">5.</span> المرحلة 3 — مصفوفة RPP</li>
+    <li><span class="num">6.</span> المرحلة 4 — نظرية التغيير</li>
+    <li><span class="num">7.</span> الخلاصة والتوصيات</li>
+    <li><span class="num">8.</span> المصادر</li>
+  </ol>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §1 CONTEXT -->
+<!-- ============================================ -->
+<div class="section-header">
+  <div class="num">القسم 1</div>
+  <div class="title">سياق المشكلة</div>
+</div>
+
+<p>قبل أي تحليل، من الضروري أن يَستوعب القارئ الإطار التاريخي والديبلوماسي لقضية الصحراء، حتى يَفهم لماذا تَفرض اللحظة الحالية على المجتمع المدني المغربي أن يَتدخّل بمشروع مصالحة وبناء مشترك.</p>
+
+<h2>1.1 — اللمحة التاريخية</h2>
+
+<h3>قبل 1975 — المرحلة الاستعمارية الإسبانية</h3>
+<p>الإقليم مستعمرة إسبانية تحت اسم «الصحراء الإسبانية» منذ 1884. السكان الصحراويون في معظمهم قبائل بدوية رحّل مُرتبطة بأطر القرابة العابرة للحدود (الرڭيبات، تكنة، أولاد دليم)، وهي روابط لا تَزال قائمة إلى اليوم وتُشكّل الأساس الاجتماعي لكل مشروع مصالحة.</p>
+
+<h3>1975 — السنة المفصلية</h3>
+<ul>
+  <li><strong>أكتوبر 1975:</strong> محكمة العدل الدولية تَصدر رأيها الاستشاري. تَعترف بوجود روابط بيعة بين بعض القبائل الصحراوية وسلاطين المغرب، لكنها تَخلص إلى أن هذه الروابط لا تُثبت رابطة سيادة إقليمية تُلغي حق الشعب الصحراوي في تقرير المصير.</li>
+  <li><strong>6 نوفمبر 1975:</strong> الحسن الثاني يُطلق المسيرة الخضراء — 350 ألف مدني مغربي يَدخلون الإقليم سلمياً.</li>
+  <li><strong>14 نوفمبر 1975:</strong> اتفاقيات مدريد الثلاثية — إسبانيا تَتنازل عن إدارة الإقليم للمغرب (الثلثان الشماليان) وموريتانيا (الثلث الجنوبي).</li>
+  <li><strong>27 فبراير 1976:</strong> اليوم التالي لانسحاب آخر جندي إسباني، البوليساريو يُعلن «الجمهورية العربية الصحراوية الديمقراطية» في بير لحلو. الحرب تَشتعل مباشرة، وعشرات الآلاف من الصحراويين يَنتقلون نحو منطقة تندوف بالجزائر.</li>
+</ul>
+
+<h3>1976 - 1991 — مرحلة الحرب</h3>
+<p>حرب غير متكافئة بين الجيش المغربي والبوليساريو، المدعوم عسكرياً ومالياً من الجزائر وليبيا القذافي. موريتانيا تَنسحب من النزاع سنة 1979، فيَحتل المغرب الجزء الجنوبي. خلال الثمانينات، يَبني المغرب جداراً دفاعياً طوله 2700 كلم، يَفصل اليوم بين المناطق تحت سيطرة المغرب (~80%) والمناطق تحت سيطرة البوليساريو (~20%).</p>
+
+<h3>1991 — وقف إطلاق النار وبعثة المينورسو</h3>
+<p>الأمم المتحدة تَحصل على وقف إطلاق النار وتُنشئ «المينورسو». المهمة المُعلَنة: تنظيم استفتاء تقرير المصير. <strong>لم يُنظَّم هذا الاستفتاء أبداً</strong>، بسبب خلاف مستعصٍ حول قائمة الناخبين.</p>
+
+<h3>2007 — مخطط الحكم الذاتي المغربي</h3>
+<p>المغرب يُقدّم مخطط الحكم الذاتي: الإقليم يُصبح جهة ذات حكم ذاتي ببرلمان وحكومة وإدارة محلية، تحت السيادة المغربية.</p>
+
+<h3>2020 — اعتراف الولايات المتحدة</h3>
+<p>الولايات المتحدة الأمريكية تَعترف بالسيادة المغربية على الصحراء — وهي أوّل عُضْوٍ دائم في مجلس الأمن يَفعل ذلك. هذا الاعتراف شَكّل منعطفاً ديبلوماسياً كبيراً مَهَّد لما سيَأتي بعده على المستوى الدولي.</p>
+
+<h2>1.2 — آخر التطورات (2022 - 2026)</h2>
+<p>الديناميكية الديبلوماسية مالت بشكل واضح لصالح المغرب منذ 2022، مع تسارع كبير بعد قرار مجلس الأمن 2797.</p>
+
+<table>
+  <thead>
+    <tr><th style="width:22%">التاريخ</th><th>الحدث</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>مارس 2022</strong></td><td>إسبانيا (القوة الاستعمارية التاريخية) تَدعم رسمياً مخطط الحكم الذاتي المغربي.</td></tr>
+    <tr><td><strong>أكتوبر 2024</strong></td><td>الرئيس الفرنسي يُعلن أمام البرلمان المغربي أن «حاضر ومستقبل الصحراء يَندرجان في إطار السيادة المغربية».</td></tr>
+    <tr><td><strong>يونيو 2025</strong></td><td>المملكة المتحدة تَنضم للمعسكر المؤيد، وتَصف الحكم الذاتي بـ«الأساس الأكثر مصداقية».</td></tr>
+    <tr><td><strong>أكتوبر 2025</strong></td><td>قرار مجلس الأمن <strong>2797</strong>: 11 صوتاً مؤيداً، الجزائر لم تُشارك. القرار يُعيد توجيه المفاوضات صراحةً على أساس مخطط الحكم الذاتي المغربي.</td></tr>
+    <tr><td><strong>نوفمبر 2025</strong></td><td>الجزائر تَقترح بشكل مفاجئ «الوساطة» بين المغرب والبوليساريو — مؤشر على إعادة تموقع.</td></tr>
+    <tr><td><strong>فبراير 2026</strong></td><td>محادثات مدريد بين المغرب والجزائر والبوليساريو برعاية أمريكية. المغرب يُقدّم نسخة موسّعة من مخطط الحكم الذاتي (~40 صفحة).</td></tr>
+    <tr><td><strong>مارس 2026</strong></td><td>سيناتورات أمريكيون يُودعون مشروع قانون «تصنيف البوليساريو منظمة إرهابية» في الكونغرس.</td></tr>
+    <tr><td><strong>أبريل 2026</strong></td><td>مالي تُعلّق اعترافها بالجمهورية الصحراوية وتَدعم المخطط المغربي.</td></tr>
+  </tbody>
+</table>
+
+<div class="panel blue">
+  <div class="panel-label">الخلاصة</div>
+  <p>حوالي <strong>120 دولة</strong> تَدعم المخطط المغربي. مجلس الأمن يُعيد توجيه المفاوضات على هذا الأساس. الجزائر تُلوّح بالوساطة. مالي تَسحب اعترافها. <span class="highlight">النافذة الزمنية للحل قد فُتحت — وهي تقريباً مَفتوحة الآن.</span></p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §2 METHODOLOGY -->
+<!-- ============================================ -->
+<div class="section-header">
+  <div class="num">القسم 2</div>
+  <div class="title">المنهجية المُعتَمَدة</div>
+</div>
+
+<p>تَعتمد هذه الوثيقة منهجية «<strong>من النظرية إلى الممارسة</strong>» (From Theory to Practice) المستندة إلى أعمال «التفكير في ممارسة السلام» (Reflecting on Peace Practice — RPP) و«مشروع تخطيط بناء السلام» (Strategic Nonviolent Action and Peacebuilding — SNAP) لمعهد الولايات المتحدة للسلام (United States Institute of Peace — USIP).</p>
+
+<p>تَتألف من أربع أدوات متكاملة طُبِّقت بشكل تَتابُعي:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="amber" style="width:6%">#</th>
+      <th class="amber" style="width:18%">الأداة</th>
+      <th class="amber" style="width:42%">الوظيفة</th>
+      <th class="amber">المُخرَج المُتَوَقَّع</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td><strong>الصناديق الثلاثة</strong></td><td>فرز المعلومات حول النزاع: قوى دفع للسلام، فاعلون أساسيون، قوى دفع للنزاع.</td><td>فهم بنيوي للوضع.</td></tr>
+    <tr><td><strong>2</strong></td><td><strong>مخطط كيرل</strong></td><td>تحديد المرحلة الحالية للنزاع على منحنى التحوّل واختيار التدخل المناسب.</td><td>تموضع زمني للتدخل.</td></tr>
+    <tr><td><strong>3</strong></td><td><strong>مصفوفة RPP</strong></td><td>تموقع الأنشطة على مصفوفة 2×2 بحسب الفئة المُستَهدَفة (أشخاص رئيسيون / عدد أكبر) ومستوى التغيير المُستَهدف (فردي / اجتماعي-سياسي).</td><td>استراتيجية تدخّل متوازنة.</td></tr>
+    <tr><td><strong>4</strong></td><td><strong>نظرية التغيير</strong></td><td>صياغة الفرضيات السببية بصيغة «إذا فعلنا X، فسيؤدي إلى Y لأنّ...».</td><td>منطق برنامج قابل للاختبار.</td></tr>
+  </tbody>
+</table>
+
+<div class="panel blue">
+  <div class="panel-label">مبدأ تأسيسي</div>
+  <p>لا يَكفي تحديد الفاعلين والعوامل، بل يَجب فهم <strong>العلاقات والديناميكيات</strong> بينهم وكيفية تَطوّرها. التحليل الجيد ليس وصفياً، بل تفسيرياً وتنبؤياً.</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §3 — 3-BOX -->
+<!-- ============================================ -->
+<div class="section-header">
+  <div class="num">القسم 3</div>
+  <div class="title">المرحلة 1 — تحليل الصناديق الثلاثة</div>
+</div>
+
+<p>فَرز المعلومات حول قضية الصحراء وفق ثلاث خانات: قوى الدفع للسلام، الفاعلون الأساسيون، وقوى الدفع للنزاع. الهدف: <em>الوضوح، لا الكمال.</em></p>
+
+<table class="table-3box">
+  <thead>
+    <tr>
+      <th class="peace">قوى الدفع للسلام<br>(للبناء عليها)</th>
+      <th class="actors">الفاعلون الأساسيون</th>
+      <th class="conflict">قوى الدفع للنزاع<br>(للتحييد)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="peace">
+        <ul>
+          <li>هيئة الإنصاف والمصالحة (IER 2004-2005): سابقة عربية وحيدة.</li>
+          <li>الخطاب الملكي بعد قرار 2797: إطار «العودة» بدل «الإدماج بالقوة».</li>
+          <li>روابط القرابة العابرة: عائلات مفصولة منذ 50 سنة، نفس القبائل (الرڭيبات، تكنة، أولاد دليم).</li>
+          <li>اللهجة الحسانية المشتركة.</li>
+          <li>الإسلام المالكي والزوايا.</li>
+          <li>الجهوية المتقدمة 2015: الإطار القانوني جاهز.</li>
+          <li>الازدهار الاقتصادي للصحراء المغربية: ميناء الداخلة، طاقات شمسية، فوسفاط — توفير فرص شغل حقيقية.</li>
+          <li>القوة الديبلوماسية للمغرب: دعم الولايات المتحدة، فرنسا، إسبانيا، المملكة المتحدة، وأكثر من 120 دولة.</li>
+          <li>الاستقرار السياسي والمؤسساتي للمغرب: من بين أكثر دول إفريقيا استقراراً.</li>
+        </ul>
+      </td>
+      <td class="actors">
+        <ul>
+          <li>الملك محمد السادس: سلطة معنوية + دينية + سياسية.</li>
+          <li>الكوادر السابقون للبوليساريو الذين عادوا.</li>
+          <li>النساء الصحراويات على الجانبين.</li>
+          <li>شيوخ القبائل التقليديون.</li>
+          <li>الجالية الصحراوية في إسبانيا.</li>
+          <li>الشباب 18-30 (الفئة المستهدفة الرئيسية).</li>
+          <li>المجلس الوطني لحقوق الإنسان.</li>
+          <li>الجامعات ومراكز البحث المغربية.</li>
+        </ul>
+      </td>
+      <td class="conflict">
+        <ul>
+          <li>النخبة العسكرية للبوليساريو في تندوف: تَفقد مكانة ورواتب — مقاومة قصوى متوقعة.</li>
+          <li>المخابرات العسكرية الجزائرية.</li>
+          <li>المحافظون المغاربة الذين قد يَرون العائدين «خونة يُكافأون».</li>
+          <li>الصحراويون «التاريخيون» في المغرب: خطر الغيرة الهوياتية.</li>
+          <li>منظمات دولية مؤيدة لانفصال الأقاليم وتفكيك الدول، تَنشط في أوروبا وجنوب إفريقيا، وتَستعمل قضية الصحراء ضمن أجندتها.</li>
+          <li>صدمة عابرة للأجيال: 50 سنة من السرد العائلي العدائي.</li>
+          <li>اقتصاد ريع النزاع في تندوف.</li>
+          <li><strong>خطر التطرف العنيف من بعض العائدين</strong>: قبول الحكم الذاتي قد يَكون لدى البعض ذريعة للوصول إلى التراب المغربي والقيام بأعمال عنيفة، حتى بعيداً عن الصحراء (الرباط، الدار البيضاء...). هذا الخطر <strong>تَكرّر تَنبيهٌ صريح إليه من داخل الصحراويين أنفسهم</strong> خلال المسار التحليلي للمشروع.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>العوامل الدافعة الرئيسية (Key Driving Factors)</h2>
+<p>من تحليل الصناديق الثلاثة، تَنبثق <strong>خمسة عوامل محورية</strong> يَقوم عليها المشروع:</p>
+<ol class="kdf-list">
+  <li>مستوى <strong>الثقة</strong> التي يَشعر بها شباب تندوف تجاه المشروع المغربي.</li>
+  <li>القدرة على تقديم <strong>كرامة اقتصادية</strong> للعائدين (لا الصدقة، بل المكانة).</li>
+  <li>حجم الفضاء الرمزي المتروك للهوية الصحراوية المتميزة (لغة، ثقافة، ذاكرة).</li>
+  <li>مَرئية ومصداقية «حاملي الذاكرة» العائدين.</li>
+  <li>مستوى الحماية من التوظيف السياسي والإعلامي، ومن الاختراق الأمني.</li>
+</ol>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §4 — CURLE -->
+<!-- ============================================ -->
+<div class="section-header amber">
+  <div class="num">القسم 4</div>
+  <div class="title">المرحلة 2 — مخطط كيرل</div>
+</div>
+
+<p>يَرسم نموذج آدم كيرل المسار من النزاع الكامن إلى السلام المستدام عبر <strong>أربع مراحل</strong>، على محورين: درجة الوعي بالقضايا (أفقي)، توازن السلطة (عمودي).</p>
+
+<div class="curle-diagram">
+  <div class="curle-axes">
+    <span>سلطة غير متوازنة ←</span>
+    <span>← سلطة متوازنة</span>
+  </div>
+  <div class="curle-phases">
+    <div class="curle-phase p1">
+      <div class="num">1</div>
+      <h4>النزاع الكامن</h4>
+      <p>سلطة غير متوازنة، وعي منخفض، الظلم لم يُسَمَّ بعد.</p>
+      <p style="margin-top:6pt;font-style:italic;color:var(--muted)">التدخل: تحسيس، تنظيم، رفع الوعي.</p>
+    </div>
+    <div class="curle-phase p2">
+      <div class="num">2</div>
+      <h4>النزاع الظاهر</h4>
+      <p>وعي مرتفع، سلطة لا تَزال غير متوازنة، الصراع يَطفو.</p>
+      <p style="margin-top:6pt;font-style:italic;color:var(--muted)">التدخل: عمل لاعنفي، مناصرة، حماية.</p>
+    </div>
+    <div class="curle-phase p3">
+      <div class="num">3</div>
+      <h4>تسوية النزاع</h4>
+      <p>اعتراف بضرورة الحل، السلطة بَدأت تَتوازن.</p>
+      <p style="margin-top:6pt;font-style:italic;color:var(--muted)">التدخل: تفاوض، وساطة، استيعاب.</p>
+    </div>
+    <div class="curle-phase p4">
+      <div class="num">4</div>
+      <h4>سلام مستدام</h4>
+      <p>سلطة متوازنة، وعي عالٍ، عدالة.</p>
+      <p style="margin-top:6pt;font-style:italic;color:var(--muted)">التدخل: مصالحة، بناء المؤسسات.</p>
+    </div>
+  </div>
+  <div class="curle-axes" style="margin-top: 8pt; margin-bottom: 0;">
+    <span>وعي منخفض</span>
+    <span>وعي عالٍ بالقضايا</span>
+  </div>
+</div>
+
+<h2>التشخيص: اختلال في المرحلة بين الأطراف</h2>
+<p>كل طرف من أطراف النزاع يَعيش في مرحلة مختلفة من المنحنى. فهم هذا الاختلال هو ما يَجعل تصميم التدخل دقيقاً:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="amber" style="width: 30%">الطرف</th>
+      <th class="amber" style="width: 18%">المرحلة</th>
+      <th class="amber">ما يَحتاجه</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>سكان تندوف</strong></td><td><strong>1 → 2</strong></td><td>تحسيس بأن العالم تغيّر، عرض بدائل، فتح نوافذ معلومات.</td></tr>
+    <tr><td><strong>العائدون / الراغبون في العودة</strong></td><td><strong>2 → 3</strong></td><td>مرافقة في الانتقال، حماية الكرامة، استيعاب تدريجي.</td></tr>
+    <tr><td><strong>مغاربة الجنوب والشمال</strong></td><td><strong>3 → 4</strong></td><td>تأطير المصالحة، تجنّب خطاب الانتقام، استقبال متكافئ.</td></tr>
+    <tr><td><strong>كوادر البوليساريو السابقة</strong></td><td><strong>3 → 4</strong></td><td>مكانة، مرئية، شرعنة دور «حاملي الذاكرة».</td></tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §5 — RPP -->
+<!-- ============================================ -->
+<div class="section-header purple">
+  <div class="num">القسم 5</div>
+  <div class="title">المرحلة 3 — مصفوفة RPP</div>
+</div>
+
+<p>مصفوفة RPP تُجبرنا على وَضع كل نشاط على إحدى الخانات الأربع الناتجة عن تقاطع بُعدين:</p>
+<ul>
+  <li><strong>الفئة المُستَهدَفة:</strong> أشخاص رئيسيون (صنّاع قرار، قياديون، فاعلون مؤسساتيون) مقابل عدد أكبر من الأشخاص (الساكنة العامة، الشباب، الأسر).</li>
+  <li><strong>مستوى التغيير:</strong> فردي / شخصي (تغيير في القيم، المعرفة، السلوك) مقابل اجتماعي - سياسي (تغيير في المؤسسات، السياسات، البِنى).</li>
+</ul>
+
+<div class="matrix-rpp">
+  <div class="empty"></div>
+  <div class="head col-key">الأشخاص الرئيسيون<br>(صنّاع القرار)</div>
+  <div class="head col-more">عدد أكبر من الأشخاص<br>(الساكنة العامة)</div>
+
+  <div class="head row">تغيير<br>فردي / شخصي</div>
+  <div class="cell q-ki">
+    <div class="quad-label">الخانة 1: تغيير فردي عند الأشخاص الرئيسيين</div>
+    <div class="activity"><span class="id">a1</span> شهادات علنية بأسلوب هيئة الإنصاف والمصالحة من كوادر البوليساريو العائدة. <span class="phase">— كيرل 3 → 4</span></div>
+    <div class="activity"><span class="id">a2</span> تكوين شيوخ القبائل لإعادة فتح الروابط العابرة للحدود. <span class="phase">— كيرل 1 → 2</span></div>
+  </div>
+  <div class="cell q-mi">
+    <div class="quad-label">الخانة 2: تغيير فردي عند عدد أكبر من الأشخاص</div>
+    <div class="activity"><span class="id">a3</span> بَثّ محتوى رقمي بالحسانية (تيك توك، يوتيوب، بودكاست) → شباب تندوف. <span class="phase">— كيرل 1 → 2</span></div>
+    <div class="activity"><span class="id">a4</span> خلية مرافقة فردية (قانون، شغل، سكن، نفسي) للعائدين. <span class="phase">— كيرل 2 → 3</span></div>
+    <div class="activity"><span class="id">a5</span> قوافل ثقافية حسّانية وبرنامج أكاديمي عن الذاكرة المشتركة. <span class="phase">— كيرل 3 → 4</span></div>
+  </div>
+
+  <div class="head row">تغيير<br>اجتماعي - سياسي</div>
+  <div class="cell q-ks">
+    <div class="quad-label">الخانة 3: تغيير اجتماعي-سياسي عند الأشخاص الرئيسيين</div>
+    <div class="activity"><span class="id">a6</span> ميثاق استقبال موقّع من المجلس الوطني لحقوق الإنسان والجامعات والجماعات. <span class="phase">— كيرل 3 → 4</span></div>
+    <div class="activity"><span class="id">a7</span> مناصرة لدى البرلمان لإطار قانوني «العودة الكريمة». <span class="phase">— كيرل 3 → 4</span></div>
+    <div class="activity"><span class="id">a8</span> إطار قانوني وشباك وحيد «العودة الكريمة»: وضع مدني، معادلة شواهد كوادر البوليساريو، استرداد ملكيات، تمدرس، بطاقة تعريف، ضمان اجتماعي. <span class="phase">— كيرل 3 → 4</span></div>
+  </div>
+  <div class="cell q-ms">
+    <div class="quad-label">الخانة 4: تغيير اجتماعي-سياسي عند عدد أكبر من الأشخاص</div>
+    <div class="activity"><span class="id">a9</span> منصة إعلامية ثلاثية اللغة (حسّانية / دارجة / إسبانية). <span class="phase">— كيرل 2 → 3</span></div>
+    <div class="activity"><span class="id">a10</span> مركز صِلَة بطانطان أو كلميم (فضاء مدني مهيكل، مستقل عن الدولة). <span class="phase">— كيرل 3 → 4</span></div>
+    <div class="activity"><span class="id">a11</span> برنامج إدماج اقتصادي للعائدين (منح، قروض صغرى، شراكات الداخلة). <span class="phase">— كيرل 3 → 4</span></div>
+  </div>
+</div>
+
+<h2>العلاقات السببية بين الأنشطة</h2>
+<p>كيف تَتسلسل الأنشطة لتُنتج أثراً تراكمياً:</p>
+
+<div class="arrows-grid">
+  <div class="arrow"><span class="from">a3</span><span class="lbl">تجلب ←</span><span class="to">a4</span></div>
+  <div class="arrow"><span class="from">a4</span><span class="lbl">تغذي ←</span><span class="to">a11</span></div>
+  <div class="arrow"><span class="from">a2</span><span class="lbl">تضخم ←</span><span class="to">a1</span></div>
+  <div class="arrow"><span class="from">a1</span><span class="lbl">تشرعن ←</span><span class="to">a10</span></div>
+  <div class="arrow"><span class="from">a8</span><span class="lbl">تغذي ←</span><span class="to">a4</span></div>
+  <div class="arrow"><span class="from">a8</span><span class="lbl">تؤطر ←</span><span class="to">a11</span></div>
+  <div class="arrow"><span class="from">a9</span><span class="lbl">تضخم ←</span><span class="to">a3</span></div>
+  <div class="arrow"><span class="from">a6</span><span class="lbl">تؤطر ←</span><span class="to">a11</span></div>
+  <div class="arrow"><span class="from">a5</span><span class="lbl">تغذي ←</span><span class="to">a10</span></div>
+</div>
+
+<h2>التحقق من معايير RPP الثلاثة</h2>
+
+<div class="panel green">
+  <div class="panel-label">المعيار 1 — مُحقَّق</div>
+  <p><strong>عدم الانحصار في خانة واحدة:</strong> الاستراتيجية تُغطّي الخانات الأربع (الخانة 1: نشاطان، الخانة 2: ثلاثة أنشطة، الخانة 3: ثلاثة أنشطة، الخانة 4: ثلاثة أنشطة).</p>
+</div>
+
+<div class="panel green">
+  <div class="panel-label">المعيار 2 — مُحقَّق</div>
+  <p><strong>ربط التغيير الفردي بالتغيير الاجتماعي-السياسي:</strong> أسهم a4 → a11 (مرافقة فردية تَقود إلى إدماج اقتصادي بنيوي)، a1 → a10 (شهادات تَقود إلى المركز)، a5 → a10 (برامج ثقافية تَقود إلى البنية التحتية).</p>
+</div>
+
+<div class="panel green">
+  <div class="panel-label">المعيار 3 — مُحقَّق</div>
+  <p>على المستوى الاجتماعي-السياسي، <strong>الوصول للأشخاص الرئيسيين وعدد أكبر معاً:</strong> الخانة 3 (الميثاق، المناصرة البرلمانية، شباك «العودة الكريمة») والخانة 4 (الإعلام، المركز، الإدماج الاقتصادي) مع روابط فعلية بينها (a6 → a11، a8 → a11).</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §6 — TOC -->
+<!-- ============================================ -->
+<div class="section-header green">
+  <div class="num">القسم 6</div>
+  <div class="title">المرحلة 4 — نظرية التغيير</div>
+</div>
+
+<p>نَختبر الفرضيات السببية الكامنة وراء الاستراتيجية بصيغة:<br><em>«إذا فعلنا [X]، فسيؤدي إلى [Y] لأنّ [الآلية السببية]»</em>. على مستويين: الكلّي (الفرضية العامة للمشروع) والجزئي (فرضية لكل نشاط).</p>
+
+<h2>المستوى الكلّي — الفرضية العامة للمشروع</h2>
+
+<div class="toc-block if">
+  <div class="lbl">إذا أنجزنا</div>
+  <p>فضاءً مدنياً مستقلاً للسلام والمصالحة والبناء المشترك بين المغاربة والصحراويين العائدين من تندوف، مُشتغِلاً ومُعترفاً به، يَعمل خلال مرحلة ما بعد التسوية.</p>
+</div>
+
+<div class="toc-block then">
+  <div class="lbl">سيُؤدّي إلى</div>
+  <p>تعايش كريم وتشاركي بين الصحراويين العائدين والصحراويين المغاربة والمغاربة، مع هوية صحراوية محفوظة، ذاكرة معترف بها، حركية مُؤمّنة، وتطرف عنيف ممنوع.</p>
+</div>
+
+<div class="toc-block because">
+  <div class="lbl">لأنّ</div>
+  <ol style="padding-right: 22pt;">
+    <li>الحل المؤسساتي يَلوح (قرار 2797، حوالي 120 دولة) لكن الاستيعاب الاجتماعي لم يُحضَّر — بدون ذلك، يَبقى الحل إدارياً ولا يَصير إنسانياً.</li>
+    <li>تجربة هيئة الإنصاف والمصالحة 2004-2005 أثبتت أن لجان الحقيقة والمصالحة المغربية تَنجح، وأن المجتمع المدني أكثر مصداقية من الدولة لهذا العمل.</li>
+    <li>اختلال المرحلة في كيرل (تندوف بالمرحلة 1-2، المؤسسات بالمرحلة 3-4) يَخلق خطر أزمة بعد التسوية إذا لم نَفعل شيئاً.</li>
+    <li>النسيج العابر للحدود (قرابة، حسانية، إسلام مالكي، قبائل) رأسمال اجتماعي كامن لا يَستطيع أحدٌ آخر تفعيله — لا الدولة (مشكوك فيها)، لا الأمم المتحدة (خارجية)، لا البوليساريو (مَوصوم).</li>
+    <li>على مدى ثماني سنوات من الورشات، تَكرّر تنبيهٌ صريح من <strong>مشاركين صحراويين قادمين من تندوف</strong> من أن جزءاً من الرافضين <strong>«لن يَهدأوا حتى يَروا الدم»</strong>. تَكرّر هذا التنبيه بشكل خاص خلال <strong>الورشة الختامية للمسار</strong>، حيث أكّده مشاركان صحراويان. هذا ليس إسقاطاً خارجياً، بل قراءة من داخل المجتمع الصحراوي نفسه — وهو ما يَجعل التحضير الاجتماعي والأمني واجباً، لا اختياراً.</li>
+  </ol>
+</div>
+
+<h2 style="page-break-before: always;">المستوى الجزئي — فرضية لكل نشاط محوري</h2>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">المحور 1 — المحتوى الرقمي</span>
+    <span class="conf-badge conf-medium">ثقة متوسطة</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">إذا</div><p>بَثّنا محتوى رقمياً بالحسانية يَستهدف الشباب 18-30 بتندوف (a3).</p></div>
+  <div class="toc-block then"><div class="lbl">سيؤدي إلى</div><p>وُصول السرديات البديلة إلى مَن يَختار البحث عنها داخل المخيمات، وفتح نوافذ معلومات لمن هو مستعد لها.</p></div>
+  <div class="toc-block because"><div class="lbl">لأنّ</div><p>الهدف ليس إقناع الجميع — معظم الجمهور لن يَتحرك. الهدف هو ضمان أن مَن يَتساءل أو يَتردّد فعلاً يَجد مادة بديلة بدل الفراغ الإعلامي. حتى تَأثير محدود جداً يَكفي لخلق تيار من الراغبين في العودة الفردية.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ خطر</div><p>إذا رَصدت المخابرات الجزائرية الحسابات وحَجبتها، أو إذا استَعمَله الرافضون لإطلاق حملة اتهامات بـ«الدعاية المغربية» تَدفع بمن كانوا مُتردّدين إلى التشدّد.</p></div>
+</div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">المحور 2 — خلية المرافقة الفردية</span>
+    <span class="conf-badge conf-high">ثقة عالية</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">إذا</div><p>أنشأنا خلية مرافقة فردية (قانون، شغل، سكن، نفسي) للعائدين (a4).</p></div>
+  <div class="toc-block then"><div class="lbl">سيؤدي إلى</div><p>العائدون سيَعيشون العودة كريمة ومستقرة، مما يَخلق سابقة مطمئنة للقادمين.</p></div>
+  <div class="toc-block because"><div class="lbl">لأنّ</div><p>العائدون الأوائل يَخدمون كإشارة اجتماعية؛ تجربتهم تَنتشر سريعاً في الشبكات العائلية بين تندوف والصحراء المغربية. تجربة إيجابية أقوى من أي تواصل رسمي.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ خطر</div><p>إذا كانت الموارد ناقصة أو المرافقة سطحية، يَنقلب الأثر: مَن يَرفض العودة يَستعمل الحالات الأولى كمضاد.</p></div>
+</div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">المحور 3 — الميثاق المؤسساتي والمناصرة</span>
+    <span class="conf-badge conf-medium">ثقة متوسطة</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">إذا</div><p>نَشَرنا ميثاق استقبال موقّع من المجلس الوطني لحقوق الإنسان والجامعات والجماعات (a6) + مناصرة برلمانية لإطار «العودة الكريمة» (a7).</p></div>
+  <div class="toc-block then"><div class="lbl">سيؤدي إلى</div><p>العودة الكريمة ستَكون لها إطار قانوني ومؤسساتي صريح وقابل للاحتجاج به.</p></div>
+  <div class="toc-block because"><div class="lbl">لأنّ</div><p>تجربة هيئة الإنصاف والمصالحة 2004-2005 أثبتت أن المواثيق الرسمية المُوقّعة تُنشئ معياراً لا يَستطيع الفاعلون المحليون تجاوزه.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ خطر</div><p>إذا كان التوقيع رمزياً فقط دون آلية للمتابعة، يَصبح الميثاق حبراً على ورق.</p></div>
+</div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">المحور 4 — مركز صِلَة</span>
+    <span class="conf-badge conf-high">ثقة عالية</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">إذا</div><p>افتتحنا مركز صِلَة بطانطان أو كلميم مع شهادات علنية بأسلوب هيئة الإنصاف والمصالحة (a10).</p></div>
+  <div class="toc-block then"><div class="lbl">سيؤدي إلى</div><p>ذاكرة الطرفين ستُعترَف بها وتُؤرشَف، بدون تراتبية.</p></div>
+  <div class="toc-block because"><div class="lbl">لأنّ</div><p>الأرشفة العلنية للروايات تُغيّر طبيعة النزاع: تَنقُل من ذاكرة حيّة (غير مستقرة) إلى ذاكرة مؤسساتية (مستقرة، مشتركة). آلية أساسية في كل مصالحة ما بعد النزاع.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ خطر</div><p>إذا اعتُبر المركز ذراعاً للدولة، سيَرفض المتشككون الصحراويون الإدلاء بشهاداتهم. الاستقلالية المؤسساتية شرط لازم.</p></div>
+</div>
+
+<div class="micro-toc">
+  <div class="header">
+    <span class="id">المحور 5 — آلية الإنذار المبكر الأمنية</span>
+    <span class="conf-badge conf-low">ثقة منخفضة (لكن ضرورية)</span>
+  </div>
+  <div class="toc-block if"><div class="lbl">إذا</div><p>أنشأنا آلية إنذار مبكر بالشراكة مع قياديين صحراويين موثوقين، تُستَخدم لرصد علامات التطرف العنيف لدى العائدين، إلى جانب توفير بدائل اقتصادية موثوقة.</p></div>
+  <div class="toc-block then"><div class="lbl">سيؤدي إلى</div><p>خطر التطرف العنيف يُرصَد مبكراً ويُحيَّد، دون شيطنة جماعية ودون انعكاس على المجموع.</p></div>
+  <div class="toc-block because"><div class="lbl">لأنّ</div><p>التحذيرات المُتكرّرة من داخل الصحراويين أنفسهم — على مدى ثماني سنوات من ورشات سويفور وآخرها الورشة الختامية — تُؤكّد أن جزءاً من الرافضين <strong>«لن يَهدأ حتى يَرى الدم»</strong>. الأقران الصحراويون وحدَهم هم الراصدون الموثوقون لهذا التيّار، لأنهم يَعرفون اللغة والشيفرة الداخلية والإشارات.</p></div>
+  <div class="toc-block risk"><div class="lbl">⚠ خطر</div><p>اختراق الآلية يُعطي خطر اتهام صحراويين أبرياء. التَوسّع المُفرِط في تعريف «التطرف» قد يَنقلب إلى تجريم سياسي. الآلية يَجب أن تَبقى ضيّقة، عملياتية، ومستقلة.</p></div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §7 — CONCLUSION -->
+<!-- ============================================ -->
+<div class="section-header">
+  <div class="num">القسم 7</div>
+  <div class="title">الخلاصة والتوصيات</div>
+</div>
+
+<p>بعد تطبيق المراحل الأربع، تَنتهي هذه الوثيقة إلى خمس قناعات استراتيجية:</p>
+
+<div class="conclusion">
+  <h3>1 · النافذة الزمنية مفتوحة الآن</h3>
+  <p>الديناميكية الديبلوماسية مالت بشكل واضح لصالح المغرب، لكن الاستيعاب الاجتماعي للحل لم يُحضَّر بعد. كل شهر يَمر دون تَحضير الأرضية الإنسانية والاجتماعية هو خسارة لا تَعوّض.</p>
+
+  <h3>2 · مشروع صِلَة هو الجسر بين الديبلوماسية والإنسانية</h3>
+  <p>دون هذا الجسر، يَبقى الحل إدارياً، ولا يَصير إنسانياً. والاتفاق السياسي بدون أرضية اجتماعية يَنفجر بعد سنوات — هذا ما تُعلّمه كل تجارب ما بعد النزاع في القرن الماضي.</p>
+
+  <h3>3 · الاستقلالية المؤسساتية شرط لازم</h3>
+  <p>إذا اعتُبر المشروع ذراعاً تواصلية للدولة، يَموت أمام الصحراويين. <span class="highlight">قوة المشروع هي مَدنيته، لا قُربه من السلطة.</span></p>
+
+  <h3 style="color: var(--danger);">4 · الخطر الأمني حقيقي ومُوَثَّق</h3>
+  <p>التحذير من احتمال أن يَستغل بعض الرافضين الحكم الذاتي كذريعة للوصول إلى التراب المغربي والقيام بأعمال عنيفة، حتى بعيداً عن الصحراء (الرباط، الدار البيضاء وغيرهما)، تَكرّر بشكل صريح من <strong>مشاركين صحراويين أنفسهم</strong> على مدى ثماني سنوات من الورشات. آلية الإنذار المبكر <strong>ليست خياراً، بل ضرورة وجودية للمشروع</strong>.</p>
+
+  <h3>5 · العمل الحقيقي يَبدأ بعد التوقيع</h3>
+  <p>السياسة ستَكون قد انتهت. مصالحة الناس ستَأخذ 20 سنة، ولا أحد غير المجتمع المدني المغربي قادر على إنجازها بمصداقية.</p>
+</div>
+
+<h2>التوصيات العملية</h2>
+<ol class="kdf-list">
+  <li>تَأمين تمويلات مستقلة ومُتنوّعة (لا يَجب أن تَكون الدولة المغربية الممول الوحيد).</li>
+  <li>اختيار الموقع الجغرافي للمركز (طانطان أو كلميم — منطقة احتكاك تاريخي محايدة).</li>
+  <li>صياغة ميثاق أخلاقي للمشروع: لا استحواذ، لا سردية انتصار، تكافؤ في الكلام.</li>
+  <li>بناء شراكات مع المجلس الوطني لحقوق الإنسان، الجامعات، والجماعات المحلية.</li>
+  <li>وَضع آلية الإنذار المبكر بالتنسيق مع شبكات بُناة السلام الصحراويين.</li>
+  <li>إطلاق المرحلة 0 (تهيئة الميدان، 12 شهراً): رسم خريطة العائلات المنفصلة، بنك شهادات، شراكات أولية.</li>
+  <li>اعتماد لغة بَنكية للرسائل: لا «انتصار»، لا «نهاية»، بل «بداية مرحلة جديدة».</li>
+</ol>
+
+<div class="page-break"></div>
+
+<!-- ============================================ -->
+<!-- §8 — SOURCES -->
+<!-- ============================================ -->
+<div class="section-header muted">
+  <div class="num">القسم 8</div>
+  <div class="title">المصادر</div>
+</div>
+
+<ol class="sources">
+  <li>قرار مجلس الأمن للأمم المتحدة 2797 (أكتوبر 2025).</li>
+  <li>تقرير السياسة الشهري لمجلس الأمن، أبريل 2026 — securitycouncilreport.org.</li>
+  <li>هيومن رايتس ووتش، «الأمم المتحدة: حق الشعب الصحراوي في تقرير المصير مهدد»، 25 مارس 2026.</li>
+  <li>Modern Diplomacy, "The Fall of the Polisario", 30 octobre 2025.</li>
+  <li>Africa at LSE, "Diplomatic realism is ending a post-colonial stalemate in Western Sahara", 10 février 2026.</li>
+  <li>Atalayar, "Polisario Front and Algeria reject US resolution on Western Sahara", 27 octobre 2025.</li>
+  <li>Morocco World News, "Morocco, Algeria, and Polisario to Hold US-Backed Talks in Madrid", février 2026.</li>
+  <li>UK House of Commons Library, "Western Sahara" research briefing.</li>
+  <li>CDA Collaborative Learning, "Reflecting on Peace Practice (RPP) — From Theory to Practice", manuel SweFOR.</li>
+  <li>USIP, "Synergizing Nonviolent Action and Peacebuilding (SNAP)", 2018.</li>
+  <li>Tony Hodges, "Western Sahara: The Roots of a Desert War", Lawrence Hill Books, 1983.</li>
+  <li>Adam Curle, "Making Peace", Tavistock Publications, 1971.</li>
+  <li>تجربة هيئة الإنصاف والمصالحة (المغرب، 2004-2005).</li>
+  <li>شهادات وملاحظات مسجّلة خلال ورشات شبكة سويفور (2018-2026)، ومنها الورشة الختامية لماي 2026.</li>
+</ol>
+
+<div class="footer-mark">
+  <p><strong>صِلَة</strong> — وثيقة استراتيجية</p>
+  <p>محمد بوساد · بثينة بنحميدة · كنزة صمود · سليمان الميموني</p>
+  <p>الميسر: نبيل بحار &nbsp;·&nbsp; ماي 2026</p>
+  <p style="margin-top:6pt;font-size:8.5pt;">Available in: العربية · Français · English · Español</p>
+</div>
+
+</body>
+</html>
